@@ -9,13 +9,13 @@ import org.xml.sax.SAXException;
 import view.Window;
 import xml.XMLDeserializer;
 import xml.XMLException;
-import model.Map;
+import model.Plan;
 
 public class Launcher {
 
 	public static void main(String[] args) {
 		Window window = new Window();
-		Map map = new Map();
+		Plan map = new Plan();
 		try {
 			XMLDeserializer.load(map);
 		} catch (ParserConfigurationException e) {
@@ -31,6 +31,8 @@ public class Launcher {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		map.display();
+		window.drawMap(map);
 	}
-	
+
 }
