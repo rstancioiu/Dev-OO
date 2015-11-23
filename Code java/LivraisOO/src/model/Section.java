@@ -18,4 +18,7 @@ public class Section {
 	public int getArrival(){
 		return this.arrival;
 	}
+	public int getDeparture(){
+		return this.departure;
+	}
 }
