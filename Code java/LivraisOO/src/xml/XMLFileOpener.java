@@ -1,19 +1,19 @@
-package livraisoo;
+package xml;
 
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.*;
 
-public class OuvreurDeFichierXML extends FileFilter {// Singleton
+public class XMLFileOpener extends FileFilter {
 	
-	private static OuvreurDeFichierXML instance = null;
-	private OuvreurDeFichierXML(){}
-	protected static OuvreurDeFichierXML getInstance(){
-		if (instance == null) instance = new OuvreurDeFichierXML();
+	private static XMLFileOpener instance = null;
+	private XMLFileOpener(){}
+	protected static XMLFileOpener getInstance(){
+		if (instance == null) instance = new XMLFileOpener();
 		return instance;
 	}
 
- 	public File ouvre(boolean lecture) throws ExceptionXML{
+ 	public File ouvre(boolean lecture) throws XMLException{
  		int returnVal;
  		JFileChooser jFileChooserXML = new JFileChooser();
         jFileChooserXML.setFileFilter(this);
@@ -23,7 +23,7 @@ public class OuvreurDeFichierXML extends FileFilter {// Singleton
         else
          	returnVal = jFileChooserXML.showSaveDialog(null);
         if (returnVal != JFileChooser.APPROVE_OPTION) 
-        	throw new ExceptionXML("Probleme a l'ouverture du fichier");
+        	throw new XMLException("Probleme a l'ouverture du fichier");
         return new File(jFileChooserXML.getSelectedFile().getAbsolutePath());
  	}
  	

@@ -1,4 +1,4 @@
-package livraisoo;
+package view;
 
 import java.io.IOException;
 
@@ -6,11 +6,18 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-public class Try {
-	public static void main (String args[]){
-		Plan plan = new Plan();
+import view.Window;
+import xml.XMLDeserializer;
+import xml.XMLException;
+import model.Map;
+
+public class Launcher {
+
+	public static void main(String[] args) {
+		Window window = new Window();
+		Map map = new Map();
 		try {
-			DeserialiseurXML.charger(plan);
+			XMLDeserializer.load(map);
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -20,9 +27,10 @@ public class Try {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (ExceptionXML e) {
+		} catch (XMLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	
 }
