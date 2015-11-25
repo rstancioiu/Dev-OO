@@ -14,7 +14,6 @@ public class CityMap {
 	private ArrayList<Section> sections = new ArrayList<Section>();
 
 	private int maxY = 0;
-	private double coeff;
 
 	/**
 	 * 
@@ -73,13 +72,14 @@ public class CityMap {
 	public ArrayList<Node> getNodes() {
 		return arrayNodes;
 	}
-
+	
 	/**
-	 * Return a coefficient used to paint the points
+	 * Return the maximum for nodes coordinates
 	 * 
 	 * @return
 	 */
-	public double getCoeff() {
-		return 600.0 / maxY;
+	public int getMax() {
+		return maxY;
 	}
+
 }
