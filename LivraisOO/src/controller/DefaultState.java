@@ -8,7 +8,6 @@ import view.Window;
 
 public abstract class DefaultState implements State {
 	
-	//Definition of the default comportaments
 
 	public void loadMap(File mapFile) {}
 
