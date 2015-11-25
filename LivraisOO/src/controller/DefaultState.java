@@ -1,5 +1,8 @@
 package controller;
 
+import java.io.File;
+
+import model.DeliveryRound;
 import model.Map;
 import model.Node;
 import view.Window;
@@ -28,7 +31,7 @@ public abstract class DefaultState implements State {
 	
 	public void open(Map map, CommandsList cmdList, Window window){}
 	
-	public void confirm(){}
+	public void confirm(DeliveryRound deliveryRound){}
 	
 	public void cancel(){}
 }

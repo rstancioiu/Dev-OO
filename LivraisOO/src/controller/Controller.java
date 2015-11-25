@@ -20,10 +20,8 @@ public class Controller {
 	protected static final RequestState requestState = new RequestState();
 	protected static final DeliveryState deliveryState = new DeliveryState();
 	protected static final AdditionState additionState = new AdditionState();
-	protected static final ModificationState modificationState = new ModificationState();
 	protected static final DeleteState deleteState = new DeleteState();
-	protected static final SwapState1 swapState2 = new SwapState1();
-	protected static final SwapState2 swapState1 = new SwapState2();
+	protected static final SwapState swapState = new SwapState();
 	protected static final GenerationState generationState = new GenerationState();
 	
 	public Controller(){

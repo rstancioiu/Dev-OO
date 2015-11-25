@@ -1,5 +1,8 @@
 package controller;
 
+import java.io.File;
+
+import model.DeliveryRound;
 import model.Map;
 import model.Node;
 import view.Window;
@@ -81,8 +84,9 @@ public interface State {
 	/**
 	 * Method called by controller after a right click
 	 * 
+	 * @param deliveryRound
 	 */
-	public void confirm();
+	public void confirm(DeliveryRound deliveryRound);
 	
 	/**
 	 * Method called by controller after a right click
