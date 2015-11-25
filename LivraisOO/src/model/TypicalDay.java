@@ -5,9 +5,11 @@ import java.util.ArrayList;
 public class TypicalDay {
 
 	private ArrayList<TimeWindow> timeWindows = new ArrayList<TimeWindow>();
-
+	private int nbDeliveries;
+	private int wareHouse;
+	
 	public TypicalDay() {
-		super();
+		nbDeliveries=0;
 	}
 
 	/**
@@ -17,24 +19,36 @@ public class TypicalDay {
 	 */
 	public void addTimeWindow(TimeWindow tm) {
 		timeWindows.add(tm);
+		nbDeliveries+=tm.getDeliveries().size();
 	}
 
 	/**
-	 * Return TimeWindow by id
-	 * 
 	 * @param id
-	 * @return
+	 * @return TimeWindow by id
 	 */
 	public TimeWindow getById(int id) {
 		return timeWindows.get(id);
 	}
 
 	/**
-	 * Return the list of time windows
-	 * 
-	 * @return
+	 * @return  the list of time windows
 	 */
 	public ArrayList<TimeWindow> getTimeWindows() {
 		return timeWindows;
+	}
+
+	/**
+	 * @return number of deliveries
+ 	 */
+	public int getNbDeliveries() {
+		return nbDeliveries;
+	}
+
+	public int getWareHouse() {
+		return wareHouse;
+	}
+
+	public void setWareHouse(int wareHouse) {
+		this.wareHouse = wareHouse;
 	}
 }

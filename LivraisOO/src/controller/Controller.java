@@ -9,18 +9,21 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import model.Delivery;
-import model.Map;
+import model.CityMap;
 import model.TimeWindow;
 import model.TypicalDay;
+import graph.GraphComplete;
 import view.Window;
 import xml.XMLDeserializer;
 import xml.XMLException;
 
 public class Controller {
-	private Map map;
+	private CityMap map;
 	private CommandsList cmdList;
 	private static State currentState;
 	private Window window;
+	private TypicalDay typicalDay;
+	
 	// Instances associated to each possible state of a controller
 	protected static final InitState initState = new InitState();
 	protected static final MapState mapState = new MapState();
@@ -41,7 +44,7 @@ public class Controller {
 	}
 	
 	public void loadMap(){
-		Map map = new Map();
+		map = new CityMap();
 		try {
 			XMLDeserializer.loadMap(map);
 		} catch (ParserConfigurationException e) {
@@ -57,7 +60,7 @@ public class Controller {
 	}
 	
 	public void loadDeliveries(){
-		TypicalDay typicalDay = new TypicalDay();
+		typicalDay = new TypicalDay();
 		try {
 			XMLDeserializer.loadDeliveries(typicalDay);
 		} catch (ParserConfigurationException e) {
@@ -69,9 +72,11 @@ public class Controller {
 		} catch (XMLException e) {
 			e.printStackTrace();
 		}
+		computeDeliveries();
 	}
 	
 	public void computeDeliveries(){
-		
+		GraphComplete graph = new GraphComplete(map,typicalDay);
+		graph.compute();
 	}
 }

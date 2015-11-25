@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 
 import javax.swing.JButton;
 
-import model.Map;
+import model.CityMap;
 import controller.Controller;
 
 public class Window extends JFrame {
@@ -75,7 +75,7 @@ public class Window extends JFrame {
 		setSize(1000, 700);
 	}
 
-	public void drawMap(Map map) {
+	public void drawMap(CityMap map) {
 		graphicView.paintMap(map);
 		graphicView.update();
 	}

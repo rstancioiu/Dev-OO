@@ -2,7 +2,7 @@ package controller;
 
 import java.io.File;
 
-import model.Map;
+import model.CityMap;
 import model.Node;
 import view.Window;
 
@@ -31,7 +31,7 @@ public interface State {
 	 * @param map
 	 * @param deliveryRound
 	 */
-	public void computeDeliveries(Map map, Node deliveryRound);
+	public void computeDeliveries(CityMap map, Node deliveryRound);
 
 	/**
 	 * Method called by controller when the button 'Add Delivery' is clicked. It
@@ -40,7 +40,7 @@ public interface State {
 	 * @param deliveryRound
 	 * @param m
 	 */
-	public void addDelivery(Node deliveryRound, Map m);
+	public void addDelivery(Node deliveryRound, CityMap m);
 
 	/**
 	 * Method called by controller when a delivery is selected

@@ -1,11 +1,14 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
-public class Map {
+public class CityMap {
 
 	// List of nodes
-	private ArrayList<Node> nodes = new ArrayList<Node>();
+	private ArrayList<Node> arrayNodes = new ArrayList<Node>();
+	private HashMap<Integer,Node> nodes = new HashMap<Integer,Node>();
 
 	// List of time windows
 	private ArrayList<Section> sections = new ArrayList<Section>();
@@ -16,7 +19,7 @@ public class Map {
 	/**
 	 * 
 	 */
-	public Map() {
+	public CityMap() {
 		super();
 	}
 
@@ -26,7 +29,8 @@ public class Map {
 	 * @param n
 	 */
 	public void addNode(Node n) {
-		nodes.add(n);
+		nodes.put(n.getId(),n);
+		arrayNodes.add(n);
 		if (n.getY() > maxY) {
 			maxY = n.getY();
 		}
@@ -47,7 +51,7 @@ public class Map {
 	 * @return
 	 */
 	public ArrayList<Section> getSections() {
-		return this.sections;
+		return sections;
 	}
 
 	/**
@@ -57,7 +61,8 @@ public class Map {
 	 * @return
 	 */
 	public Node getNodeById(int id) {
-		return nodes.get(id);
+		Node node = nodes.get(id);
+		return node;
 	}
 
 	/**
@@ -66,7 +71,7 @@ public class Map {
 	 * @return
 	 */
 	public ArrayList<Node> getNodes() {
-		return nodes;
+		return arrayNodes;
 	}
 
 	/**

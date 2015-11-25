@@ -69,4 +69,11 @@ public class Section {
 	public double getLength() {
 		return length;
 	}
+
+	/**
+	 * @return time 
+	 */
+	public double getTime() {
+		return length * speed;
+	}
 }

@@ -2,7 +2,7 @@ package view;
 
 import javax.swing.JPanel;
 
-import model.Map;
+import model.CityMap;
 import model.Node;
 import model.Section;
 
@@ -14,7 +14,7 @@ import java.awt.Color;
 public class GraphicView extends JPanel {
 
 	private JLabel messageArea;
-	private Map map = new Map();
+	private CityMap map = new CityMap();
 
 	public GraphicView() {
 		this.setLayout(new FlowLayout());
@@ -39,7 +39,6 @@ public class GraphicView extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		for (Node n : map.getNodes()) {
-			System.out.println(n.getX() + " " + n.getY());
 			g.fillOval(n.getX(), (int) (n.getY() * map.getCoeff()), 6, 6);
 			g.drawString(Integer.toString(n.getId()), n.getX() + 3, (int) (n.getY() * map.getCoeff()) + 3);
 		}
@@ -55,7 +54,7 @@ public class GraphicView extends JPanel {
 	 * 
 	 * @param map
 	 */
-	public void paintMap(Map map) {
+	public void paintMap(CityMap map) {
 		this.map = map;
 	}
 

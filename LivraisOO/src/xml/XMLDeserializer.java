@@ -17,14 +17,14 @@ import org.xml.sax.SAXException;
 
 import model.Delivery;
 import model.Node;
-import model.Map;
+import model.CityMap;
 import model.Section;
 import model.TypicalDay;
 import model.TimeWindow;
 
 public class XMLDeserializer {
 
-	public static void loadMap(Map map) throws ParserConfigurationException, SAXException, IOException, XMLException {
+	public static void loadMap(CityMap map) throws ParserConfigurationException, SAXException, IOException, XMLException {
 		File xml = XMLFileOpener.getInstance().ouvre(true);
 		DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		Document document = docBuilder.parse(xml);
@@ -35,7 +35,7 @@ public class XMLDeserializer {
 			throw new XMLException("Document non conforme");
 	}
 
-	private static void buildMapFromDOMXML(Element noeudDOMRacine, Map map) throws XMLException, NumberFormatException {
+	private static void buildMapFromDOMXML(Element noeudDOMRacine, CityMap map) throws XMLException, NumberFormatException {
 		NodeList nodeList = noeudDOMRacine.getElementsByTagName("Noeud");
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			map.addNode(createNode((Element) nodeList.item(i), map));
@@ -46,7 +46,7 @@ public class XMLDeserializer {
 		}
 	}
 
-	private static Node createNode(Element elt, Map map) throws XMLException {
+	private static Node createNode(Element elt, CityMap map) throws XMLException {
 		int id = Integer.parseInt(elt.getAttribute("id"));
 		int x = Integer.parseInt(elt.getAttribute("x"));
 		int y = Integer.parseInt(elt.getAttribute("y"));
@@ -89,6 +89,8 @@ public class XMLDeserializer {
 	private static void buildDeliveriesFromDOMXML(Element noeudDOMRacine, TypicalDay typicalDay)
 			throws XMLException, NumberFormatException {
 		NodeList nodeList = noeudDOMRacine.getElementsByTagName("Plage");
+		NodeList wareHouse = noeudDOMRacine.getElementsByTagName("Entrepot");
+		typicalDay.setWareHouse(Integer.parseInt(((Element)wareHouse.item(0)).getAttribute("adresse")));
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			String start = ((Element) nodeList.item(i)).getAttribute("heureDebut");
 			String end = ((Element) nodeList.item(i)).getAttribute("heureFin");

@@ -67,4 +67,14 @@ public class Node {
 	public int getY() {
 		return y;
 	}
+
+	public ArrayList<Section> getOutgoing() {
+		return outgoing;
+	}
+
+	public ArrayList<Section> getIncoming() {
+		return incoming;
+	}
+	
+	
 }
