@@ -31,7 +31,7 @@ public abstract class DefaultState implements State {
 	
 	public void open(Map map, CommandsList cmdList, Window window){}
 	
-	public void confirm(DeliveryRound deliveryRound){}
+	public void confirm(DeliveryRound deliveryRound, Window window){}
 	
 	public void cancel(){}
 }

@@ -1,13 +1,13 @@
 package controller;
 
 import model.DeliveryRound;
+import view.Window;
 
 public class DeleteState extends DefaultState {
 	//State reached when the user clicks the delete button
 	//The user selects a node in the list
 	@Override
-	public void confirm(DeliveryRound deliveryRound) {
-		//TODO: implémenter le choix dans une combobox et la suppression
+	public void confirm(DeliveryRound deliveryRound, Window window) {
 		Controller.setCurrentState(Controller.deliveryState);
 	}
 	

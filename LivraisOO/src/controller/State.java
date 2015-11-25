@@ -86,7 +86,7 @@ public interface State {
 	 * 
 	 * @param deliveryRound
 	 */
-	public void confirm(DeliveryRound deliveryRound);
+	public void confirm(DeliveryRound deliveryRound, Window window);
 	
 	/**
 	 * Method called by controller after a right click
