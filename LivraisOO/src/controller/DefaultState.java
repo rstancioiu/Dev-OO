@@ -2,7 +2,7 @@ package controller;
 
 import java.io.File;
 
-import model.Plan;
+import model.Map;
 import model.Node;
 import view.Window;
 
@@ -14,10 +14,10 @@ public abstract class DefaultState implements State {
 	public void loadDeliveries(File requestFile) {
 	}
 
-	public void computeDeliveries(Plan map, Node deliveryRound) {
+	public void computeDeliveries(Map map, Node deliveryRound) {
 	}
 
-	public void addDelivery(Node deliveryRound, Plan m) {
+	public void addDelivery(Node deliveryRound, Map m) {
 	}
 
 	public void modifyDelivery(Node d) {
