@@ -1,7 +1,5 @@
 package controller;
 
-import java.io.File;
-
 import model.Map;
 import model.Node;
 import view.Window;
@@ -14,7 +12,7 @@ public interface State {
 	 * 
 	 * @param mapFile
 	 */
-	public void loadMap(File mapFile);
+	public void loadMap(Window window);
 
 	/**
 	 * Method called by controller when the button 'Load Request' is cliked. It
@@ -22,7 +20,7 @@ public interface State {
 	 * 
 	 * @param requestFile
 	 */
-	public void loadDeliveries(File requestFile);
+	public void loadDeliveries();
 
 	/**
 	 * Method called by controller when the button 'Compute Deliveries' is

@@ -40,8 +40,10 @@ public class Controller {
 	}
 	
 	/**
-	 * Change l'etat courant du controleur
-	 * @param etat le nouvel etat courant
+	 * 
+	 * Change the controller current state, by receving the new state as parameter
+	 * @param state
+	 * 
 	 */
 	protected static void setCurrentState(State state){
 		currentState = state;
@@ -52,18 +54,7 @@ public class Controller {
 	}
 	
 	public void loadDeliveries(){
-		TypicalDay typicalDay = new TypicalDay();
-		try {
-			XMLDeserializer.loadDeliveries(typicalDay);
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-		} catch (SAXException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (XMLException e) {
-			e.printStackTrace();
-		}
+		mapState.loadDeliveries();
 	}
 	
 	public void computeDeliveries(){

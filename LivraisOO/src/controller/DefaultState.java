@@ -1,16 +1,14 @@
 package controller;
 
-import java.io.File;
-
 import model.Map;
 import model.Node;
 import view.Window;
 
 public abstract class DefaultState implements State {
 	
-	public void loadMap(File mapFile) {}
+	public void loadMap(Window window) {}
 
-	public void loadDeliveries(File requestFile) {}
+	public void loadDeliveries() {}
 
 	public void computeDeliveries(Map map, Node deliveryRound) {}
 
