@@ -1,37 +1,51 @@
 package model;
 
+import java.util.ArrayList;
+
 public class TimeWindow {
-	private String name;
-	private int departure;
-	private int arrival;
-	private double speed;
-	private double length;
 
-	public TimeWindow(String name, int departure, int arrival, double speed, double length) {
-		this.name = name;
-		this.departure = departure;
-		this.arrival = arrival;
-		this.speed = speed;
-		this.length = length;
+	private String start;
+	private String end;
+	private ArrayList<Delivery> deliveries = new ArrayList<Delivery>();
+
+	public TimeWindow(String start, String end) {
+		this.start = start;
+		this.end = end;
 	}
 
-	public int getArrival() {
-		return arrival;
+	/**
+	 * Add a delivery to the time window
+	 * 
+	 * @param d
+	 */
+	public void addDelivery(Delivery d) {
+		deliveries.add(d);
 	}
 
-	public String getName() {
-		return name;
+	/**
+	 * Return the starting hour of the time window
+	 * 
+	 * @return
+	 */
+	public String getStart() {
+		return start;
 	}
 
-	public int getDeparture() {
-		return departure;
+	/**
+	 * Return the ending hour of the time window
+	 * 
+	 * @return
+	 */
+	public String getEnd() {
+		return end;
 	}
 
-	public double getSpeed() {
-		return speed;
-	}
-
-	public double getLength() {
-		return length;
+	/**
+	 * Return the list of deliveries
+	 * 
+	 * @return
+	 */
+	public ArrayList<Delivery> getDeliveries() {
+		return deliveries;
 	}
 }
