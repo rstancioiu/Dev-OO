@@ -35,12 +35,21 @@ public class Controller {
 	/**
 	 * 
 	 * Change the controller current state, by receving the new state as parameter
+	 *
 	 * @param state
 	 * 
 	 */
 	protected static void setCurrentState(State state){
 		currentState = state;
 	}
+	
+	/**
+	 * 
+	 * Returns the controller's current state
+	 * 
+	 * @return current state
+	 * 
+	 */
 	
 	protected static State getCurrentState(){
 		return currentState;
