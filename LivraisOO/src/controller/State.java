@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 
 import model.CityMap;
+import model.DeliveryRound;
 import model.Node;
 import view.Window;
 
@@ -14,7 +15,7 @@ public interface State {
 	 * 
 	 * @param mapFile
 	 */
-	public void loadMap(File mapFile);
+	public void loadMap(Window window);
 
 	/**
 	 * Method called by controller when the button 'Load Request' is cliked. It
@@ -22,7 +23,7 @@ public interface State {
 	 * 
 	 * @param requestFile
 	 */
-	public void loadDeliveries(File requestFile);
+	public void loadDeliveries();
 
 	/**
 	 * Method called by controller when the button 'Compute Deliveries' is
@@ -79,5 +80,18 @@ public interface State {
 	 * @param cmdList
 	 */
 	public void rightClick(Window window, CommandsList cmdList);
+	
+	/**
+	 * Method called by controller after a right click
+	 * 
+	 * @param deliveryRound
+	 */
+	public void confirm(DeliveryRound deliveryRound, Window window);
+	
+	/**
+	 * Method called by controller after a right click
+	 * 
+	 */
+	public void cancel();
 
 }

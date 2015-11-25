@@ -1,12 +1,5 @@
 package controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
 
 import model.Delivery;
 import model.CityMap;
@@ -29,12 +22,9 @@ public class Controller {
 	protected static final MapState mapState = new MapState();
 	protected static final RequestState requestState = new RequestState();
 	protected static final DeliveryState deliveryState = new DeliveryState();
-	protected static final AditionState1 aditionState1 = new AditionState1();
-	protected static final AditionState2 aditionState2 = new AditionState2();
-	protected static final ModificationState modificationState = new ModificationState();
+	protected static final AdditionState additionState = new AdditionState();
 	protected static final DeleteState deleteState = new DeleteState();
-	protected static final SwapState1 swapState2 = new SwapState1();
-	protected static final SwapState2 swapState1 = new SwapState2();
+	protected static final SwapState swapState = new SwapState();
 	protected static final GenerationState generationState = new GenerationState();
 	
 	public Controller(){
@@ -43,40 +33,33 @@ public class Controller {
 		window = new Window(this);
 	}
 	
+	/**
+	 * 
+	 * Change the controller current state, by receving the new state as parameter
+	 *
+	 * @param state
+	 * 
+	 */
+	protected static void setCurrentState(State state){
+		currentState = state;
+	}
+	
+	/**
+	 * 
+	 * Returns the controller's current state
+	 * 
+	 * @return current state
+	 * 
+	 */
+	
+	protected static State getCurrentState(){
+		return currentState;
+	}
 	public void loadMap(){
-		map = new CityMap();
-		try {
-			XMLDeserializer.loadMap(map);
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-		} catch (SAXException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (XMLException e) {
-			e.printStackTrace();
-		}
-		window.drawMap(map);
+		initState.loadMap(window);
 	}
 	
 	public void loadDeliveries(){
-		typicalDay = new TypicalDay();
-		try {
-			XMLDeserializer.loadDeliveries(typicalDay);
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-		} catch (SAXException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (XMLException e) {
-			e.printStackTrace();
-		}
-		computeDeliveries();
-	}
-	
-	public void computeDeliveries(){
-		GraphComplete graph = new GraphComplete(map,typicalDay);
-		graph.compute();
+		mapState.loadDeliveries();
 	}
 }

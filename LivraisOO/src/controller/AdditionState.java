@@ -3,9 +3,9 @@ package controller;
 import model.DeliveryRound;
 import view.Window;
 
-public class DeleteState extends DefaultState {
-	//State reached when the user clicks the delete button
-	//The user selects a node in the list
+public class AdditionState extends DefaultState {
+	//State reached when the user clicks the add button
+	//The user selects a node in the first list and a preceding delivery in the second list
 	@Override
 	public void confirm(DeliveryRound deliveryRound, Window window) {
 		Controller.setCurrentState(Controller.deliveryState);

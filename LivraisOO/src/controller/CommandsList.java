@@ -3,12 +3,12 @@ package controller;
 import java.util.LinkedList;
 
 public class CommandsList {
-	private LinkedList<Command> liste;
+	private LinkedList<ICommand> liste;
 	private int indexCrt;
 
 	public CommandsList() {
 		indexCrt = -1;
-		liste = new LinkedList<Command>();
+		liste = new LinkedList<ICommand>();
 	}
 
 	/**
@@ -16,7 +16,7 @@ public class CommandsList {
 	 * 
 	 * @param c
 	 */
-	public void add(Command c) {
+	public void add(ICommand c) {
 		for (int i = indexCrt + 1; i < liste.size(); i++)
 			liste.remove(i);
 		indexCrt++;
@@ -30,7 +30,7 @@ public class CommandsList {
 	 */
 	public void undo() {
 		if (indexCrt >= 0) {
-			Command Cmd = liste.get(indexCrt);
+			ICommand Cmd = liste.get(indexCrt);
 			indexCrt--;
 			Cmd.undoCmd();
 		}
@@ -42,7 +42,7 @@ public class CommandsList {
 	 */
 	public void remove() {
 		if (indexCrt >= 0) {
-			Command Cmd = liste.get(indexCrt);
+			ICommand Cmd = liste.get(indexCrt);
 			liste.remove(indexCrt);
 			indexCrt--;
 			Cmd.undoCmd();
@@ -55,7 +55,7 @@ public class CommandsList {
 	public void redo() {
 		if (indexCrt < liste.size() - 1) {
 			indexCrt++;
-			Command Cmd = liste.get(indexCrt);
+			ICommand Cmd = liste.get(indexCrt);
 			Cmd.doCmd();
 		}
 	}
