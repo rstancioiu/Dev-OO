@@ -1,47 +1,82 @@
 package view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-import model.Plan;
+import javax.swing.JButton;
 
-public class Window extends JFrame{
+import model.Map;
+import controller.Controller;
+
+public class Window extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private GraphicView graphicView;
 	private LabelView textualView;
 	private JLabel messageBox;
+	private Controller controller;
+	private JButton loadFile;
+	private JButton loadDeliveries;
 
-	public Window() {
-		setLayout(null);
-		messageBox = new JLabel();
-		graphicView = new GraphicView(this);
-		textualView = new LabelView(this);
-		messageBox.setBorder(BorderFactory.createTitledBorder("Messages"));
-		getContentPane().add(messageBox);
-		setSize();
-		setVisible(true);
+	public Window(Controller controller) {
+		this.controller = controller;
+		createAndShowGui();
+	}
+
+	private void createAndShowGui() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 0, 900, 600);
+		panel.setLayout(null);
+
+		messageBox = new JLabel();
+		graphicView = new GraphicView();
+		textualView = new LabelView();
+		loadFile = new JButton("New Map");
+		loadFile.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				controller.loadMap();
+				;
+			}
+		});
+		loadDeliveries = new JButton("New Delivery");
+		loadDeliveries.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				controller.loadDeliveries();
+			}
+		});
+
+		messageBox.setBorder(BorderFactory.createTitledBorder("Messages"));
+		messageBox.setBounds(200, 600, 480, 60);
+		graphicView.setBounds(0, 0, 800, 700);
+		textualView.setBounds(800, 0, 200, 400);
+		loadFile.setBounds(850, 600, 100, 50);
+		loadDeliveries.setBounds(850, 500, 100, 50);
+
+		panel.add(messageBox);
+		panel.add(graphicView);
+		panel.add(textualView);
+		panel.add(loadFile);
+		panel.add(loadDeliveries);
+		panel.setVisible(true);
 		textualView.StepOne();
 		graphicView.StepOne();
+		getContentPane().add(panel);
+		setVisible(true);
+		setLocationRelativeTo(null);
+		setSize(1000, 700);
 	}
 
-	private void setSize() {
-		setSize(1000, 800);
-		messageBox.setSize(480, 60);
-		messageBox.setLocation(0, 400);
-		graphicView.setLocation(0, 0);
-		graphicView.setSize(800, 740);
-		textualView.setSize(100, 400);
-		textualView.setLocation(380, 0);
-	}
-	
-	@SuppressWarnings("unused")
-	private void showMessage(String message){
-		messageBox.setText(message);
-	}
-	
-	public void drawMap(Plan map){
-		this.graphicView.paintMap(map);
+	public void drawMap(Map map) {
+		graphicView.paintMap(map);
+		graphicView.update();
 	}
 }

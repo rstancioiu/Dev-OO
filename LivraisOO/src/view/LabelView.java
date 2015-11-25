@@ -5,11 +5,10 @@ import javax.swing.JLabel;
 
 public class LabelView extends JLabel {
 
-	public LabelView(Window w) {
+	public LabelView() {
 		super();
 		this.setVerticalAlignment(CENTER);
 		setBorder(BorderFactory.createTitledBorder("Deliveries"));
-		w.add(this);
 	}
 
 	public void StepOne() {
