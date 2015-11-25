@@ -26,8 +26,7 @@ public class Controller {
 	protected static final MapState mapState = new MapState();
 	protected static final RequestState requestState = new RequestState();
 	protected static final DeliveryState deliveryState = new DeliveryState();
-	protected static final AditionState1 aditionState1 = new AditionState1();
-	protected static final AditionState2 aditionState2 = new AditionState2();
+	protected static final AdditionState additionState = new AdditionState();
 	protected static final ModificationState modificationState = new ModificationState();
 	protected static final DeleteState deleteState = new DeleteState();
 	protected static final SwapState1 swapState2 = new SwapState1();
@@ -38,6 +37,14 @@ public class Controller {
 		cmdList = new CommandsList();
 		currentState = initState;
 		window = new Window(this);
+	}
+	
+	/**
+	 * Change l'etat courant du controleur
+	 * @param etat le nouvel etat courant
+	 */
+	protected static void setCurrentState(State state){
+		currentState = state;
 	}
 	
 	public void loadMap(){

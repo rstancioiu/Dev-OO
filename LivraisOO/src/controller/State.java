@@ -79,5 +79,17 @@ public interface State {
 	 * @param cmdList
 	 */
 	public void rightClick(Window window, CommandsList cmdList);
+	
+	/**
+	 * Method called by controller after a right click
+	 * 
+	 */
+	public void confirm();
+	
+	/**
+	 * Method called by controller after a right click
+	 * 
+	 */
+	public void cancel();
 
 }

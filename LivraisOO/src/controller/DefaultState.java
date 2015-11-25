@@ -8,7 +8,6 @@ import view.Window;
 
 public abstract class DefaultState implements State {
 	
-
 	public void loadMap(File mapFile) {}
 
 	public void loadDeliveries(File requestFile) {}
@@ -30,5 +29,9 @@ public abstract class DefaultState implements State {
 	public void save(Map map, Window window){};
 	
 	public void open(Map map, CommandsList cmdList, Window window){}
+	
+	public void confirm(){}
+	
+	public void cancel(){}
 }
 
