@@ -1,8 +1,8 @@
 package controller;
 
-public class InverseCmd implements Command {
+public class InverseCmd implements ICommand {
 
-	private Command cmd;
+	private ICommand cmd;
 
 	/**
 	 * Create the inverse command of the command cmd (in a way the cmd.doCmd
@@ -10,7 +10,7 @@ public class InverseCmd implements Command {
 	 * 
 	 * @param cmd
 	 */
-	public InverseCmd(Command cmd) {
+	public InverseCmd(ICommand cmd) {
 		this.cmd = cmd;
 	}
 

@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 
 import model.CityMap;
-import model.Map;
 import model.TypicalDay;
 
 import controller.Controller;
@@ -67,14 +66,12 @@ public class Window extends JFrame {
 		compute.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				controller.computeDeliveries();
 			}
 		});
 		generateRoadmap = new JButton("Generate Roadmap");
 		generateRoadmap.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				controller.generateRoadmap();
 			}
 		});
 		

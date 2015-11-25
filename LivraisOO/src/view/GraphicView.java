@@ -26,7 +26,6 @@ public class GraphicView extends JPanel {
 
 	private JLabel messageArea;
 	private CityMap map = new CityMap();
-	private Map map = new Map();
 	private TypicalDay typicalday = new TypicalDay();
     private AffineTransform at;   // the current pan and zoom transform
     private Point2D XFormedPoint; // storage for a transformed mouse point

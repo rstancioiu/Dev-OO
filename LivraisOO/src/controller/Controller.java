@@ -58,29 +58,8 @@ public class Controller {
 	public void loadMap(){
 		initState.loadMap(window);
 	}
-
-	public void loadDeliveries(){
-		TypicalDay typicalDay = new TypicalDay();
-		try {
-			XMLDeserializer.loadDeliveries(typicalDay);
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-		} catch (SAXException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (XMLException e) {
-			e.printStackTrace();
-		}
-		window.drawDeliveries(typicalDay);
-
-	}
 	
 	public void loadDeliveries(){
 		mapState.loadDeliveries();
-	}
-	
-	public void generateRoadmap(){
-
 	}
 }
