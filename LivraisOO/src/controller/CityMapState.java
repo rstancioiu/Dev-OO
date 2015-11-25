@@ -10,11 +10,11 @@ import model.TypicalDay;
 import xml.XMLDeserializer;
 import xml.XMLException;
 
-public class MapState extends DefaultState {
+public class CityMapState extends DefaultState {
 	
 	@Override
-	public void loadDeliveries(){
-		TypicalDay typicalDay = new TypicalDay();
+	public void loadDeliveries(TypicalDay typicalDay){
+		 typicalDay = new TypicalDay();
 		try {
 			XMLDeserializer.loadDeliveries(typicalDay);
 			Controller.setCurrentState(Controller.requestState);

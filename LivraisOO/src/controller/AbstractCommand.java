@@ -9,7 +9,7 @@ import model.DeliveryRound;
  * @author Heptaswagnome
  *
  */
-public abstract class AbstractCommand implements ICommand {
+public abstract class AbstractCommand implements Command {
 
 	protected TimeWindow timeWindow;
 	protected Delivery delivery;

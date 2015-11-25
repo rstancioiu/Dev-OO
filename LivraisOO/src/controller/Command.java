@@ -5,7 +5,7 @@ package controller;
  * @author Heptaswagnome
  *
  */
-public interface ICommand {
+public interface Command {
 
 	/**
 	 * Execute the 'this' command

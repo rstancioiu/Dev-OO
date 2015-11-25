@@ -5,6 +5,7 @@ import java.io.File;
 import model.CityMap;
 import model.DeliveryRound;
 import model.Node;
+import model.TypicalDay;
 import view.Window;
 
 public interface State {
@@ -15,7 +16,7 @@ public interface State {
 	 * 
 	 * @param mapFile
 	 */
-	public void loadMap(Window window);
+	public void loadMap(CityMap map,Window window);
 
 	/**
 	 * Method called by controller when the button 'Load Request' is cliked. It
@@ -23,7 +24,7 @@ public interface State {
 	 * 
 	 * @param requestFile
 	 */
-	public void loadDeliveries();
+	public void loadDeliveries(TypicalDay typicalDay);
 
 	/**
 	 * Method called by controller when the button 'Compute Deliveries' is
@@ -32,7 +33,7 @@ public interface State {
 	 * @param map
 	 * @param deliveryRound
 	 */
-	public void computeDeliveries(CityMap map, Node deliveryRound);
+	public void computeDeliveries(CityMap map, TypicalDay typicalDay);
 
 	/**
 	 * Method called by controller when the button 'Add Delivery' is clicked. It
