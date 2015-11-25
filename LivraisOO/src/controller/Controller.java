@@ -48,19 +48,7 @@ public class Controller {
 	}
 	
 	public void loadMap(){
-		Map map = new Map();
-		try {
-			XMLDeserializer.loadMap(map);
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-		} catch (SAXException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (XMLException e) {
-			e.printStackTrace();
-		}
-		window.drawMap(map);
+		initState.loadMap(window);
 	}
 	
 	public void loadDeliveries(){
