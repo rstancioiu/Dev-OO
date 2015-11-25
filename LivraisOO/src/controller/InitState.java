@@ -19,6 +19,7 @@ public class InitState extends DefaultState {
 		Map map = new Map();
 		try {
 			XMLDeserializer.loadMap(map);
+			Controller.setCurrentState(Controller.mapState);
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (SAXException e) {

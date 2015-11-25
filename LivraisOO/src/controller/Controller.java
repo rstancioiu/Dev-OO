@@ -1,12 +1,5 @@
 package controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
 
 import model.Delivery;
 import model.Map;
@@ -49,6 +42,9 @@ public class Controller {
 		currentState = state;
 	}
 	
+	protected static State getCurrentState(){
+		return currentState;
+	}
 	public void loadMap(){
 		initState.loadMap(window);
 	}

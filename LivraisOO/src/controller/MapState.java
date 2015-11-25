@@ -17,6 +17,7 @@ public class MapState extends DefaultState {
 		TypicalDay typicalDay = new TypicalDay();
 		try {
 			XMLDeserializer.loadDeliveries(typicalDay);
+			Controller.setCurrentState(Controller.deliveryState);
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (SAXException e) {
