@@ -60,7 +60,4 @@ public class Controller {
 		mapState.loadDeliveries();
 	}
 	
-	public void computeDeliveries(){
-		
-	}
 }
