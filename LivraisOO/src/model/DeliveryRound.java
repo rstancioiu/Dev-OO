@@ -177,11 +177,4 @@ public class DeliveryRound {
 	public int getDuration(){
 		return this.duration;
 	}
-	/**
-	 * paths getter
-	 * @return paths
-	 */
-	public ArrayList<Path> getPaths(){
-		return this.getPaths();
-	}
 }
