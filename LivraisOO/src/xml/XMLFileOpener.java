@@ -8,26 +8,40 @@ public class XMLFileOpener extends FileFilter {
 
 	private static XMLFileOpener instance = null;
 
+	/**
+	 * Empty constructor
+	 */
 	private XMLFileOpener() {
+		super();
 	}
 
+	/**
+	 * @return the XMLFileOpener instance
+	 */
 	protected static XMLFileOpener getInstance() {
 		if (instance == null)
 			instance = new XMLFileOpener();
 		return instance;
 	}
 
-	public File ouvre(boolean lecture) throws XMLException {
+	/**
+	 * Opens a file
+	 * 
+	 * @param read
+	 * @return
+	 * @throws XMLException
+	 */
+	public File open(boolean read) throws XMLException {
 		int returnVal;
 		JFileChooser jFileChooserXML = new JFileChooser();
 		jFileChooserXML.setFileFilter(this);
 		jFileChooserXML.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		if (lecture)
+		if (read)
 			returnVal = jFileChooserXML.showOpenDialog(null);
 		else
 			returnVal = jFileChooserXML.showSaveDialog(null);
 		if (returnVal != JFileChooser.APPROVE_OPTION)
-			throw new XMLException("Probleme a l'ouverture du fichier");
+			throw new XMLException("Problems when openning the file");
 		return new File(jFileChooserXML.getSelectedFile().getAbsolutePath());
 	}
 
@@ -48,6 +62,10 @@ public class XMLFileOpener extends FileFilter {
 		return "Fichier XML";
 	}
 
+	/**
+	 * @param f
+	 * @return a string representing the extension of the file
+ 	 */
 	private String getExtension(File f) {
 		String filename = f.getName();
 		int i = filename.lastIndexOf('.');

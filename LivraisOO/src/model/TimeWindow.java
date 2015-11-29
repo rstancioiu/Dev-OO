@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class TimeWindow {
 
-	private String start;
-	private String end;
+	private int start;
+	private int end;
 	private ArrayList<Delivery> deliveries = new ArrayList<Delivery>();
 
 	/**
@@ -14,7 +14,7 @@ public class TimeWindow {
 	 * @param start
 	 * @param end
 	 */
-	public TimeWindow(String start, String end) {
+	public TimeWindow(int start, int end) {
 		this.start = start;
 		this.end = end;
 	}
@@ -64,20 +64,20 @@ public class TimeWindow {
 	}
 
 	/**
-	 * Return the starting hour of the time window
+	 * Return the starting time of the time window
 	 * 
 	 * @return
 	 */
-	public String getStart() {
+	public int getStart() {
 		return start;
 	}
 
 	/**
-	 * Return the ending hour of the time window
+	 * Return the ending time of the time window
 	 * 
 	 * @return
 	 */
-	public String getEnd() {
+	public int getEnd() {
 		return end;
 	}
 
