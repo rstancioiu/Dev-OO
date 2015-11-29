@@ -23,6 +23,7 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -108,7 +109,19 @@ public class GraphicView extends JPanel {
 			repaint();
 		}
 
-		public void mouseClicked(MouseEvent e) {}
+		public void mouseClicked(MouseEvent e) {
+			Point pointClicked = e.getPoint();
+			double px=(pointClicked.getX()-getWidth()/2 )/scale - translateX +getWidth()/2;
+			double py=(pointClicked.getY()-getHeight()/2)/scale  - translateY +getHeight()/2;
+			for (Node n : map.getNodes()) {
+				double x = n.getX()*getCoeff();
+				double y = n.getY()*getCoeff();
+				if(Math.sqrt((px-x)*(px-x)+(py-y)*(py-y))<20)
+				{
+					System.out.println("You clicked in node " + n.getId());
+				}
+			}
+		}
 		public void mouseEntered(MouseEvent e) {}
 		public void mouseExited(MouseEvent e) {}
 		public void mouseMoved(MouseEvent e) {}
