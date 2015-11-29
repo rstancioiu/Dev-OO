@@ -1,20 +1,16 @@
 package controller;
 
-import model.Delivery;
 import model.DeliveryRound;
 import model.Node;
 import model.CityMap;
-import model.TimeWindow;
 import model.TypicalDay;
-import graph.GraphComplete;
 import view.Window;
-import xml.XMLDeserializer;
-import xml.XMLException;
 
 public class Controller {
 	private CityMap map;
 	private TypicalDay typicalDay;
 	private CommandsList cmdList;
+	private DeliveryRound deliveryRound;
 	private static State currentState;
 	private Window window;
 
@@ -54,28 +50,33 @@ public class Controller {
 	protected static State getCurrentState() {
 		return currentState;
 	}
+	
+	public void computeDeliveries(){
+		System.out.println(currentState.getClass());
+		currentState.computeDeliveries(this.map, this.typicalDay, this.deliveryRound);
+	}
 
 	public void loadMap() {
-		currentState.loadMap(map, window);
+		currentState.loadMap(this.map, this.window);
 	}
 
 	public void loadDeliveries() {
-		currentState.loadDeliveries(typicalDay);
+		currentState.loadDeliveries(this.typicalDay);
 	}
 
-	public void addDelivery(Node deliveryRound, CityMap m) {
-		currentState.addDelivery(deliveryRound, m);
+	public void addDelivery() {
+		currentState.addDelivery(deliveryRound, map);
 	}
 
 	public void modifyDelivery(Node d) {
 		currentState.modifyDelivery(d);
 	}
 
-	public void deleteDelivery(Node deliveryRound, Node d) {
+	public void deleteDelivery(Node d) {
 		currentState.deleteDelivery(deliveryRound, d);
 	}
 
-	public void modifyDelivery(Node deliveryRound, Node d1, Node d2) {
+	public void modifyDelivery(Node d1, Node d2) {
 		currentState.modifyDelivery(deliveryRound, d1, d2);
 	}
 

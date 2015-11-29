@@ -14,7 +14,6 @@ public class CityMapState extends DefaultState {
 	
 	@Override
 	public void loadDeliveries(TypicalDay typicalDay){
-		 typicalDay = new TypicalDay();
 		try {
 			XMLDeserializer.loadDeliveries(typicalDay);
 			Controller.setCurrentState(Controller.requestState);
@@ -27,6 +26,7 @@ public class CityMapState extends DefaultState {
 		} catch (XMLException e) {
 			e.printStackTrace();
 		}
+		System.out.println("Current state : requestState");
 	}
 
 }

@@ -16,7 +16,6 @@ public class InitState extends DefaultState {
 	
 	@Override
 	public void loadMap(CityMap map, Window window) {
-	    map = new CityMap();
 		try {
 			XMLDeserializer.loadMap(map);
 			Controller.setCurrentState(Controller.mapState);
@@ -30,6 +29,7 @@ public class InitState extends DefaultState {
 			e.printStackTrace();
 		}
 		window.drawMap(map);
+		System.out.println("Current state: cityMapState");
 	}	
 	
 }

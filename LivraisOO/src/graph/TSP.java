@@ -2,7 +2,7 @@ package graph;
 
 public interface TSP {
 	
-	public void chercheSolution(int tpsLimite, Graph g);
+	public void chercheSolution(Graph g);
 	
 	public Integer getSolution(int i);
 	

@@ -16,19 +16,19 @@ public abstract class DefaultState implements State {
 	public void loadDeliveries(TypicalDay typicalDay) {
 	}
 
-	public void computeDeliveries(CityMap map, TypicalDay typicalDay) {
+	public void computeDeliveries(CityMap map, TypicalDay typicalDay, DeliveryRound deliveryRound) {
 	}
 
-	public void addDelivery(Node deliveryRound, CityMap m) {
+	public void addDelivery(DeliveryRound deliveryRound, CityMap m) {
 	}
 
 	public void modifyDelivery(Node d) {
 	}
 
-	public void deleteDelivery(Node deliveryRound, Node d) {
+	public void deleteDelivery(DeliveryRound deliveryRound, Node d) {
 	}
 
-	public void modifyDelivery(Node deliveryRound, Node d1, Node d2) {
+	public void modifyDelivery(DeliveryRound deliveryRound, Node d1, Node d2) {
 	}
 
 	public void generateRoadmap() {

@@ -33,7 +33,7 @@ public interface State {
 	 * @param map
 	 * @param deliveryRound
 	 */
-	public void computeDeliveries(CityMap map, TypicalDay typicalDay);
+	public void computeDeliveries(CityMap map, TypicalDay typicalDay,DeliveryRound deliveryRound);
 
 	/**
 	 * Method called by controller when the button 'Add Delivery' is clicked. It
@@ -42,7 +42,7 @@ public interface State {
 	 * @param deliveryRound
 	 * @param m
 	 */
-	public void addDelivery(Node deliveryRound, CityMap m);
+	public void addDelivery(DeliveryRound deliveryRound, CityMap m);
 
 	/**
 	 * Method called by controller when a delivery is selected
@@ -58,7 +58,7 @@ public interface State {
 	 * @param d
 	 * @param deliveryRound
 	 */
-	public void deleteDelivery(Node deliveryRound, Node d);
+	public void deleteDelivery(DeliveryRound deliveryRound, Node d);
 
 	/**
 	 * Method called by controller when two deliveries are selected and the
@@ -67,7 +67,7 @@ public interface State {
 	 * @param d1
 	 * @param d2
 	 */
-	public void modifyDelivery(Node deliveryRound, Node d1, Node d2);
+	public void modifyDelivery(DeliveryRound deliveryRound, Node d1, Node d2);
 
 	/**
 	 * Method called by controller when the button 'Generate Roadmap' is hit

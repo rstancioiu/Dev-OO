@@ -66,6 +66,7 @@ public class Window extends JFrame {
 		compute.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				controller.computeDeliveries();
 			}
 		});
 		generateRoadmap = new JButton("Generate Roadmap");

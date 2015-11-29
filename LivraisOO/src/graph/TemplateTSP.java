@@ -9,13 +9,8 @@ public abstract class TemplateTSP implements TSP {
 	private Integer[] meilleureSolution;
 	protected Graph g;
 	private double coutMeilleureSolution;
-	private int tpsLimite;
-	private long tpsDebut;
 	
-	public void chercheSolution(int tpsLimite, Graph g){
-		if (tpsLimite <= 0) return;
-		tpsDebut = System.currentTimeMillis();	
-		this.tpsLimite = tpsLimite;
+	public void chercheSolution(Graph g){
 		this.g = g;
 		meilleureSolution = new Integer[g.getNbNodes()];
 		Collection<Integer> nonVus = new ArrayList<Integer>(g.getNbNodes()-1);
@@ -24,6 +19,8 @@ public abstract class TemplateTSP implements TSP {
 		vus.add(0); 
 		coutMeilleureSolution = Integer.MAX_VALUE;
 		branchAndBound(0, nonVus, vus, 0);
+		for(int i=0;i<g.getNbNodes();++i)
+			System.out.println(meilleureSolution[i]);
 	}
 	
 	public Integer getSolution(int i){
@@ -44,7 +41,6 @@ public abstract class TemplateTSP implements TSP {
 	protected abstract Iterator<Integer> iterator(Integer sommetCrt, Collection<Integer> nonVus, Graph g);
 	
 	private void branchAndBound(int sommetCrt, Collection<Integer> nonVus, Collection<Integer> vus, double coutVus){
-		if (System.currentTimeMillis() - tpsDebut > tpsLimite) return;
 	    if (nonVus.size() == 0){ 
 	    	if (g.isEdge(sommetCrt,0)){ 
 	    		if (coutVus+g.getCost(sommetCrt,0) < coutMeilleureSolution){
