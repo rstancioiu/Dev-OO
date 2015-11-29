@@ -29,6 +29,7 @@ public class PathTest extends TestCase{
 		super.setUp();
 		departure = new Delivery(1,2,0);
 		arrival = new Delivery(2,4,2);
+		sections = new ArrayList<Section>();
 		sections.add(new Section("v0",0,1,4.3,100.0));
 		sections.add(new Section("v1",0,2,3.2,50.0));
 		sections.add(new Section("v2",1,2,2.8,150.0));
@@ -42,22 +43,18 @@ public class PathTest extends TestCase{
 		path = null;
 	}
 
-	@Test//---------------------------------------------------
-	public void test() {
-		fail("Not yet implemented");
-	}
 	@Test
 	public void testPath() {
 		assertNotNull("Instance is created", path);
 	}
 	
 	@Test
-	public void testGetSetSetions() {
+	public void testGetSetSections() {
 		ArrayList<Section > s = new ArrayList<Section>();
-		sections.add(new Section("v2",1,2,2.8,150.0));
-		sections.add(new Section("v3",2,1,2.8,150.0));
+		s.add(new Section("v2",1,2,2.8,150.0));
+		s.add(new Section("v3",2,1,2.8,150.0));
 		path.SetSections(s);
-		assertEquals("Is that sections correct", sections, path.getSections());
+		assertEquals("Is that sections correct", s, path.getSections());
 		
 	}
 	
@@ -65,13 +62,14 @@ public class PathTest extends TestCase{
 	public void testGetSetDeparture() {
 		Delivery d = new Delivery (1,2,3);
 		path.setDeparture(d);
-		assertEquals("Is that departure correct", departure, path.getDeparture());
+		assertEquals("Is that departure correct", d, path.getDeparture());
 	}
 	
 	@Test
 	public void testGetSetArrival() {
 		Delivery a = new Delivery (1,2,3);
-		assertEquals("Is that arrival correct", arrival, path.getArrival());
+		path.setArrival(a);
+		assertEquals("Is that arrival correct", a, path.getArrival());
 	}
 	
 }
