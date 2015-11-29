@@ -159,21 +159,21 @@ public class DeliveryRound {
 	 * end getter
 	 * @return end
 	 */
-	private String getEnd(){
+	public String getEnd(){
 		return this.end;
 	}
 	/**
 	 * duration getter
 	 * @return duration
 	 */
-	private int getDuration(){
+	public int getDuration(){
 		return this.duration;
 	}
 	/**
 	 * paths getter
 	 * @return paths
 	 */
-	private ArrayList<Path> getPaths(){
+	public ArrayList<Path> getPaths(){
 		return this.getPaths();
 	}
 }
