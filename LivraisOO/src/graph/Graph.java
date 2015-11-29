@@ -29,6 +29,7 @@ public class Graph{
 	private double[] dist;
 	private Section[] parent;
 	private int[][] edges;
+	private int[] rank;
 	
 	public Graph(CityMap map, TypicalDay typicalDay) {
 		this.map = map;
@@ -58,7 +59,20 @@ public class Graph{
 		cost = new double[count][count];
 		edges = new int[count][count];
 		paths = new Path[count][count];
+		rank = new int[count];
+		generateRanks(timeWindows);
 		initPartialGraph(count,timeWindows);
+	}
+	
+	private void generateRanks(ArrayList<TimeWindow> timeWindows){
+		int prev=0;
+		for(int i=0;i<timeWindows.size();++i){
+			ArrayList<Delivery> deliveries = timeWindows.get(i).getDeliveries();
+			for(int j=0;j<deliveries.size();++j){
+				rank[hashMap[deliveries.get(j).getAddress()]]=prev;
+			}
+			prev+=deliveries.size();
+		}
 	}
 	
 	private void initPartialGraph(int length, ArrayList<TimeWindow> timeWindows){
@@ -191,6 +205,10 @@ public class Graph{
 	
 	public double getCost(int i, int j) {
 		return cost[i][j];
+	}
+	
+	public int getRank(int i){
+		return rank[i];
 	}
 
 	public boolean isEdge(int i, int j) {
