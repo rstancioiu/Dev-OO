@@ -15,4 +15,7 @@ public class AdditionState extends DefaultState {
 	public void cancel(){
 		Controller.setCurrentState(Controller.deliveryState);
 	}
+	
+	public void updateVue(Window window){
+	}
 }

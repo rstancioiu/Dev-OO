@@ -16,7 +16,7 @@ public interface State {
 	 * 
 	 * @param mapFile
 	 */
-	public void loadMap(CityMap map,Window window);
+	public void loadMap(CityMap map, Window window);
 
 	/**
 	 * Method called by controller when the button 'Load Request' is cliked. It
@@ -24,7 +24,7 @@ public interface State {
 	 * 
 	 * @param requestFile
 	 */
-	public void loadDeliveries(TypicalDay typicalDay);
+	public void loadDeliveries(TypicalDay typicalDay, Window window);
 
 	/**
 	 * Method called by controller when the button 'Compute Deliveries' is
@@ -94,5 +94,10 @@ public interface State {
 	 * 
 	 */
 	public void cancel();
+	
+	/**
+	 * Method called by controller to update the view
+	 */
+	public void updateVue(Window window);
 
 }

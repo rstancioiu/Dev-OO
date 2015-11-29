@@ -1,5 +1,6 @@
 package controller;
 
+import view.Window;
 import graph.Graph;
 import graph.TSP1;
 import graph.TSP;
@@ -26,5 +27,12 @@ public class RequestState extends DefaultState {
 		for(int i=0;i<graph.getNbNodes();++i)
 			System.out.println(tsp.getSolution(i));
 		Controller.setCurrentState(Controller.deliveryState);
+	}
+	
+	public void updateVue(Window window){
+		window.disableAll();
+		window.enableLoadMap(true);
+		window.enableLoadDeliveries(true);
+		window.enableCompute(true);
 	}
 }

@@ -9,11 +9,13 @@ import model.TypicalDay;
 import view.Window;
 
 public abstract class DefaultState implements State {
+	
+	private Window window;
 
 	public void loadMap(CityMap map,Window window) {
 	}
 
-	public void loadDeliveries(TypicalDay typicalDay) {
+	public void loadDeliveries(TypicalDay typicalDay, Window window) {
 	}
 
 	public void computeDeliveries(CityMap map, TypicalDay typicalDay, DeliveryRound deliveryRound) {

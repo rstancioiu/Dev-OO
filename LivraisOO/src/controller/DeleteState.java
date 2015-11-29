@@ -16,4 +16,7 @@ public class DeleteState extends DefaultState {
 	public void cancel(){
 		Controller.setCurrentState(Controller.deliveryState);
 	}
+	
+	public void updateVue(Window window){
+	}
 }

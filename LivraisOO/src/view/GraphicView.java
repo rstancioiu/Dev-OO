@@ -3,8 +3,10 @@ package view;
 import javax.swing.JPanel;
 
 import model.CityMap;
+import model.Delivery;
 import model.Node;
 import model.Section;
+import model.TimeWindow;
 import model.TypicalDay;
 
 import javax.swing.JLabel;
@@ -24,9 +26,8 @@ import java.awt.geom.Point2D;
 
 public class GraphicView extends JPanel {
 
-	private JLabel messageArea;
 	private CityMap map = new CityMap();
-	private TypicalDay typicalday = new TypicalDay();
+	private TypicalDay typicalDay = new TypicalDay();
     private AffineTransform at;   // the current pan and zoom transform
     private Point2D XFormedPoint; // storage for a transformed mouse point
     private double translateX, translateY, scale; //already applied
@@ -39,10 +40,6 @@ public class GraphicView extends JPanel {
 	    translateY = 0;
 	    scale = 1;
 	    wheelCounter = 0;
-		this.messageArea = new JLabel("Plan", JLabel.LEFT);
-		this.messageArea.setText("<html>Drop your plan here...</html>");
-		this.messageArea.setVisible(true);
-		this.add(messageArea);
 		MovingHandler handler = new MovingHandler();
 		this.addMouseListener(handler);
 		this.addMouseMotionListener(handler);
@@ -124,17 +121,28 @@ public class GraphicView extends JPanel {
 	    at.translate(translateX, translateY);
 	    graphics2D.setTransform(at);
 	    
-	    //--- Place code here to be tranformed ---
+	    //--- Draw map ---
 	    for (Node n : map.getNodes()) {
 			g.fillOval(n.getX()-3, (int) (n.getY() * getCoeff()-3), 6, 6);
-			g.drawString(Integer.toString(n.getId()), n.getX() + 3,
-					(int) (n.getY() * getCoeff()) + 3);
+			g.drawString(Integer.toString(n.getId()), n.getX() + 6,
+					(int) (n.getY() * getCoeff()) + 6);
 		}
 		for (Section s : map.getSections()) {
 			Node n1 = map.getNodeById(s.getArrival());
 			Node n2 = map.getNodeById(s.getDeparture());
 			g.drawLine(n1.getX(), (int) (n1.getY() * getCoeff()), n2.getX(),
 					(int) (n2.getY() * getCoeff()));
+		}
+		// ---------------------------------------
+		
+	    //--- Draw deliveries ---
+		for (TimeWindow t : typicalDay.getTimeWindows()) {
+			for (Delivery d : t.getDeliveries()) {
+				Node n = map.getNodeById(d.getId());
+				g.setColor(Color.BLUE);
+				g.fillOval(n.getX()-6, (int) (n.getY() * getCoeff()-6), 12, 12);
+				g.setColor(Color.WHITE);
+			}
 		}
 		// ---------------------------------------
 	    
@@ -155,10 +163,7 @@ public class GraphicView extends JPanel {
 	 * 
 	 * @param typicalday
 	 */
-	public void paintDeliveries(TypicalDay typicalday) {
-		this.typicalday = typicalday;
-	}
-
-	public void StepOne() {
+	public void paintDeliveries(TypicalDay typicalDay) {
+		this.typicalDay = typicalDay;
 	}
 }
