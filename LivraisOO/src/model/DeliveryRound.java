@@ -147,4 +147,33 @@ public class DeliveryRound {
 
 		return ID;
 	}
+	
+	/**
+	 * start getter
+	 * @return start
+	 */
+	public String getStart(){
+		return this.start;
+	}
+	/**
+	 * end getter
+	 * @return end
+	 */
+	private String getEnd(){
+		return this.end;
+	}
+	/**
+	 * duration getter
+	 * @return duration
+	 */
+	private int getDuration(){
+		return this.duration;
+	}
+	/**
+	 * paths getter
+	 * @return paths
+	 */
+	private ArrayList<Path> getPaths(){
+		return this.getPaths();
+	}
 }
