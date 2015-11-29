@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import graph.Graph;
 
+
 /**
  * Represents a delivery round, with a list of paths, a start hour, an end hour
  * and a duration
@@ -15,6 +16,7 @@ public class DeliveryRound {
 	private String end;
 	private double duration;
 	private ArrayList<Path> paths;
+	private TypicalDay typicalDay;
 
 	/**
 	 * Constructor of DeliveryRound
@@ -39,6 +41,9 @@ public class DeliveryRound {
 				Path path2 = graph.generatePath(newDelivery, paths.get(i).getArrival());
 				newPaths.add(path1);
 				newPaths.add(path2);
+				for(int k=0;k<typicalDay.getTimeWindows().size();++k){
+					typicalDay.getTimeWindows().get(k).insertDelivery(paths.get(i).getDeparture(),newDelivery);
+				}
 				duration += path1.getDuration() + path2.getDuration();
 			} else {
 				newPaths.add(paths.get(i));
@@ -57,9 +62,10 @@ public class DeliveryRound {
 		ArrayList<Path> newPaths = new ArrayList<Path>();
 		for (int i = 0; i < paths.size() - 1; i++) {
 			if (paths.get(i).getArrival().equals(delivery)) {
-				duration -= paths.get(i).getDuration() + paths.get(i + 1).getDuration();
 				Path path = graph.generatePath(paths.get(i).getDeparture(), paths.get(i + 1).getArrival());
-				duration += path.getDuration();
+				for(int k=0;k<typicalDay.getTimeWindows().size();++k){
+					typicalDay.getTimeWindows().get(k).deleteDelivery(paths.get(i).getArrival());
+				}
 				newPaths.add(path);
 			} else {
 				newPaths.add(paths.get(i));
@@ -76,6 +82,7 @@ public class DeliveryRound {
 	 */
 	public void swapDeliveries(Delivery first, Delivery second, Graph graph) {
 		int i = 0, j = 0;
+		System.out.println("swap Done");
 		for (int k = 0; k < paths.size(); ++k) {
 			if (paths.get(k).getArrival().equals(first)) {
 				i = k;
@@ -86,9 +93,22 @@ public class DeliveryRound {
 		}
 		if (i != j) {
 			deleteDelivery(paths.get(i).getArrival(), graph);
+			for(int k=0;k<typicalDay.getTimeWindows().size();++k){
+				typicalDay.getTimeWindows().get(k).deleteDelivery(paths.get(i).getArrival());
+			}
 			addDelivery(paths.get(i).getDeparture(), second, graph);
+			for(int k=0;k<typicalDay.getTimeWindows().size();++k){
+				typicalDay.getTimeWindows().get(k).insertDelivery(paths.get(i).getDeparture(),second);
+			}
 			deleteDelivery(paths.get(j).getArrival(), graph);
+			for(int k=0;k<typicalDay.getTimeWindows().size();++k){
+				typicalDay.getTimeWindows().get(k).deleteDelivery(paths.get(j).getArrival());
+			}
 			addDelivery(paths.get(j).getDeparture(), first, graph);
+			for(int k=0;k<typicalDay.getTimeWindows().size();++k){
+				typicalDay.getTimeWindows().get(k).insertDelivery(paths.get(j).getDeparture(),first);
+			}
+			System.out.println("swap Done");
 		}
 	}
 
@@ -102,6 +122,11 @@ public class DeliveryRound {
 		}
 		this.paths = paths;
 	}
+	
+	public void setTypicalDay(TypicalDay typicalDay){
+		this.typicalDay=typicalDay;
+	}
+	
 
 	/**
 	 * Paths getter
@@ -170,4 +195,10 @@ public class DeliveryRound {
 	public double getDuration() {
 		return this.duration;
 	}
+
+	public TypicalDay getTypicalDay() {
+		return typicalDay;
+	}
+	
+	
 }

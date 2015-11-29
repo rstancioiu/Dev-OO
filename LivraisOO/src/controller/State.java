@@ -2,7 +2,9 @@ package controller;
 
 import java.io.File;
 
+import graph.Graph;
 import model.CityMap;
+import model.Delivery;
 import model.DeliveryRound;
 import model.Node;
 import model.TypicalDay;
@@ -33,41 +35,7 @@ public interface State {
 	 * @param map
 	 * @param deliveryRound
 	 */
-	public void computeDeliveries(CityMap map, TypicalDay typicalDay,DeliveryRound deliveryRound, Window window);
-
-	/**
-	 * Method called by controller when the button 'Add Delivery' is clicked. It
-	 * adds a new delivery through a chosen node in the map with the add command
-	 * 
-	 * @param deliveryRound
-	 * @param m
-	 */
-	public void addDelivery(DeliveryRound deliveryRound, CityMap m);
-
-	/**
-	 * Method called by controller when a delivery is selected
-	 * 
-	 * @param d
-	 */
-	public void modifyDelivery(Node d);
-
-	/**
-	 * Method called by controller when a delivery is selected and the button
-	 * 'Delete Delivery' is hit
-	 * 
-	 * @param d
-	 * @param deliveryRound
-	 */
-	public void deleteDelivery(DeliveryRound deliveryRound, Node d);
-
-	/**
-	 * Method called by controller when two deliveries are selected and the
-	 * button 'Swap Deliveries' is hit
-	 * 
-	 * @param d1
-	 * @param d2
-	 */
-	public void modifyDelivery(DeliveryRound deliveryRound, Node d1, Node d2);
+	public void computeDeliveries(CityMap map, TypicalDay typicalDay,DeliveryRound deliveryRound, Window window, Graph graph);
 
 	/**
 	 * Method called by controller when the button 'Generate Roadmap' is hit
@@ -82,12 +50,12 @@ public interface State {
 	 */
 	public void rightClick(Window window, CommandsList cmdList);
 	
-	/**
-	 * Method called by controller after a right click
-	 * 
-	 * @param deliveryRound
-	 */
-	public void confirm(DeliveryRound deliveryRound, Window window);
+	
+	public void confirmAdd(DeliveryRound deliveryRound, Delivery delivery,Node node, Graph graph);
+	
+	public void confirmDelete(DeliveryRound deliveryRound,  Delivery delivery, Graph graph);
+	
+	public void confirmSwap(DeliveryRound deliveryRound, Delivery start, Delivery end, Graph graph);
 	
 	/**
 	 * Method called by controller after a right click
@@ -99,5 +67,11 @@ public interface State {
 	 * Method called by controller to update the view
 	 */
 	public void updateVue(Window window);
+	
+	public void clickAddButton();
+	
+	public void clickDeleteButton();
+	
+	public void clickSwapButton();
 
 }

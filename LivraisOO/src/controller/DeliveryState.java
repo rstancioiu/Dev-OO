@@ -58,8 +58,20 @@ public class DeliveryState extends DefaultState {
 		}
 	}
 
+	public void clickAddButton(){
+		Controller.setCurrentState(Controller.additionState);
+	}
+	
+	public void clickDeleteButton(){
+		Controller.setCurrentState(Controller.deleteState);
+	}
+	
+	public void clickSwapButton(){
+		Controller.setCurrentState(Controller.swapState);
+	}
 	
 	public void updateVue(Window window){
+		window.hideButtons();
 	}
 
 }

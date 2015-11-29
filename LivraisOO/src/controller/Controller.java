@@ -2,13 +2,16 @@ package controller;
 
 import model.DeliveryRound;
 import model.Node;
+import graph.Graph;
 import model.CityMap;
+import model.Delivery;
 import model.TypicalDay;
 import view.Window;
 
 public class Controller {
 	private CityMap map;
 	private TypicalDay typicalDay;
+	private Graph graph;
 	private CommandsList cmdList;
 	private DeliveryRound deliveryRound;
 	private static State currentState;
@@ -49,12 +52,13 @@ public class Controller {
 	 * 
 	 * @return current state
 	 */
-	protected static State getCurrentState() {
+	public State getCurrentState() {
 		return currentState;
 	}
 	
 	public void computeDeliveries(){
-		currentState.computeDeliveries(this.map, this.typicalDay, this.deliveryRound, this.window);
+		graph = new Graph(map,typicalDay);
+		currentState.computeDeliveries(this.map, this.typicalDay, this.deliveryRound, this.window, this.graph);
 	}
 
 	public void loadMap() {
@@ -65,26 +69,11 @@ public class Controller {
 		currentState.loadDeliveries(this.typicalDay, this.window);
 	}
 
-	public void addDelivery() {
-		currentState.addDelivery(deliveryRound, map);
-	}
 
-	public void modifyDelivery(Node d) {
-		currentState.modifyDelivery(d);
-	}
-
-	public void deleteDelivery(Node d) {
-		currentState.deleteDelivery(deliveryRound, d);
-	}
-
-	public void modifyDelivery(Node d1, Node d2) {
-		currentState.modifyDelivery(deliveryRound, d1, d2);
-	}
-
-	public void generateRoadmap(DeliveryRound deliveryRound) {
+	public void generateRoadmap() {
 		currentState.generateRoadmap(deliveryRound);
 	}
-
+		
 	public void rightClick(Window window, CommandsList cmdList) {
 		currentState.rightClick(window, cmdList);
 	}
@@ -95,12 +84,36 @@ public class Controller {
 	public void open(CityMap map, CommandsList cmdList, Window window) {
 	}
 
-	public void confirm(DeliveryRound deliveryRound, Window window) {
-		currentState.confirm(deliveryRound, window);
+	public void confirmAdd(Delivery delivery, Node node) {
+		currentState.confirmAdd(deliveryRound, delivery, node, graph);
+		window.drawDeliveryRound(deliveryRound,typicalDay);
+	}
+	
+	public void confirmDelete(Delivery delivery){
+		currentState.confirmDelete(deliveryRound, delivery , graph);
+		window.drawDeliveryRound(deliveryRound,typicalDay);
+	}
+	
+	public void confirmSwap(Delivery start, Delivery end){
+		System.out.println("Swap started");
+		currentState.confirmSwap(deliveryRound, start, end, graph);
+		window.drawDeliveryRound(deliveryRound,typicalDay);
 	}
 
 	public void cancel() {
 		currentState.cancel();
+	}
+	
+	public void clickAddButton(){
+		currentState.clickAddButton();
+	}
+	
+	public void clickDeleteButton(){
+		currentState.clickDeleteButton();	
+	}
+	
+	public void clickSwapButton(){
+		currentState.clickSwapButton();
 	}
 	
 }

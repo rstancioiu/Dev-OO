@@ -184,8 +184,6 @@ public class Graph {
 
 	/**
 	 * Comparator class used in the priority queue of dijkstra
-	 * 
-	 * @author Afkid
 	 */
 	private class NodesComparator implements Comparator<Integer> {
 
@@ -212,7 +210,7 @@ public class Graph {
 				int out = nodes.get(k).getAddress();
 				cost[pos][k] = dist[out];
 				ArrayList<Section> path = new ArrayList<Section>();
-				while (out != source && !parent[out].equals(null)) {
+				while (out != source) {
 					path.add(parent[out]);
 					out = parent[out].getDeparture();
 				}
@@ -304,6 +302,7 @@ public class Graph {
 			path.add(parent[out]);
 			out = parent[out].getDeparture();
 		}
+		reversePath(path);
 		return new Path(start, end, path, dist[end.getAddress()]);
 	}
 }

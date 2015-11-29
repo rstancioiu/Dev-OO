@@ -13,8 +13,7 @@ import model.Path;
 import model.TypicalDay;
 
 public class RequestState extends DefaultState {
-	public void computeDeliveries(CityMap map, TypicalDay typicalDay, DeliveryRound deliveryRound, Window window) {
-		Graph graph = new Graph(map,typicalDay);
+	public void computeDeliveries(CityMap map, TypicalDay typicalDay, DeliveryRound deliveryRound, Window window, Graph graph) {
 		graph.computeShortestPaths();
 		TSP tsp = new TSP1();
 		tsp.chercheSolution(graph);
@@ -25,7 +24,9 @@ public class RequestState extends DefaultState {
 		}
 		paths.add(graph.getPath(0, tsp.getSolution(graph.getNbNodesDelivery()-1)));
 		deliveryRound.setPaths(paths);
+		deliveryRound.setTypicalDay(typicalDay);
 		window.drawDeliveryRound(deliveryRound, typicalDay);
+		
 		Controller.setCurrentState(Controller.deliveryState);
 	}
 

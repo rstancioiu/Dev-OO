@@ -2,7 +2,9 @@ package controller;
 
 import java.io.File;
 
+import graph.Graph;
 import model.CityMap;
+import model.Delivery;
 import model.DeliveryRound;
 import model.Node;
 import model.TypicalDay;
@@ -18,19 +20,7 @@ public abstract class DefaultState implements State {
 	public void loadDeliveries(TypicalDay typicalDay, Window window) {
 	}
 
-	public void computeDeliveries(CityMap map, TypicalDay typicalDay, DeliveryRound deliveryRound, Window window) {
-	}
-
-	public void addDelivery(DeliveryRound deliveryRound, CityMap m) {
-	}
-
-	public void modifyDelivery(Node d) {
-	}
-
-	public void deleteDelivery(DeliveryRound deliveryRound, Node d) {
-	}
-
-	public void modifyDelivery(DeliveryRound deliveryRound, Node d1, Node d2) {
+	public void computeDeliveries(CityMap map, TypicalDay typicalDay, DeliveryRound deliveryRound, Window window, Graph graph) {
 	}
 
 	public void generateRoadmap(DeliveryRound deliveryRound) {
@@ -50,4 +40,23 @@ public abstract class DefaultState implements State {
 
 	public void cancel() {
 	}
+	
+	public void clickAddButton(){
+	}
+	
+	public void clickDeleteButton(){
+	}
+	
+	public void clickSwapButton(){
+	}
+	
+	public void confirmAdd(DeliveryRound deliveryRound, Delivery delivery,Node node, Graph graph){	
+	}
+	
+	public void confirmDelete(DeliveryRound deliveryRound, Delivery delivery, Graph graph){	
+	}
+	
+	public void confirmSwap(DeliveryRound deliveryRound, Delivery start, Delivery end, Graph graph){
+	}
+	
 }

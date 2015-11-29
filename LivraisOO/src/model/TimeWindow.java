@@ -27,6 +27,18 @@ public class TimeWindow {
 	public void addDelivery(Delivery d) {
 		deliveries.add(d);
 	}
+	
+	public void insertDelivery(Delivery before, Delivery d){
+		ArrayList<Delivery> newDeliveries = new ArrayList<Delivery>();
+		for(int i=0;i<deliveries.size();++i)
+		{
+			newDeliveries.add(deliveries.get(i));
+			if(deliveries.get(i).equals(before)){
+				 newDeliveries.add(d);
+			}
+		}
+		deliveries = newDeliveries;
+	}
 
 	/**
 	 * Delete a delivery from the list of deliveries

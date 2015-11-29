@@ -33,6 +33,8 @@ import java.awt.event.MouseWheelListener;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.NoninvertibleTransformException;
 import java.awt.geom.Point2D;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class GraphicView extends JPanel {
 
@@ -44,11 +46,13 @@ public class GraphicView extends JPanel {
 	private double translateX, translateY, scale; //already applied
 	private double wheelCounter;
 	private JPanel bottomButtons = new JPanel();
+	private ArrayList<Delivery> selectedDeliveries = new ArrayList<Delivery>();
+	private ArrayList<Node> selectedNodes = new ArrayList<Node>();
 
-	public GraphicView(JButton addButton, JButton deleteButton, JButton swapButton) {
+	public GraphicView(JButton addButton, JButton deleteButton, JButton swapButton, JButton confirmButton, JButton cancelButton) {
 		super();
 		this.setLayout(new BorderLayout());
-
+		
 		bottomButtons.setOpaque(false);
 		bottomButtons.setLayout(new BoxLayout(bottomButtons, BoxLayout.X_AXIS));
 		bottomButtons.add(addButton);
@@ -56,6 +60,10 @@ public class GraphicView extends JPanel {
 		bottomButtons.add(deleteButton);
 		bottomButtons.add(Box.createRigidArea(new Dimension(5,0)));
 		bottomButtons.add(swapButton);
+		bottomButtons.add(Box.createRigidArea(new Dimension(300,0)));
+		bottomButtons.add(confirmButton);
+		bottomButtons.add(Box.createRigidArea(new Dimension(5,0)));
+		bottomButtons.add(cancelButton);
 		add(bottomButtons, BorderLayout.PAGE_END);
 
 		setBackground(Color.white);
@@ -110,6 +118,7 @@ public class GraphicView extends JPanel {
 		}
 
 		public void mouseClicked(MouseEvent e) {
+			Node selectedNode= new Node(-1,-1,-1);
 			Point pointClicked = e.getPoint();
 			double px=(pointClicked.getX()-getWidth()/2 )/scale - translateX +getWidth()/2;
 			double py=(pointClicked.getY()-getHeight()/2)/scale  - translateY +getHeight()/2;
@@ -118,7 +127,26 @@ public class GraphicView extends JPanel {
 				double y = n.getY()*getCoeff();
 				if(Math.sqrt((px-x)*(px-x)+(py-y)*(py-y))<20)
 				{
-					System.out.println("You clicked in node " + n.getId());
+					selectedNode = n;
+				}
+			}
+			ArrayList<TimeWindow> timeWindows = typicalDay.getTimeWindows();
+			System.out.println(selectedNode.getId());
+			if(selectedNode.getId()!=-1)
+			{
+				boolean found=false;
+				for(int i=0;i<timeWindows.size();++i){
+					ArrayList<Delivery> deliveries = timeWindows.get(i).getDeliveries();
+					for(int j=0;j<deliveries.size();++j){
+						if(selectedNode.getId()==deliveries.get(j).getAddress()){
+							selectedDeliveries.add(deliveries.get(j));
+							found=true;
+							System.out.println("Delivery Found");
+						}
+					}
+				}
+				if(!found){
+					selectedNodes.add(selectedNode);
 				}
 			}
 		}
@@ -240,6 +268,7 @@ public class GraphicView extends JPanel {
 	 */
 	public void paintDeliveries(TypicalDay typicalDay) {
 		this.typicalDay = typicalDay;
+		update();
 	}
 
 	/**
@@ -249,5 +278,18 @@ public class GraphicView extends JPanel {
 	 */
 	public void paintDeliveryRound(DeliveryRound deliveryRound) {
 		this.deliveryRound = deliveryRound;
+	}
+	
+	public void clearNodes(){
+		selectedNodes.clear();
+		selectedDeliveries.clear();
+	}
+
+	public ArrayList<Delivery> getSelectedDeliveries() {
+		return selectedDeliveries;
+	}
+
+	public ArrayList<Node> getSelectedNodes() {
+		return selectedNodes;
 	}
 }

@@ -1,5 +1,7 @@
 package controller;
 
+import graph.Graph;
+import model.Delivery;
 import model.DeliveryRound;
 import model.Node;
 import view.Window;
@@ -8,7 +10,9 @@ public class AdditionState extends DefaultState {
 	//State reached when the user clicks the add button
 	//The user selects a node in the first list and a preceding delivery in the second list
 	@Override
-	public void confirm(DeliveryRound deliveryRound, Window window) {
+	public void confirmAdd(DeliveryRound deliveryRound, Delivery delivery, Node node, Graph graph) {
+		Delivery newDelivery = new Delivery(0,0,node.getId());
+		deliveryRound.addDelivery(delivery, newDelivery, graph);
 		Controller.setCurrentState(Controller.deliveryState);
 	}
 	
@@ -17,5 +21,6 @@ public class AdditionState extends DefaultState {
 	}
 	
 	public void updateVue(Window window){
+		window.showButtons();
 	}
 }
