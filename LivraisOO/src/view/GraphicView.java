@@ -1,5 +1,8 @@
 package view;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import model.CityMap;
@@ -14,6 +17,8 @@ import model.TypicalDay;
 import javax.swing.JLabel;
 
 import java.awt.BasicStroke;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Color;
@@ -33,24 +38,36 @@ public class GraphicView extends JPanel {
 	private CityMap map = new CityMap();
 	private TypicalDay typicalDay = new TypicalDay();
 	private DeliveryRound deliveryRound = new DeliveryRound();
-    private AffineTransform at;   // the current pan and zoom transform
-    private Point2D XFormedPoint; // storage for a transformed mouse point
-    private double translateX, translateY, scale; //already applied
-    private double wheelCounter;
-    
-    public GraphicView() {
-		this.setLayout(new FlowLayout());
+	private AffineTransform at;   // the current pan and zoom transform
+	private Point2D XFormedPoint; // storage for a transformed mouse point
+	private double translateX, translateY, scale; //already applied
+	private double wheelCounter;
+	private JPanel bottomButtons = new JPanel();
+
+	public GraphicView(JButton addButton, JButton deleteButton, JButton swapButton) {
+		super();
+		this.setLayout(new BorderLayout());
+
+		bottomButtons.setOpaque(false);
+		bottomButtons.setLayout(new BoxLayout(bottomButtons, BoxLayout.X_AXIS));
+		bottomButtons.add(addButton);
+		bottomButtons.add(Box.createRigidArea(new Dimension(5,0)));
+		bottomButtons.add(deleteButton);
+		bottomButtons.add(Box.createRigidArea(new Dimension(5,0)));
+		bottomButtons.add(swapButton);
+		add(bottomButtons, BorderLayout.PAGE_END);
+
 		setBackground(Color.white);
 		translateX = 0;
-	    translateY = 0;
-	    scale = 1;
-	    wheelCounter = 0;
+		translateY = 0;
+		scale = 1;
+		wheelCounter = 0;
 		MovingHandler handler = new MovingHandler();
 		this.addMouseListener(handler);
 		this.addMouseMotionListener(handler);
 		this.addMouseWheelListener(handler);
 	}
-    	
+
 	class MovingHandler implements MouseListener, MouseMotionListener, MouseWheelListener {
 		double refX;
 		double refY;
@@ -82,15 +99,15 @@ public class GraphicView extends JPanel {
 			translateY += deltaY;
 			repaint();
 		}
-		
+
 		public void mouseWheelMoved(MouseWheelEvent e){
 			int notches = e.getWheelRotation();
 			wheelCounter -= ((double)notches)/5;
 			wheelCounter = Math.max(-2,Math.min(wheelCounter, 2));
-		    scale = Math.exp(wheelCounter);
-		    repaint();
+			scale = Math.exp(wheelCounter);
+			repaint();
 		}
-		
+
 		public void mouseClicked(MouseEvent e) {}
 		public void mouseEntered(MouseEvent e) {}
 		public void mouseExited(MouseEvent e) {}
@@ -108,7 +125,7 @@ public class GraphicView extends JPanel {
 	public double getCoeff() {
 		return 3;
 	}
-	
+
 	private void drawNode(Graphics g, Node n, Color c) {
 		g.setColor(Color.BLACK);
 		g.fillOval((int) (n.getX() * getCoeff()-16), (int) (n.getY() * getCoeff()-16), 32, 32);
@@ -120,7 +137,7 @@ public class GraphicView extends JPanel {
 		g.drawString(nodeId,(int) (n.getX() * getCoeff()-nodeId.length()*4),
 				(int) (n.getY() * getCoeff()+4));
 	}
-	
+
 	private void drawLine(Graphics g, Node n1, Node n2, Color c, boolean bold) {
 		Graphics2D graphics2D = (Graphics2D) g;
 		g.setColor(c);
@@ -138,16 +155,22 @@ public class GraphicView extends JPanel {
 		graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
 		super.paintComponent(g);
-		
-	    AffineTransform saveTransform = graphics2D.getTransform();
-	    at = new AffineTransform(saveTransform);
-	    at.translate(getWidth()/2, getHeight()/2);
-	    at.scale(scale, scale);
-	    at.translate(-getWidth()/2, -getHeight()/2);
-	    at.translate(translateX, translateY);
-	    graphics2D.setTransform(at);
-	    
-		//--- Draw delivery round ---
+
+		AffineTransform saveTransform = graphics2D.getTransform();
+		at = new AffineTransform(saveTransform);
+		at.translate(getWidth()/2, getHeight()/2);
+		at.scale(scale, scale);
+		at.translate(-getWidth()/2, -getHeight()/2);
+		at.translate(translateX, translateY);
+		graphics2D.setTransform(at);
+
+		//--- Draw map ---
+		for (Section s : map.getSections()) {
+			Node n1 = map.getNodeById(s.getArrival());
+			Node n2 = map.getNodeById(s.getDeparture());
+			drawLine(g, n1, n2, Color.GRAY, false);
+		}
+
 		for (Path p : deliveryRound.getPaths()) {
 			for (Section s : p.getSections()) {
 				Node n1 = map.getNodeById(s.getArrival());
@@ -155,26 +178,20 @@ public class GraphicView extends JPanel {
 				drawLine(g, n1, n2, new Color(40,110,130), true);
 			}
 		}
-	    
-	    //--- Draw map ---
-	    for (Section s : map.getSections()) {
-			Node n1 = map.getNodeById(s.getArrival());
-			Node n2 = map.getNodeById(s.getDeparture());
-			drawLine(g, n1, n2, Color.GRAY, false);
+
+		for (Node n : map.getNodes()) {
+			drawNode(g, n, Color.WHITE);
 		}
-	    for (Node n : map.getNodes()) {
-	    	drawNode(g, n, Color.WHITE);
-		}
-		
-	    //--- Draw deliveries ---
+
+		//--- Draw deliveries ---
 		for (TimeWindow t : typicalDay.getTimeWindows()) {
 			for (Delivery d : t.getDeliveries()) {
 				Node n = map.getNodeById(d.getAddress());
 				drawNode(g, n, new Color(140,210,230));
 			}
 		}
-	    
-	    graphics2D.setTransform(saveTransform);
+
+		graphics2D.setTransform(saveTransform);
 	}
 
 	/**
@@ -194,7 +211,7 @@ public class GraphicView extends JPanel {
 	public void paintDeliveries(TypicalDay typicalDay) {
 		this.typicalDay = typicalDay;
 	}
-	
+
 	/**
 	 * Change the delivery round
 	 * 

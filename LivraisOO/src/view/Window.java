@@ -26,10 +26,8 @@ public class Window extends JFrame {
 	private TypicalDayView typicalDayView;
 	private DeliveryRoundView deliveryRoundView;
 	private Controller controller;
-	private JButton loadMap;
-	private JButton loadDeliveries;
-	private JButton compute;
-	private JButton generateRoadmap;
+	private JButton loadMap, loadDeliveries, compute, generateRoadmap;
+	private JButton addButton, deleteButton, swapButton;
 
 	public Window(Controller controller) {
 		this.controller = controller;
@@ -49,7 +47,28 @@ public class Window extends JFrame {
 		layout.setAutoCreateContainerGaps(true);
 		panel.setLayout(layout);
 
-		graphicView = new GraphicView();
+		addButton = new JButton("Add");
+		addButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+
+		deleteButton = new JButton("Delete");
+		deleteButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+
+		swapButton = new JButton("Swap");
+		swapButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+
+		graphicView = new GraphicView(addButton, deleteButton, swapButton);
 		typicalDayView = new TypicalDayView();
 		deliveryRoundView = new DeliveryRoundView();
 		loadMap = new JButton("Load Map");
@@ -57,7 +76,6 @@ public class Window extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				controller.loadMap();
-				;
 			}
 		});
 		loadDeliveries = new JButton("Load deliveries");
