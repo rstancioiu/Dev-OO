@@ -14,6 +14,7 @@ import javax.swing.JButton;
 
 import model.CityMap;
 import model.Delivery;
+import model.DeliveryRound;
 import model.TimeWindow;
 import model.TypicalDay;
 
@@ -124,6 +125,11 @@ public class Window extends JFrame {
 	public void drawDeliveries(TypicalDay typicalDay) {
 		graphicView.paintDeliveries(typicalDay);
 		textualView.listDeliveries(typicalDay);
+		graphicView.update();
+	}
+	
+	public void drawDeliveryRound(DeliveryRound deliveryRound) {
+		graphicView.paintDeliveryRound(deliveryRound);
 		graphicView.update();
 	}
 	

@@ -24,9 +24,10 @@ public class Controller {
 	protected static final SwapState swapState = new SwapState();
 	protected static final GenerationState generationState = new GenerationState();
 
-	public Controller(CityMap map, TypicalDay typicalDay) {
+	public Controller(CityMap map, TypicalDay typicalDay, DeliveryRound deliveryRound) {
 		this.map = map;
 		this.typicalDay = typicalDay;
+		this.deliveryRound = deliveryRound;
 		cmdList = new CommandsList();
 		window = new Window(this);
 		setCurrentState(initState);
@@ -53,8 +54,7 @@ public class Controller {
 	}
 	
 	public void computeDeliveries(){
-		System.out.println(currentState.getClass());
-		currentState.computeDeliveries(this.map, this.typicalDay, this.deliveryRound);
+		currentState.computeDeliveries(this.map, this.typicalDay, this.deliveryRound, this.window);
 	}
 
 	public void loadMap() {

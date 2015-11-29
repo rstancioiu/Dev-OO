@@ -4,12 +4,16 @@ import javax.swing.JPanel;
 
 import model.CityMap;
 import model.Delivery;
+import model.DeliveryRound;
 import model.Node;
 import model.Section;
 import model.TimeWindow;
+import model.Path;
 import model.TypicalDay;
 
 import javax.swing.JLabel;
+
+import java.awt.BasicStroke;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Color;
@@ -28,6 +32,7 @@ public class GraphicView extends JPanel {
 
 	private CityMap map = new CityMap();
 	private TypicalDay typicalDay = new TypicalDay();
+	private DeliveryRound deliveryRound = new DeliveryRound();
     private AffineTransform at;   // the current pan and zoom transform
     private Point2D XFormedPoint; // storage for a transformed mouse point
     private double translateX, translateY, scale; //already applied
@@ -145,6 +150,21 @@ public class GraphicView extends JPanel {
 			}
 		}
 		// ---------------------------------------
+		
+		//--- Draw delivery round ---
+		for (Path p : deliveryRound.getPaths()) {
+			for (Section s : p.getSections()) {
+				g.setColor(Color.BLUE);
+				Node n1 = map.getNodeById(s.getArrival());
+				Node n2 = map.getNodeById(s.getDeparture());
+				graphics2D.setStroke(new BasicStroke(3));
+				g.drawLine(n1.getX(), (int) (n1.getY() * getCoeff()), n2.getX(),
+						(int) (n2.getY() * getCoeff()));
+				graphics2D.setStroke(new BasicStroke(1));
+				g.setColor(Color.WHITE);
+			}
+		}
+		// ---------------------------------------
 	    
 	    graphics2D.setTransform(saveTransform);
 	}
@@ -161,9 +181,18 @@ public class GraphicView extends JPanel {
 	/**
 	 * Change the typical day
 	 * 
-	 * @param typicalday
+	 * @param typicalDay
 	 */
 	public void paintDeliveries(TypicalDay typicalDay) {
 		this.typicalDay = typicalDay;
+	}
+	
+	/**
+	 * Change the delivery round
+	 * 
+	 * @param deliveryRound
+	 */
+	public void paintDeliveryRound(DeliveryRound deliveryRound) {
+		this.deliveryRound = deliveryRound;
 	}
 }

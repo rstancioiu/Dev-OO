@@ -98,6 +98,14 @@ public class DeliveryRound {
 	public void setPaths(ArrayList<Path> p) {
 		paths = p;
 	}
+	
+	/**
+	 * Paths getter
+	 * 
+	 */
+	public ArrayList<Path> getPaths() {
+		return paths;
+	}
 
 	/**
 	 * Start time setter

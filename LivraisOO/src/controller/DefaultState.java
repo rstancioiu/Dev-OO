@@ -18,7 +18,7 @@ public abstract class DefaultState implements State {
 	public void loadDeliveries(TypicalDay typicalDay, Window window) {
 	}
 
-	public void computeDeliveries(CityMap map, TypicalDay typicalDay, DeliveryRound deliveryRound) {
+	public void computeDeliveries(CityMap map, TypicalDay typicalDay, DeliveryRound deliveryRound, Window window) {
 	}
 
 	public void addDelivery(DeliveryRound deliveryRound, CityMap m) {

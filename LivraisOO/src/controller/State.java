@@ -33,7 +33,7 @@ public interface State {
 	 * @param map
 	 * @param deliveryRound
 	 */
-	public void computeDeliveries(CityMap map, TypicalDay typicalDay,DeliveryRound deliveryRound);
+	public void computeDeliveries(CityMap map, TypicalDay typicalDay,DeliveryRound deliveryRound, Window window);
 
 	/**
 	 * Method called by controller when the button 'Add Delivery' is clicked. It
