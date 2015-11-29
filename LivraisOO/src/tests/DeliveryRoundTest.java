@@ -65,6 +65,19 @@ public class DeliveryRoundTest extends TestCase{
 		deliveryRound.setDuration(5.0);
 		assertEquals("Is that duration correct",5.0, deliveryRound.getDuration());
 	}
+	@Test
+	public void testAddDelivery() {
+		fail("Not yet implemented");
+	}
+	public void testDeleteDelivery() {
+		fail("Not yet implemented");
+	}
+	public void testSwapDelivery() {
+		fail("Not yet implemented");
+	}
+	public void testGetNewId() {
+		fail("Not yet implemented");
+	}
 	/*public void testAddDelivery(){
 		
 		Section s1 = new Section("r1",1,2,3.0,3.0);
