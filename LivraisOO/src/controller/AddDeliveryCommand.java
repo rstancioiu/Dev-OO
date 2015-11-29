@@ -1,5 +1,6 @@
 package controller;
 
+import graph.Graph;
 import model.Delivery;
 import model.TimeWindow;
 import model.DeliveryRound;
@@ -12,8 +13,8 @@ import model.DeliveryRound;
  */
 public class AddDeliveryCommand extends AbstractCommand {
 
-	public AddDeliveryCommand(TimeWindow tw, Delivery d, DeliveryRound dr){
-		super(tw, d, dr);
+	public AddDeliveryCommand(TimeWindow tw, Delivery d, DeliveryRound dr, Graph g){
+		super(tw, d, dr, g);
 	}
 	
 	/**
@@ -35,6 +36,6 @@ public class AddDeliveryCommand extends AbstractCommand {
 	@Override
 	public void undoCmd() {
 		timeWindow.deleteDelivery(delivery);
-		deliveryRound.deleteDelivery(delivery);
+		deliveryRound.deleteDelivery(delivery, graph);
 	}
 }

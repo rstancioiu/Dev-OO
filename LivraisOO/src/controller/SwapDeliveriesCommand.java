@@ -1,5 +1,6 @@
 package controller;
 
+import graph.Graph;
 import model.Delivery;
 import model.TimeWindow;
 import model.DeliveryRound;
@@ -21,8 +22,8 @@ public class SwapDeliveriesCommand extends AbstractCommand {
 	 * @param d2
 	 * @param dr
 	 */
-	public SwapDeliveriesCommand(TimeWindow tw, Delivery d, Delivery d2, DeliveryRound dr){
-		super(tw, d, dr);
+	public SwapDeliveriesCommand(TimeWindow tw, Delivery d, Delivery d2, DeliveryRound dr, Graph g){
+		super(tw, d, dr, g);
 		delivery2 = d2;
 	}
 	

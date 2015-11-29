@@ -1,5 +1,6 @@
 package controller;
 
+import graph.Graph;
 import model.TimeWindow;
 import model.Delivery;
 import model.DeliveryRound;
@@ -14,11 +15,13 @@ public abstract class AbstractCommand implements Command {
 	protected TimeWindow timeWindow;
 	protected Delivery delivery;
 	protected DeliveryRound deliveryRound;
+	protected Graph graph;
 	
-	public AbstractCommand(TimeWindow tw, Delivery d, DeliveryRound dr) {
+	public AbstractCommand(TimeWindow tw, Delivery d, DeliveryRound dr, Graph g) {
 		this.timeWindow = tw;
 		this.delivery = d;
 		this.deliveryRound = dr;
+		this.graph = g;
 	}
 	
 	/**
