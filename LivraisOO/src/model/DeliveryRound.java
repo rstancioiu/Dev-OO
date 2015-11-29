@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import graph.Graph;
+
 /**
  * Represents a delivery round, with a list of paths, a start hour, an end hour
  * and a duration
@@ -27,17 +29,19 @@ public class DeliveryRound {
 	 * @param previous
 	 * @param newDelivery
 	 */
-	public void addDelivery(Delivery previous, Delivery newDelivery) {
-		Path ancientPath;
+	public void addDelivery(Delivery previous, Delivery newDelivery, Graph graph) {
+		ArrayList<Path> newPaths = new ArrayList<Path>();
 		for (int i = 0; i < paths.size(); i++) {
-			if (paths.get(i).getDeparture() == previous) {
-				ancientPath = paths.get(i);
-				// TODO : calculer les deux nouveaux chemins, remplacer l'ancien
-				// par le premier et ajouter un deuxieme
-				// Path path = new Path();
-				break;
+			if (paths.get(i).getDeparture().equals(previous)) {
+				Path path1 = graph.generatePath(previous, newDelivery);
+				Path path2 = graph.generatePath(newDelivery, paths.get(i + 1).getDeparture());
+				newPaths.add(path1);
+				newPaths.add(path2);
+			} else {
+				newPaths.add(paths.get(i));
 			}
 		}
+		setPaths(newPaths);
 	}
 
 	/**
@@ -45,19 +49,19 @@ public class DeliveryRound {
 	 * 
 	 * @param d
 	 */
-	public void deleteDelivery(Delivery d) {
-		Path path1 = null;
-		Path path2 = null;
-		for (int i = 0; i < paths.size(); i++) {
-			if (paths.get(i).getDeparture() == d) {
-				path2 = paths.get(i);
+	public void deleteDelivery(Delivery d, Graph graph) {
+		ArrayList<Path> newPaths = new ArrayList<Path>();
+		for (int i = 0; i < paths.size()-1; i++) {
+			if (paths.get(i).getArrival().equals(d)) {
+			 	Path path = graph.generatePath(paths.get(i).getDeparture(), paths.get(i+1).getArrival());
+			 	newPaths.add(path);
 			}
-			if (paths.get(i).getArrival() == d) {
-				path1 = paths.get(i);
+			else
+			{
+				newPaths.add(paths.get(i));
 			}
 		}
-		// TODO : calculer le nouveau chemin, remplacer path1 par le nouveau et
-		// supprimer path2
+		setPaths(newPaths);
 	}
 
 	/**
@@ -66,8 +70,23 @@ public class DeliveryRound {
 	 * @param first
 	 * @param second
 	 */
-	public void swapDeliveries(Delivery first, Delivery second) {
-		// TODO : echanger les deux livraisons et recalculer les chemins
+	public void swapDeliveries(Delivery first, Delivery second, Graph graph) {
+		ArrayList<Path> newPaths = new ArrayList<Path>();
+		int i=0,j=0;
+		for(int k=0;k<paths.size();++k){
+			if(paths.get(k).getArrival().equals(first)){
+				i=k;
+			}
+			if(paths.get(k).getArrival().equals(second)){
+				j=k;
+			}
+		}
+		if(i!=j){
+			deleteDelivery(paths.get(i).getArrival(),graph);
+			addDelivery(paths.get(i).getDeparture(),second,graph);
+			deleteDelivery(paths.get(j).getArrival(),graph);
+			addDelivery(paths.get(j).getDeparture(),first,graph);
+		}
 	}
 
 	/**

@@ -108,7 +108,7 @@ public class Graph{
 		{
 			int source  = nodes.get(i).getAddress();
 			dijkstra(source);
-			generatePaths(source);
+			computePaths(source);
 		}
 	}
 
@@ -149,7 +149,7 @@ public class Graph{
 		}
 	}
 	
-	private void generatePaths(int source){
+	private void computePaths(int source){
 		int pos=hashMap[source];
 		for(int k=0;k<nbNodesDelivery;++k){
 			if(k!=pos)
@@ -200,4 +200,15 @@ public class Graph{
 		return ((edges[i][j]==1)?true:false);
 	}
 	
+	public Path generatePath(Delivery start,Delivery end){
+		int in = start.getAddress();
+		int out = end.getAddress();
+		dijkstra(in);
+		ArrayList<Section> path = new ArrayList<Section>();
+		while(out!=in && !parent[out].equals(null)){
+			path.add(parent[out]);
+			out = parent[out].getDeparture();
+		}
+		return new Path(start,end,path);
+	}
 }
