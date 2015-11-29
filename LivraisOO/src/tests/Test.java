@@ -1,10 +1,11 @@
+package tests;
+
 import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
-
 import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 public class Test extends TestCase {
 	public static void main(String[] args) {

@@ -1,3 +1,5 @@
+package tests;
+
 import static org.junit.Assert.*;
 
 import org.junit.After;
@@ -27,25 +29,21 @@ public class DeliveryTest extends TestCase  {
 	}
 
 	@Test
-	public void test() {
-		testDelivery();
-		testGetId();
-		testGetClient();
-		testGetAddress();
-	}
-	
 	public void testDelivery() {
 		assertNotNull("Instance is created", delivery);
 	}
 	
+	@Test
 	public void testGetId() {
 		assertEquals("Is that id correct", 1, delivery.getId());
 	}
 	
+	@Test
 	public void testGetClient() {
 		assertEquals("Is that client correct", 2, delivery.getClient());
 	}
 	
+	@Test
 	public void testGetAddress() {
 		assertEquals("Is that address correct", 3, delivery.getAddress());
 	}
