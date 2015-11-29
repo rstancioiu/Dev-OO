@@ -248,6 +248,10 @@ public class GraphicView extends JPanel {
 				drawNode(g, n, new Color(140,210,230));
 			}
 		}
+		
+		if(typicalDay.getWareHouse() != -1) {
+			drawNode(g, map.getNodeById(typicalDay.getWareHouse()), Color.GREEN);
+		}
 
 		graphics2D.setTransform(saveTransform);
 	}

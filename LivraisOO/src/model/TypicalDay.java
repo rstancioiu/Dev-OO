@@ -9,7 +9,8 @@ public class TypicalDay {
 	private int wareHouse;
 	
 	public TypicalDay() {
-		nbDeliveries=0;
+		nbDeliveries = 0;
+		wareHouse = -1;
 	}
 
 	/**

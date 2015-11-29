@@ -22,7 +22,7 @@ import model.TimeWindow;
 import model.TypicalDay;
 
 public class DeliveryRoundView extends JList {
-	
+
 	private DefaultListModel model;
 
 	public DeliveryRoundView() {
@@ -38,15 +38,15 @@ public class DeliveryRoundView extends JList {
 	private void addElement(String label) {
 		model.addElement(label);
 	}
-	
+
 	private String formatHour(int seconds) {
 		DecimalFormat formatter = new DecimalFormat("00");
 		String result = formatter.format(seconds/3600) + ":"
-					  + formatter.format(seconds%3600/60) + ":"
-					  + formatter.format(seconds%60);
+				+ formatter.format(seconds%3600/60) + ":"
+				+ formatter.format(seconds%60);
 		return result;
 	}
-	
+
 	public TimeWindow getWindowByDelivery(Delivery d, TypicalDay typicalDay) {
 		for (TimeWindow t : typicalDay.getTimeWindows()) {
 			for (Delivery d2 : t.getDeliveries()) {
@@ -59,8 +59,8 @@ public class DeliveryRoundView extends JList {
 	}
 
 	public void listDeliveryRound(DeliveryRound deliveryRound, TypicalDay typicalDay) {
+		model.clear();
 		int STOPTIME = 10;
-
 		ArrayList<Path> paths = deliveryRound.getPaths();
 		Path first = paths.get(0);
 		int firstTime = getWindowByDelivery(first.getArrival(), typicalDay).getStart();
@@ -72,16 +72,19 @@ public class DeliveryRoundView extends JList {
 			Delivery arrival = p.getArrival();
 			TimeWindow currentWindow = getWindowByDelivery(arrival, typicalDay);
 			String line;
-			if(p == paths.get(paths.size()-1)) {
-				line = "Warehouse arrival : " + formatHour(departure);
-			} else {
-				line = "" + arrival.getAddress() + " at " + formatHour(departure);
-			}
+			line = "" + arrival.getAddress() + " at " + formatHour(departure);
 			if(departure<currentWindow.getStart()) {
 				int delta = currentWindow.getStart() - departure;
 				line += " (wait " + formatHour(delta) + ")";
 				departure += delta;
+			} else if(departure>currentWindow.getEnd()) {
+				int delta = departure - currentWindow.getEnd();
+				line += " (late " + formatHour(delta) + ")";
 			}
+			if(p == paths.get(paths.size()-1)) {
+				line = "Warehouse arrival : " + formatHour(departure);
+			}
+
 			model.addElement(line);
 		}
 	}
