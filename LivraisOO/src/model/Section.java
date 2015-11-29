@@ -71,7 +71,7 @@ public class Section {
 	}
 
 	/**
-	 * @return time 
+	 * @return time
 	 */
 	public double getTime() {
 		return length * speed;

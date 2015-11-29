@@ -15,15 +15,15 @@ import model.TypicalDay;
 public class RequestState extends DefaultState {
 	public void computeDeliveries(CityMap map, TypicalDay typicalDay, DeliveryRound deliveryRound, Window window) {
 		Graph graph = new Graph(map,typicalDay);
-		graph.compute();
+		graph.computeShortestPaths();
 		TSP tsp = new TSP1();
 		tsp.chercheSolution(graph);
 		ArrayList<Path> paths = new ArrayList<Path>();
-		for(int i=0;i<graph.getNbNodes()-1;++i)
+		for(int i=0;i<graph.getNbNodesDelivery()-1;++i)
 		{
 			paths.add(graph.getPath(tsp.getSolution(i), tsp.getSolution(i+1)));
 		}
-		paths.add(graph.getPath(tsp.getSolution(graph.getNbNodes()-1), 0));
+		paths.add(graph.getPath(tsp.getSolution(graph.getNbNodesDelivery()-1), 0));
 		deliveryRound.setPaths(paths);
 		window.drawDeliveryRound(deliveryRound);
 		Controller.setCurrentState(Controller.deliveryState);

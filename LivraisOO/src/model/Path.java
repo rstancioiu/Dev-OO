@@ -3,74 +3,83 @@ package model;
 import java.util.ArrayList;
 
 /**
- * Represents a path between two deliveries points (departure & arrival)
- * A path is a list of sections
- * @author Heptaswagnome
- *
+ * Represents a path between two deliveries points (departure & arrival) A path
+ * is a list of sections
  */
 public class Path {
 
 	private ArrayList<Section> sections;
 	private Delivery arrival;
 	private Delivery departure;
-	
+	private double duration;
+
 	/**
 	 * Path constructor
-	 * @param a Arrival
-	 * @param d Departure
-	 * @param s Sections composing the path
+	 * 
+	 * @param arrival
+	 * @param departure
+	 * @param sections
+	 * @param duration
 	 */
-	public Path(Delivery a, Delivery d, ArrayList<Section> s){
-		this.sections = s;
-		this.departure = d;
-		this.arrival = a;
+	public Path(Delivery arrival, Delivery departure, ArrayList<Section> sections, double duration) {
+		this.sections = sections;
+		this.departure = departure;
+		this.arrival = arrival;
+		this.duration = duration;
 	}
-	
+
 	/**
-	 * Sections getter
-	 * @return Sections list
+	 * @return sections list
 	 */
-	public ArrayList<Section> getSections(){
+	public ArrayList<Section> getSections() {
 		return this.sections;
 	}
-	
+
 	/**
-	 * Departure getter
-	 * @return Departure
+	 * @return departure
 	 */
-	public Delivery getDeparture(){
+	public Delivery getDeparture() {
 		return this.departure;
 	}
-	
+
 	/**
-	 * Arrival getter
-	 * @return Arrival
+	 * @return arrival
 	 */
-	public Delivery getArrival(){
-		return this.arrival;
+	public Delivery getArrival() {
+		return arrival;
 	}
-	
+
 	/**
-	 * Sections setter
-	 * @param s New sections
+	 * Change sections
+	 * 
+	 * @param sections
 	 */
-	public void SetSections(ArrayList<Section> s){
-		this.sections = s;
+	public void SetSections(ArrayList<Section> sections) {
+		this.sections = sections;
 	}
-	
+
 	/**
-	 * Arrival setter
-	 * @param a New arrival
+	 * Change arrival
+	 * 
+	 * @param arrival
 	 */
-	public void setArrival(Delivery a){
-		this.arrival = a;
+	public void setArrival(Delivery arrival) {
+		this.arrival = arrival;
 	}
-	
+
 	/**
-	 * Departure setter
-	 * @param d New departure
+	 * Change departure
+	 * 
+	 * @param departure
 	 */
-	public void setDeparture(Delivery d){
-		this.departure = d;
+	public void setDeparture(Delivery departure) {
+		this.departure = departure;
+	}
+
+	/**
+	 * @return duration
+	 */
+	public double getDuration() {
+		return duration;
 	}
 }

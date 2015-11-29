@@ -8,6 +8,12 @@ public class TimeWindow {
 	private String end;
 	private ArrayList<Delivery> deliveries = new ArrayList<Delivery>();
 
+	/**
+	 * TimeWindow is determined by a starting hour and an ending hour
+	 * 
+	 * @param start
+	 * @param end
+	 */
 	public TimeWindow(String start, String end) {
 		this.start = start;
 		this.end = end;
@@ -24,39 +30,39 @@ public class TimeWindow {
 
 	/**
 	 * Delete a delivery from the list of deliveries
+	 * 
 	 * @param d
 	 */
-	public void deleteDelivery(Delivery d){
-		for(int i=0;i<deliveries.size();++i){
-			if(deliveries.get(i).equals(d)){
+	public void deleteDelivery(Delivery d) {
+		for (int i = 0; i < deliveries.size(); ++i) {
+			if (deliveries.get(i).equals(d)) {
 				deliveries.remove(i);
 				break;
 			}
 		}
 	}
-	
+
 	/**
 	 * Swap two deliveries
+	 * 
 	 * @param d1
 	 * @param d2
 	 */
-	public void swapDeliveries(Delivery d1, Delivery d2){
-		int i,j;
-		for(i=0;i<deliveries.size();++i)
-			if(deliveries.get(i).equals(d1))
+	public void swapDeliveries(Delivery d1, Delivery d2) {
+		int i, j;
+		for (i = 0; i < deliveries.size(); ++i)
+			if (deliveries.get(i).equals(d1))
 				break;
-		for(j=0;j<deliveries.size();++j)
-			if(deliveries.get(j).equals(d2))
+		for (j = 0; j < deliveries.size(); ++j)
+			if (deliveries.get(j).equals(d2))
 				break;
-		if(i!=deliveries.size() && j!=deliveries.size())
-		{
+		if (i != deliveries.size() && j != deliveries.size()) {
 			Delivery tmp = deliveries.get(i);
 			deliveries.set(i, deliveries.get(j));
 			deliveries.set(j, tmp);
 		}
 	}
-	
-	
+
 	/**
 	 * Return the starting hour of the time window
 	 * 
@@ -83,6 +89,5 @@ public class TimeWindow {
 	public ArrayList<Delivery> getDeliveries() {
 		return deliveries;
 	}
-	
-	
+
 }

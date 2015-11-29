@@ -13,7 +13,7 @@ public class DeliveryRound {
 
 	private String start;
 	private String end;
-	private int duration;
+	private double duration;
 	private ArrayList<Path> paths;
 
 	/**
@@ -21,6 +21,7 @@ public class DeliveryRound {
 	 */
 	public DeliveryRound() {
 		paths = new ArrayList<Path>();
+		duration = 0;
 	}
 
 	/**
@@ -33,10 +34,12 @@ public class DeliveryRound {
 		ArrayList<Path> newPaths = new ArrayList<Path>();
 		for (int i = 0; i < paths.size(); i++) {
 			if (paths.get(i).getDeparture().equals(previous)) {
+				duration -= paths.get(i).getDuration();
 				Path path1 = graph.generatePath(previous, newDelivery);
-				Path path2 = graph.generatePath(newDelivery, paths.get(i + 1).getDeparture());
+				Path path2 = graph.generatePath(newDelivery, paths.get(i).getArrival());
 				newPaths.add(path1);
 				newPaths.add(path2);
+				duration += path1.getDuration() + path2.getDuration();
 			} else {
 				newPaths.add(paths.get(i));
 			}
@@ -47,17 +50,18 @@ public class DeliveryRound {
 	/**
 	 * Deletes a delivery
 	 * 
-	 * @param d
+	 * @param delivery
+	 * @param graph
 	 */
-	public void deleteDelivery(Delivery d, Graph graph) {
+	public void deleteDelivery(Delivery delivery, Graph graph) {
 		ArrayList<Path> newPaths = new ArrayList<Path>();
-		for (int i = 0; i < paths.size()-1; i++) {
-			if (paths.get(i).getArrival().equals(d)) {
-			 	Path path = graph.generatePath(paths.get(i).getDeparture(), paths.get(i+1).getArrival());
-			 	newPaths.add(path);
-			}
-			else
-			{
+		for (int i = 0; i < paths.size() - 1; i++) {
+			if (paths.get(i).getArrival().equals(delivery)) {
+				duration -= paths.get(i).getDuration() + paths.get(i + 1).getDuration();
+				Path path = graph.generatePath(paths.get(i).getDeparture(), paths.get(i + 1).getArrival());
+				duration += path.getDuration();
+				newPaths.add(path);
+			} else {
 				newPaths.add(paths.get(i));
 			}
 		}
@@ -71,70 +75,60 @@ public class DeliveryRound {
 	 * @param second
 	 */
 	public void swapDeliveries(Delivery first, Delivery second, Graph graph) {
-		ArrayList<Path> newPaths = new ArrayList<Path>();
-		int i=0,j=0;
-		for(int k=0;k<paths.size();++k){
-			if(paths.get(k).getArrival().equals(first)){
-				i=k;
+		int i = 0, j = 0;
+		for (int k = 0; k < paths.size(); ++k) {
+			if (paths.get(k).getArrival().equals(first)) {
+				i = k;
 			}
-			if(paths.get(k).getArrival().equals(second)){
-				j=k;
+			if (paths.get(k).getArrival().equals(second)) {
+				j = k;
 			}
 		}
-		if(i!=j){
-			deleteDelivery(paths.get(i).getArrival(),graph);
-			addDelivery(paths.get(i).getDeparture(),second,graph);
-			deleteDelivery(paths.get(j).getArrival(),graph);
-			addDelivery(paths.get(j).getDeparture(),first,graph);
+		if (i != j) {
+			deleteDelivery(paths.get(i).getArrival(), graph);
+			addDelivery(paths.get(i).getDeparture(), second, graph);
+			deleteDelivery(paths.get(j).getArrival(), graph);
+			addDelivery(paths.get(j).getDeparture(), first, graph);
 		}
 	}
 
 	/**
-	 * Paths setter
-	 * 
-	 * @param p
-	 *            New paths
+	 * @param path
 	 */
-	public void setPaths(ArrayList<Path> p) {
-		paths = p;
+	public void setPaths(ArrayList<Path> paths) {
+		duration = 0;
+		for (int i = 0; i < paths.size(); ++i) {
+			duration += paths.get(i).getDuration();
+		}
+		this.paths = paths;
 	}
-	
+
 	/**
 	 * Paths getter
-	 * 
 	 */
 	public ArrayList<Path> getPaths() {
 		return paths;
 	}
 
 	/**
-	 * Start time setter
-	 * 
-	 * @param s
-	 *            New start time
+	 * @param start
 	 */
 	public void setStart(String s) {
-		start = s;
+		this.start = start;
 	}
 
 	/**
-	 * End time setter
-	 * 
-	 * @param e
-	 *            New end time
+	 * @param end
 	 */
-	public void setEnd(String e) {
-		end = e;
+	public void setEnd(String end) {
+		this.end = end;
 	}
 
 	/**
-	 * Duration setter
-	 * 
-	 * @param d
-	 *            New duration
+	 * @param duration
 	 */
-	public void setDuration(int d) {
-		duration = d;
+	public void setDuration(double duration) {
+		this.duration = duration;
 	}
 
 	/**
@@ -155,33 +149,25 @@ public class DeliveryRound {
 
 		return ID;
 	}
-	
+
 	/**
-	 * start getter
 	 * @return start
 	 */
-	public String getStart(){
+	public String getStart() {
 		return this.start;
 	}
+
 	/**
-	 * end getter
 	 * @return end
 	 */
-	public String getEnd(){
+	public String getEnd() {
 		return this.end;
 	}
+
 	/**
-	 * duration getter
 	 * @return duration
 	 */
-	public int getDuration(){
+	public double getDuration() {
 		return this.duration;
-	}
-	/**
-	 * paths getter
-	 * @return paths
-	 */
-	public ArrayList<Path> getPaths(){
-		return this.getPaths();
 	}
 }

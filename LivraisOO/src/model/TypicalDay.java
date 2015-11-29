@@ -43,11 +43,18 @@ public class TypicalDay {
 	public int getNbDeliveries() {
 		return nbDeliveries;
 	}
-
+	
+	/**
+	 * @return wareHouse
+	 */
 	public int getWareHouse() {
 		return wareHouse;
 	}
 
+	/**
+	 * Change wareHouse
+	 * @param wareHouse
+	 */
 	public void setWareHouse(int wareHouse) {
 		this.wareHouse = wareHouse;
 	}

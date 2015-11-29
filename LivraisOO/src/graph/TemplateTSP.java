@@ -12,11 +12,11 @@ public abstract class TemplateTSP implements TSP {
 
 	public void chercheSolution(Graph g) {
 		this.g = g;
-		meilleureSolution = new Integer[g.getNbNodes()];
-		Collection<Integer> nonVus = new ArrayList<Integer>(g.getNbNodes() - 1);
-		for (int i = 1; i < g.getNbNodes(); i++)
+		meilleureSolution = new Integer[g.getNbNodesDelivery()];
+		Collection<Integer> nonVus = new ArrayList<Integer>(g.getNbNodesDelivery() - 1);
+		for (int i = 1; i < g.getNbNodesDelivery(); i++)
 			nonVus.add(i);
-		Collection<Integer> vus = new ArrayList<Integer>(g.getNbNodes());
+		Collection<Integer> vus = new ArrayList<Integer>(g.getNbNodesDelivery());
 		vus.add(0);
 		coutMeilleureSolution = Integer.MAX_VALUE;
 		long tpsDebut = System.currentTimeMillis();	
@@ -26,7 +26,7 @@ public abstract class TemplateTSP implements TSP {
 	}
 
 	public Integer getSolution(int i) {
-		if (g != null && i >= 0 && i < g.getNbNodes())
+		if (g != null && i >= 0 && i < g.getNbNodesDelivery())
 			return meilleureSolution[i];
 		return -1;
 	}
@@ -49,7 +49,7 @@ public abstract class TemplateTSP implements TSP {
 					coutMeilleureSolution = coutVus + g.getCost(sommetCrt, 0);
 				}
 			}
-		} else if ((g.getRank(sommetCrt) <= g.getNbNodes() - nonVus.size())
+		} else if ((g.getRank(sommetCrt) <= g.getNbNodesDelivery() - nonVus.size())
 				&& (coutVus + bound(sommetCrt, nonVus) < coutMeilleureSolution)) {
 			Iterator<Integer> it = iterator(sommetCrt, nonVus, g);
 			while (it.hasNext()) {

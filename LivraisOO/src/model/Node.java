@@ -68,10 +68,16 @@ public class Node {
 		return y;
 	}
 
+	/**
+	 * @return array of outgoing sections
+	 */
 	public ArrayList<Section> getOutgoing() {
 		return outgoing;
 	}
 
+	/**
+	 * @return array of incomming sections
+	 */
 	public ArrayList<Section> getIncoming() {
 		return incoming;
 	}
