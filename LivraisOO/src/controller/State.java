@@ -72,7 +72,7 @@ public interface State {
 	/**
 	 * Method called by controller when the button 'Generate Roadmap' is hit
 	 */
-	public void generateRoadmap();
+	public void generateRoadmap(DeliveryRound deliveryRound);
 
 	/**
 	 * Method called by controller after a right click

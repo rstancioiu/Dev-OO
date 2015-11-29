@@ -81,8 +81,8 @@ public class Controller {
 		currentState.modifyDelivery(deliveryRound, d1, d2);
 	}
 
-	public void generateRoadmap() {
-		currentState.generateRoadmap();
+	public void generateRoadmap(DeliveryRound deliveryRound) {
+		currentState.generateRoadmap(deliveryRound);
 	}
 
 	public void rightClick(Window window, CommandsList cmdList) {

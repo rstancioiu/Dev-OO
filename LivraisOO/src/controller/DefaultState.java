@@ -33,7 +33,7 @@ public abstract class DefaultState implements State {
 	public void modifyDelivery(DeliveryRound deliveryRound, Node d1, Node d2) {
 	}
 
-	public void generateRoadmap() {
+	public void generateRoadmap(DeliveryRound deliveryRound) {
 	}
 
 	public void rightClick(Window window, CommandsList cmdList) {
