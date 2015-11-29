@@ -68,19 +68,34 @@ public class Graph{
 			}
 		}
 		for(int i=0;i<timeWindows.size();++i){
+			ArrayList<Delivery> deliveries = timeWindows.get(i).getDeliveries();
 			if(i==0) {
-				ArrayList<Delivery> deliveries = timeWindows.get(i).getDeliveries();
 				for(int j=0;j<deliveries.size();++j){
 					int out = hashMap[deliveries.get(j).getAddress()];
 					edges[i][out]=1;
 				}
-			} else if(i<timeWindows.size()-1){
-				ArrayList<Delivery> deliveriesIn = timeWindows.get(i).getDeliveries();
+			} 
+			if(i<timeWindows.size()-1){
 				ArrayList<Delivery> deliveriesOut = timeWindows.get(i+1).getDeliveries();
-				for(int j=0;j<deliveriesIn.size();++j){
-					int in = hashMap[deliveriesIn.get(j).getAddress()];
+				for(int j=0;j<deliveries.size();++j){
+					int in = hashMap[deliveries.get(j).getAddress()];
 					for(int k=0;k<deliveriesOut.size();++k){
 						int out = hashMap[deliveriesOut.get(k).getAddress()];
+						edges[in][out]=1;
+					}
+				}
+			} else {
+				for(int j=0;j<deliveries.size();++j){
+					int in = hashMap[deliveries.get(j).getAddress()];
+					edges[in][0]=1;
+				}
+			}
+			for(int k=0;k<deliveries.size();++k){
+				for(int j=0;j<deliveries.size();++j){
+					if(k!=j)
+					{
+						int in = hashMap[deliveries.get(k).getAddress()];
+						int out = hashMap[deliveries.get(j).getAddress()];
 						edges[in][out]=1;
 					}
 				}
@@ -142,12 +157,11 @@ public class Graph{
 				int out = nodes.get(k).getAddress();
 				cost[pos][k]= dist[out];
 				ArrayList<Section> path = new ArrayList<Section>();
-				while(out!=source){
+				while(out!=source && !parent[out].equals(null)){
 					path.add(parent[out]);
 					out = parent[out].getDeparture();
 				}
 				path = reversePath(path);
-				System.out.println(pos + " " + k);
 				paths[pos][k] = new Path(nodes.get(pos),nodes.get(k),path);
 			} else {
 				paths[pos][k]=null;
@@ -167,9 +181,7 @@ public class Graph{
 	}
 	
 	public Path getPath(int in,int out){
-		int s = hashMap[in];
-		int e = hashMap[out];
-		return paths[s][e];
+		return paths[in][out];
 	}
 	
 
@@ -178,9 +190,7 @@ public class Graph{
 	}
 	
 	public double getCost(int i, int j) {
-		int s = hashMap[i];
-		int e = hashMap[j];
-		return cost[s][e];
+		return cost[i][j];
 	}
 
 	public boolean isEdge(int i, int j) {

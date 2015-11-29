@@ -19,8 +19,6 @@ public abstract class TemplateTSP implements TSP {
 		vus.add(0); 
 		coutMeilleureSolution = Integer.MAX_VALUE;
 		branchAndBound(0, nonVus, vus, 0);
-		for(int i=0;i<g.getNbNodes();++i)
-			System.out.println(meilleureSolution[i]);
 	}
 	
 	public Integer getSolution(int i){

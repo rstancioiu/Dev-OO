@@ -14,7 +14,11 @@ public class RequestState extends DefaultState {
 		graph.compute();
 		for(int i=0;i<graph.getNbNodes();++i){
 			for(int j=0;j<graph.getNbNodes();++j)
-				System.out.print(graph.getCost(i, j)+" ");
+				if(graph.isEdge(i, j))
+				{
+					System.out.print(graph.getCost(i, j)+" ");
+				}
+				else System.out.print(-1+ " ");
 			System.out.println();
 		}
 		TSP tsp = new TSP1();
