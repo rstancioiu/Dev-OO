@@ -12,7 +12,7 @@ public class Controller {
 	private CommandsList cmdList;
 	private DeliveryRound deliveryRound;
 	private static State currentState;
-	private Window window;
+	private static Window window;
 
 	// Instances associated to each possible state of a controller
 	protected static final InitState initState = new InitState();
@@ -28,8 +28,8 @@ public class Controller {
 		this.map = map;
 		this.typicalDay = typicalDay;
 		cmdList = new CommandsList();
-		currentState = initState;
 		window = new Window(this);
+		setCurrentState(initState);
 	}
 
 	/**
@@ -40,6 +40,7 @@ public class Controller {
 	 */
 	protected static void setCurrentState(State state) {
 		currentState = state;
+		currentState.updateVue(window);
 	}
 
 	/**
@@ -61,7 +62,7 @@ public class Controller {
 	}
 
 	public void loadDeliveries() {
-		currentState.loadDeliveries(this.typicalDay);
+		currentState.loadDeliveries(this.typicalDay, this.window);
 	}
 
 	public void addDelivery() {

@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 
 import model.CityMap;
+import model.Delivery;
+import model.TimeWindow;
 import model.TypicalDay;
 
 import controller.Controller;
@@ -47,7 +49,7 @@ public class Window extends JFrame {
 
 		graphicView = new GraphicView();
 		textualView = new TextualView();
-		loadMap = new JButton("New Map");
+		loadMap = new JButton("Load Map");
 		loadMap.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -55,7 +57,7 @@ public class Window extends JFrame {
 				;
 			}
 		});
-		loadDeliveries = new JButton("New Delivery");
+		loadDeliveries = new JButton("Load deliveries");
 		loadDeliveries.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -110,8 +112,6 @@ public class Window extends JFrame {
 		generateRoadmap.setMinimumSize(new Dimension(150,20));
 		
 		panel.setVisible(true);
-		textualView.StepOne();
-		graphicView.StepOne();
 		getContentPane().add(panel);
 		setVisible(true);
 	}
@@ -121,8 +121,32 @@ public class Window extends JFrame {
 		graphicView.update();
 	}
 
-	public void drawDeliveries(TypicalDay typicalday) {
-		graphicView.paintDeliveries(typicalday);
+	public void drawDeliveries(TypicalDay typicalDay) {
+		graphicView.paintDeliveries(typicalDay);
+		textualView.listDeliveries(typicalDay);
 		graphicView.update();
+	}
+	
+	public void enableLoadMap(boolean state) {
+		loadMap.setEnabled(state);
+	}
+	
+	public void enableLoadDeliveries(boolean state) {
+		loadDeliveries.setEnabled(state);	
+	}
+	
+	public void enableCompute(boolean state) {
+		compute.setEnabled(state);
+	}
+	
+	public void enableGenerateRoadmap(boolean state) {
+		generateRoadmap.setEnabled(state);
+	}
+	
+	public void disableAll() {
+		enableLoadMap(false);
+		enableLoadDeliveries(false);
+		enableCompute(false);
+		enableGenerateRoadmap(false);
 	}
 }

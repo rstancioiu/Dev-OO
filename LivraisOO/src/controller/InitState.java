@@ -32,4 +32,9 @@ public class InitState extends DefaultState {
 		System.out.println("Current state: cityMapState");
 	}	
 	
+	public void updateVue(Window window){
+		window.disableAll();
+		window.enableLoadMap(true);
+	}
+	
 }
