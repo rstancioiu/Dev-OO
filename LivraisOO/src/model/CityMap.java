@@ -13,8 +13,6 @@ public class CityMap {
 	// List of time windows
 	private ArrayList<Section> sections = new ArrayList<Section>();
 
-	private int maxY = 0;
-
 	/**
 	 * 
 	 */
@@ -30,9 +28,6 @@ public class CityMap {
 	public void addNode(Node n) {
 		nodes.put(n.getId(),n);
 		arrayNodes.add(n);
-		if (n.getY() > maxY) {
-			maxY = n.getY();
-		}
 	}
 
 	/**
@@ -71,15 +66,6 @@ public class CityMap {
 	 */
 	public ArrayList<Node> getNodes() {
 		return arrayNodes;
-	}
-	
-	/**
-	 * Return the maximum for nodes coordinates
-	 * 
-	 * @return
-	 */
-	public int getMax() {
-		return maxY;
 	}
 
 }

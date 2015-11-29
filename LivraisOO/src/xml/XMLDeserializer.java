@@ -75,8 +75,8 @@ public class XMLDeserializer {
 	 */
 	private static Node createNode(Element elt, CityMap map) throws XMLException {
 		int id = Integer.parseInt(elt.getAttribute("id"));
-		int x = Integer.parseInt(elt.getAttribute("x"));
-		int y = Integer.parseInt(elt.getAttribute("y"));
+		int x = (int) (Integer.parseInt(elt.getAttribute("x"))*1.2);
+		int y = (int) (Integer.parseInt(elt.getAttribute("y"))*1.2);
 		Node n = new Node(id, x, y);
 		NodeList sectionList = elt.getElementsByTagName("LeTronconSortant");
 		for (int i = 0; i < sectionList.getLength(); i++) {

@@ -106,7 +106,28 @@ public class GraphicView extends JPanel {
 	}
 
 	public double getCoeff() {
-		return 900 / (map.getMax());
+		return 3;
+	}
+	
+	private void drawNode(Graphics g, Node n, Color c) {
+		g.setColor(Color.BLACK);
+		g.fillOval((int) (n.getX() * getCoeff()-16), (int) (n.getY() * getCoeff()-16), 32, 32);
+		g.setColor(c);
+		g.fillOval((int) (n.getX() * getCoeff()-15), (int) (n.getY() * getCoeff()-15), 30, 30);
+		g.setColor(Color.BLACK);
+		String nodeId = Integer.toString(n.getId());
+		g.setFont(g.getFont().deriveFont(15F));
+		g.drawString(nodeId,(int) (n.getX() * getCoeff()-nodeId.length()*4),
+				(int) (n.getY() * getCoeff()+4));
+	}
+	
+	private void drawLine(Graphics g, Node n1, Node n2, Color c, boolean bold) {
+		Graphics2D graphics2D = (Graphics2D) g;
+		g.setColor(c);
+		graphics2D.setStroke(new BasicStroke(bold ? 6 : 1));
+		g.drawLine((int) (n1.getX() * getCoeff()), (int) (n1.getY() * getCoeff()), (int) (n2.getX() * getCoeff()),
+				(int) (n2.getY() * getCoeff()));
+		graphics2D.setStroke(new BasicStroke(1));
 	}
 
 	/**
@@ -126,45 +147,32 @@ public class GraphicView extends JPanel {
 	    at.translate(translateX, translateY);
 	    graphics2D.setTransform(at);
 	    
-	    //--- Draw map ---
-	    for (Node n : map.getNodes()) {
-			g.fillOval(n.getX()-3, (int) (n.getY() * getCoeff()-3), 6, 6);
-			g.drawString(Integer.toString(n.getId()), n.getX() + 6,
-					(int) (n.getY() * getCoeff()) + 6);
+		//--- Draw delivery round ---
+		for (Path p : deliveryRound.getPaths()) {
+			for (Section s : p.getSections()) {
+				Node n1 = map.getNodeById(s.getArrival());
+				Node n2 = map.getNodeById(s.getDeparture());
+				drawLine(g, n1, n2, new Color(40,110,130), true);
+			}
 		}
-		for (Section s : map.getSections()) {
+	    
+	    //--- Draw map ---
+	    for (Section s : map.getSections()) {
 			Node n1 = map.getNodeById(s.getArrival());
 			Node n2 = map.getNodeById(s.getDeparture());
-			g.drawLine(n1.getX(), (int) (n1.getY() * getCoeff()), n2.getX(),
-					(int) (n2.getY() * getCoeff()));
+			drawLine(g, n1, n2, Color.GRAY, false);
 		}
-		// ---------------------------------------
+	    for (Node n : map.getNodes()) {
+	    	drawNode(g, n, Color.WHITE);
+		}
 		
 	    //--- Draw deliveries ---
 		for (TimeWindow t : typicalDay.getTimeWindows()) {
 			for (Delivery d : t.getDeliveries()) {
 				Node n = map.getNodeById(d.getAddress());
-				g.setColor(Color.BLUE);
-				g.fillOval(n.getX()-6, (int) (n.getY() * getCoeff()-6), 12, 12);
-				g.setColor(Color.WHITE);
+				drawNode(g, n, new Color(140,210,230));
 			}
 		}
-		// ---------------------------------------
-		
-		//--- Draw delivery round ---
-		for (Path p : deliveryRound.getPaths()) {
-			for (Section s : p.getSections()) {
-				g.setColor(Color.BLUE);
-				Node n1 = map.getNodeById(s.getArrival());
-				Node n2 = map.getNodeById(s.getDeparture());
-				graphics2D.setStroke(new BasicStroke(3));
-				g.drawLine(n1.getX(), (int) (n1.getY() * getCoeff()), n2.getX(),
-						(int) (n2.getY() * getCoeff()));
-				graphics2D.setStroke(new BasicStroke(1));
-				g.setColor(Color.WHITE);
-			}
-		}
-		// ---------------------------------------
 	    
 	    graphics2D.setTransform(saveTransform);
 	}

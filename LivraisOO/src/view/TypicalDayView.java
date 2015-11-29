@@ -11,14 +11,13 @@ import model.Delivery;
 import model.TimeWindow;
 import model.TypicalDay;
 
-public class TextualView extends JList {
+public class TypicalDayView extends JList {
 	
 	private DefaultListModel model;
 
-	public TextualView() {
+	public TypicalDayView() {
 		super();
 		setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-		//setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		setVisibleRowCount(-1);
 		JScrollPane listScroller = new JScrollPane(this);
 		model = new DefaultListModel();

@@ -23,7 +23,8 @@ import controller.Controller;
 public class Window extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private GraphicView graphicView;
-	private TextualView textualView;
+	private TypicalDayView typicalDayView;
+	private DeliveryRoundView deliveryRoundView;
 	private Controller controller;
 	private JButton loadMap;
 	private JButton loadDeliveries;
@@ -49,7 +50,8 @@ public class Window extends JFrame {
 		panel.setLayout(layout);
 
 		graphicView = new GraphicView();
-		textualView = new TextualView();
+		typicalDayView = new TypicalDayView();
+		deliveryRoundView = new DeliveryRoundView();
 		loadMap = new JButton("Load Map");
 		loadMap.addActionListener(new ActionListener() {
 			@Override
@@ -83,7 +85,8 @@ public class Window extends JFrame {
 		   layout.createSequentialGroup()
 		      .addComponent(graphicView)
 		      .addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
-		           .addComponent(textualView)
+		           .addComponent(typicalDayView)
+		           .addComponent(deliveryRoundView)
 		           .addComponent(compute)
 		           .addComponent(generateRoadmap)
 		           .addComponent(loadMap)
@@ -96,7 +99,8 @@ public class Window extends JFrame {
 		      .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 		           .addComponent(graphicView)
 		           .addGroup(layout.createSequentialGroup()
-				      .addComponent(textualView)
+				      .addComponent(typicalDayView)
+				      .addComponent(deliveryRoundView)
 		    		  .addComponent(compute)
 			          .addComponent(generateRoadmap)
 				      .addComponent(loadMap)
@@ -105,8 +109,11 @@ public class Window extends JFrame {
 			)
 		);
 
-		textualView.setMinimumSize(new Dimension(200,250));
-		textualView.setMaximumSize(new Dimension(200,800));
+		typicalDayView.setMinimumSize(new Dimension(250,150));
+		typicalDayView.setMaximumSize(new Dimension(250,400));
+		deliveryRoundView.setMinimumSize(new Dimension(250,150));
+		deliveryRoundView.setMaximumSize(new Dimension(250,400));
+		
 		loadMap.setMinimumSize(new Dimension(150,20));
 		loadDeliveries.setMinimumSize(new Dimension(150,20));
 		compute.setMinimumSize(new Dimension(150,20));
@@ -124,12 +131,13 @@ public class Window extends JFrame {
 
 	public void drawDeliveries(TypicalDay typicalDay) {
 		graphicView.paintDeliveries(typicalDay);
-		textualView.listDeliveries(typicalDay);
+		typicalDayView.listDeliveries(typicalDay);
 		graphicView.update();
 	}
 	
 	public void drawDeliveryRound(DeliveryRound deliveryRound) {
 		graphicView.paintDeliveryRound(deliveryRound);
+		deliveryRoundView.listDeliveryRound(deliveryRound);
 		graphicView.update();
 	}
 	
