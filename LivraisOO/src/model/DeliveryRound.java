@@ -114,7 +114,7 @@ public class DeliveryRound {
 	 * @param start
 	 */
 	public void setStart(String s) {
-		this.start = start;
+		this.start = s;
 	}
 
 	/**

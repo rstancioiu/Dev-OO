@@ -52,7 +52,6 @@ public class DeliveryRoundTest extends TestCase{
 		
 		assertEquals("Is that length correct", 1, deliveryRound.getPaths().size());
 		assertEquals("Is that path correct", path, deliveryRound.getPaths().get(0));
-		deliveryRound.setPaths(null);
 	}
 	public void testGetSetStart() {
 		deliveryRound.setStart("3h");
@@ -63,8 +62,8 @@ public class DeliveryRoundTest extends TestCase{
 		assertEquals("Is that end hour correct","20h", deliveryRound.getEnd());
 	}
 	public void testGetSetDuration() {
-		deliveryRound.setDuration(5);
-		assertEquals("Is that duration correct",5, deliveryRound.getDuration());
+		deliveryRound.setDuration(5.0);
+		assertEquals("Is that duration correct",5.0, deliveryRound.getDuration());
 	}
 	/*public void testAddDelivery(){
 		
