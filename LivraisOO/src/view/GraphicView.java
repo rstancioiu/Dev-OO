@@ -138,7 +138,7 @@ public class GraphicView extends JPanel {
 	    //--- Draw deliveries ---
 		for (TimeWindow t : typicalDay.getTimeWindows()) {
 			for (Delivery d : t.getDeliveries()) {
-				Node n = map.getNodeById(d.getId());
+				Node n = map.getNodeById(d.getAddress());
 				g.setColor(Color.BLUE);
 				g.fillOval(n.getX()-6, (int) (n.getY() * getCoeff()-6), 12, 12);
 				g.setColor(Color.WHITE);

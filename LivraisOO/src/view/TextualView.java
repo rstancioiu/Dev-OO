@@ -33,7 +33,7 @@ public class TextualView extends JList {
 	public void listDeliveries(TypicalDay typicalDay) {
 		for (TimeWindow t : typicalDay.getTimeWindows()) {
 			for (Delivery d : t.getDeliveries()) {
-				addElement(t.getStart() + "-" + t.getEnd() + " : " + d.getId());
+				addElement(t.getStart() + "-" + t.getEnd() + " : " + d.getAddress());
 			}
 		}
 	}
