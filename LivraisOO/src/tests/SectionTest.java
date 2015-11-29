@@ -13,6 +13,9 @@ public class SectionTest extends TestCase {
 		super(name);
 	}
 
+	public Section getSection(){
+		return section;
+	}
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();

@@ -38,13 +38,13 @@ public class DeliveryRoundTest extends TestCase{
 		assertNotNull("Instance is created", deliveryRound);
 	}
 	
-	public void addDelivery(Delivery previous, Delivery newDelivery, Graph graph)
-	public void deleteDelivery(Delivery d, Graph graph)
-	public void swapDeliveries(Delivery first, Delivery second, Graph graph)
-	public void setPaths(ArrayList<Path> p)
-	public void setStart(String s)
-	public void setEnd(String e)
-	public void setDuration(int d)
-	public int getNewID()
+	//public void addDelivery(Delivery previous, Delivery newDelivery, Graph graph)
+	//public void deleteDelivery(Delivery d, Graph graph)
+	//public void swapDeliveries(Delivery first, Delivery second, Graph graph)
+	//public void setPaths(ArrayList<Path> p)
+	//public void setStart(String s)
+	//public void setEnd(String e)
+	//public void setDuration(int d)
+	//public int getNewID()
 
 }
