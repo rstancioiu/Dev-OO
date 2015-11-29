@@ -1,0 +1,5 @@
+--->TestPlan2
+--->TestLivraison2
+OrdreLivraison = [9,11,3];
+OrdreIntersectionTotal = [0,10,9,10,11,2,3,2,1,0]
+TempsTourneeSeconde = 3168.12; //Temps de trajet + temps d'arret
