@@ -44,7 +44,7 @@ public class DeliveryRoundTest extends TestCase{
 		ArrayList <Section> sections = new ArrayList<Section>();
 		Delivery d1 = new Delivery(1,1,1);
 		Delivery d2 = new Delivery(2,2,2);
-		Path path = new Path(d1,d2,sections);
+		Path path = new Path(d1,d2,sections,0);
 		
 		ArrayList <Path> paths = new ArrayList<Path>();
 		paths.add(path);

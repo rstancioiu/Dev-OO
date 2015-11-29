@@ -34,7 +34,7 @@ public class PathTest extends TestCase{
 		sections.add(new Section("v1",0,2,3.2,50.0));
 		sections.add(new Section("v2",1,2,2.8,150.0));
 		sections.add(new Section("v3",2,1,2.8,150.0));
-		path = new Path(departure, arrival, sections);
+		path = new Path(departure, arrival, sections,0);
 	}
 
 	@After
