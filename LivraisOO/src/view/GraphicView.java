@@ -150,13 +150,30 @@ public class GraphicView extends JPanel {
 		g.drawString(nodeId,(int) (n.getX() * getCoeff()-nodeId.length()*4),
 				(int) (n.getY() * getCoeff()+4));
 	}
+	
+    void drawArrow(Graphics g1, int x1, int y1, int x2, int y2) {
+    	int SIZE = 10;
+        Graphics2D g = (Graphics2D) g1.create();
+        double dx = x2 - x1;
+        double dy = y2 - y1;
+        double angle = Math.atan2(dy, dx);
+        dx = dx - Math.cos(angle)*16;
+        dy = dy - Math.sin(angle)*16;
+        int len = (int) Math.sqrt(dx*dx + dy*dy);
+        AffineTransform at = AffineTransform.getTranslateInstance(x1, y1);
+        at.concatenate(AffineTransform.getRotateInstance(angle));
+        g.transform(at);
+        g.drawLine(0, 0, len, 0);
+        g.fillPolygon(new int[] {len, len-SIZE, len-SIZE, len},
+                      new int[] {0, -SIZE, SIZE, 0}, 4);
+    }
 
 	private void drawLine(Graphics g, Node n1, Node n2, Color c, boolean bold) {
 		Graphics2D graphics2D = (Graphics2D) g;
 		g.setColor(c);
 		graphics2D.setStroke(new BasicStroke(bold ? 6 : 1));
-		g.drawLine((int) (n1.getX() * getCoeff()), (int) (n1.getY() * getCoeff()), (int) (n2.getX() * getCoeff()),
-				(int) (n2.getY() * getCoeff()));
+		//g.drawLine((int) (n1.getX() * getCoeff()), (int) (n1.getY() * getCoeff()), (int) (n2.getX() * getCoeff()), (int) (n2.getY() * getCoeff()));
+		drawArrow(g, (int) (n1.getX() * getCoeff()), (int) (n1.getY() * getCoeff()), (int) (n2.getX() * getCoeff()), (int) (n2.getY() * getCoeff()));
 		graphics2D.setStroke(new BasicStroke(1));
 	}
 

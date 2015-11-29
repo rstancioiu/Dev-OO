@@ -36,7 +36,7 @@ public class Window extends JFrame {
 
 	private void createAndShowGui() {
 		setSize(1000, 600);
-		setMinimumSize(new Dimension(500, 500));
+		setMinimumSize(new Dimension(700, 500));
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -153,9 +153,9 @@ public class Window extends JFrame {
 		graphicView.update();
 	}
 	
-	public void drawDeliveryRound(DeliveryRound deliveryRound) {
+	public void drawDeliveryRound(DeliveryRound deliveryRound, TypicalDay typicalDay) {
 		graphicView.paintDeliveryRound(deliveryRound);
-		deliveryRoundView.listDeliveryRound(deliveryRound);
+		deliveryRoundView.listDeliveryRound(deliveryRound, typicalDay);
 		graphicView.update();
 	}
 	

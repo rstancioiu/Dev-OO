@@ -2,6 +2,9 @@ package view;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
@@ -36,11 +39,50 @@ public class DeliveryRoundView extends JList {
 		model.addElement(label);
 	}
 	
-	public void listDeliveryRound(DeliveryRound deliveryRound) {
-		for (Path p : deliveryRound.getPaths()) {
-			for (Section s : p.getSections()) {
-				
+	private String formatHour(int seconds) {
+		DecimalFormat formatter = new DecimalFormat("00");
+		String result = formatter.format(seconds/3600) + ":"
+					  + formatter.format(seconds%3600/60) + ":"
+					  + formatter.format(seconds%60);
+		return result;
+	}
+	
+	public TimeWindow getWindowByDelivery(Delivery d, TypicalDay typicalDay) {
+		for (TimeWindow t : typicalDay.getTimeWindows()) {
+			for (Delivery d2 : t.getDeliveries()) {
+				if(d==d2) {
+					return t;
+				}
 			}
+		}
+		return new TimeWindow(-1, -1);
+	}
+
+	public void listDeliveryRound(DeliveryRound deliveryRound, TypicalDay typicalDay) {
+		int STOPTIME = 10;
+
+		ArrayList<Path> paths = deliveryRound.getPaths();
+		Path first = paths.get(0);
+		int firstTime = getWindowByDelivery(first.getArrival(), typicalDay).getStart();
+		int departure = (int) (firstTime - first.getDuration() + 1);
+		model.addElement("Warehouse departure : " + formatHour(departure));
+		departure -= STOPTIME;
+		for (Path p : paths) {
+			departure += STOPTIME + p.getDuration();
+			Delivery arrival = p.getArrival();
+			TimeWindow currentWindow = getWindowByDelivery(arrival, typicalDay);
+			String line;
+			if(p == paths.get(paths.size()-1)) {
+				line = "Warehouse arrival : " + formatHour(departure);
+			} else {
+				line = "" + arrival.getAddress() + " at " + formatHour(departure);
+			}
+			if(departure<currentWindow.getStart()) {
+				int delta = currentWindow.getStart() - departure;
+				line += " (wait " + formatHour(delta) + ")";
+				departure += delta;
+			}
+			model.addElement(line);
 		}
 	}
 
