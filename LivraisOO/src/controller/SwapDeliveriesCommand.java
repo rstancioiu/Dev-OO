@@ -11,10 +11,9 @@ import model.DeliveryRound;
  *
  */
 public class SwapDeliveriesCommand extends AbstractCommand {
-
 	private Delivery start;
 	private Delivery end;
-	
+
 	/**
 	 * 
 	 * @param tw
@@ -27,7 +26,7 @@ public class SwapDeliveriesCommand extends AbstractCommand {
 		super(start, dr, g);
 		this.end = end;
 	}
-	
+
 	/**
 	 * Swap the deliveries in the time window and delivery round
 	 */

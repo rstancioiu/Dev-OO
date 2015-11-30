@@ -15,12 +15,12 @@ import model.Section;
 import model.TimeWindow;
 
 public class PathTest extends TestCase{
-	
+
 	private Path path;
 	private Delivery departure;
 	private Delivery arrival;
 	private ArrayList<Section> sections;
-	
+
 	public PathTest (String name) {
 		super(name);
 	}
@@ -48,7 +48,7 @@ public class PathTest extends TestCase{
 	public void testPath() {
 		assertNotNull("Instance is created", path);
 	}
-	
+
 	@Test
 	public void testGetSetSections() {
 		ArrayList<Section > s = new ArrayList<Section>();
@@ -56,21 +56,21 @@ public class PathTest extends TestCase{
 		s.add(new Section("v3",2,1,2.8,150.0));
 		path.SetSections(s);
 		assertEquals("Is that sections correct", s, path.getSections());
-		
+
 	}
-	
+
 	@Test
 	public void testGetSetDeparture() {
 		Delivery d = new Delivery (1, 2, 3, new TimeWindow(0, 24));
 		path.setDeparture(d);
 		assertEquals("Is that departure correct", d, path.getDeparture());
 	}
-	
+
 	@Test
 	public void testGetSetArrival() {
 		Delivery a = new Delivery (1, 2, 3, new TimeWindow(0, 24));
 		path.setArrival(a);
 		assertEquals("Is that arrival correct", a, path.getArrival());
 	}
-	
+
 }

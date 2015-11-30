@@ -24,7 +24,7 @@ public class DeliveryRound {
 		paths = new ArrayList<Path>();
 		duration = 0;
 	}
-	
+
 	private String formatHour(int seconds) {
 		DecimalFormat formatter = new DecimalFormat("00");
 		String result = formatter.format(seconds/3600) + ":"
@@ -32,7 +32,7 @@ public class DeliveryRound {
 				+ formatter.format(seconds%60);
 		return result;
 	}
-	
+
 	/**
 	 * Update delivery effective times
 	 */
@@ -77,13 +77,13 @@ public class DeliveryRound {
 		for (int i = 0; i < paths.size(); i++) {
 			if (paths.get(i).getDeparture().equals(previous)) {
 				Path path1 = graph.generatePath(paths.get(i).getDeparture(), newDelivery);
-				
+
 				if(tm.getStart()>0 && i==0) {
 					//newDelivery.setTimeWindow(tm);
 				} else {
 					newDelivery.setTimeWindow(paths.get(i).getDeparture().getTimeWindow());
 				}
-				
+
 				if(i == 0) {
 					newDelivery.setTime(newDelivery.getTimeWindow().getStart());
 				} else {
@@ -92,7 +92,7 @@ public class DeliveryRound {
 				Path path2 = graph.generatePath(newDelivery, paths.get(i).getArrival());
 				newPaths.add(path1);
 				newPaths.add(path2);
-				
+
 			} else {
 				newPaths.add(paths.get(i));
 			}

@@ -8,7 +8,7 @@ import model.Section;
 
 public class SectionTest extends TestCase {
 	private Section section;
-	
+
 	public SectionTest(String name){
 		super(name);
 	}

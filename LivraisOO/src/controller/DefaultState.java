@@ -11,7 +11,7 @@ import model.TypicalDay;
 import view.Window;
 
 public abstract class DefaultState implements State {
-	
+
 	private Window window;
 
 	public void loadMap(CityMap map,Window window) {
@@ -40,16 +40,16 @@ public abstract class DefaultState implements State {
 
 	public void cancel() {
 	}
-	
+
 	public void clickAddButton(){
 	}
-	
+
 	public void clickDeleteButton(){
 	}
-	
+
 	public void clickSwapButton(){
 	}
-	
+
 	public void confirmAdd(DeliveryRound deliveryRound, Delivery delivery,Node node, TypicalDay typicalDay, Graph graph,CommandsList cmdList){	
 	}
 	
@@ -58,5 +58,5 @@ public abstract class DefaultState implements State {
 	
 	public void confirmSwap(DeliveryRound deliveryRound, Delivery start, Delivery end, Graph graph, CommandsList cmdList){
 	}
-	
+
 }

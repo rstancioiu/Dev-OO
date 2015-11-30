@@ -19,7 +19,7 @@ public class DeleteDeliveryCommand extends AbstractCommand {
 		super(d, dr, g);
 		this.typicalDay = typicalDay;
 	}
-	
+
 	/**
 	 * Remove the delivery from the time window and delivery round
 	 */

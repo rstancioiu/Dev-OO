@@ -14,7 +14,7 @@ import model.TimeWindow;
 import model.TypicalDay;
 
 public class TypicalDayView extends JList {
-	
+
 	private DefaultListModel model;
 
 	public TypicalDayView() {
@@ -30,15 +30,15 @@ public class TypicalDayView extends JList {
 	private void addElement(String label) {
 		model.addElement(label);
 	}
-	
+
 	private String formatHour(int seconds) {
 		DecimalFormat formatter = new DecimalFormat("00");
 		String result = formatter.format(seconds/3600) + ":"
-					  + formatter.format(seconds%3600/60) + ":"
-					  + formatter.format(seconds%60);
+				+ formatter.format(seconds%3600/60) + ":"
+				+ formatter.format(seconds%60);
 		return result;
 	}
-	
+
 	public void listDeliveries(TypicalDay typicalDay) {
 		model.clear();
 		model.addElement("Warehouse : " + typicalDay.getWareHouse());

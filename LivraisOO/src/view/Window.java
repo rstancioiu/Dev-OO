@@ -32,7 +32,7 @@ public class Window extends JFrame {
 	private JButton addButton, deleteButton, swapButton, confirmButton, cancelButton;
 	private DeliveryRound deliveryRound;
 	private JLabel messageBox;
-	
+
 	public Window(Controller controller) {
 		this.controller = controller;
 		createAndShowGui();
@@ -50,7 +50,7 @@ public class Window extends JFrame {
 		layout.setAutoCreateGaps(true);
 		layout.setAutoCreateContainerGaps(true);
 		panel.setLayout(layout);
-		
+
 		messageBox = new JLabel(" ");
 		addButton = new JButton("Add");
 		addButton.addActionListener(new ActionListener() {
@@ -202,15 +202,15 @@ public class Window extends JFrame {
 	public void enableGenerateRoadmap(boolean state) {
 		generateRoadmap.setEnabled(state);
 	}
-	
+
 	public void enableAddButton(boolean state) {
 		addButton.setEnabled(state);
 	}
-	
+
 	public void enableDeleteButton(boolean state) {
 		deleteButton.setEnabled(state);
 	}
-	
+
 	public void enableSwapButton(boolean state) {
 		swapButton.setEnabled(state);
 	}
@@ -224,11 +224,11 @@ public class Window extends JFrame {
 		enableDeleteButton(false);
 		enableSwapButton(false);
 	}
-	
+
 	public void clearMessage() {
 		messageBox.setText(" ");
 	}
-	
+
 	public void showButtons() {
 		confirmButton.setVisible(true);
 		confirmButton.setEnabled(true);
@@ -236,7 +236,7 @@ public class Window extends JFrame {
 		cancelButton.setEnabled(true);
 		graphicView.clearNodes();
 	}
-	
+
 	public void hideButtons(){
 		confirmButton.setVisible(false);
 		confirmButton.setEnabled(false);

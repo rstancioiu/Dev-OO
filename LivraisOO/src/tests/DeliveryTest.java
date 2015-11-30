@@ -13,11 +13,11 @@ import model.TimeWindow;
 public class DeliveryTest extends TestCase  {
 
 	private Delivery delivery;
-	
+
 	public DeliveryTest (String name){
 		super(name);
 	}
-	
+
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
@@ -34,22 +34,22 @@ public class DeliveryTest extends TestCase  {
 	public void testDelivery() {
 		assertNotNull("Instance is created", delivery);
 	}
-	
+
 	@Test
 	public void testGetId() {
 		assertEquals("Is that id correct", 1, delivery.getId());
 	}
-	
+
 	@Test
 	public void testGetClient() {
 		assertEquals("Is that client correct", 2, delivery.getClient());
 	}
-	
+
 	@Test
 	public void testGetAddress() {
 		assertEquals("Is that address correct", 3, delivery.getAddress());
 	}
-	
-		
+
+
 
 }

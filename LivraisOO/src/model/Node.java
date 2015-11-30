@@ -81,6 +81,6 @@ public class Node {
 	public ArrayList<Section> getIncoming() {
 		return incoming;
 	}
-	
-	
+
+
 }

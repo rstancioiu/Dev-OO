@@ -21,7 +21,7 @@ public class AddDeliveryCommand extends AbstractCommand {
 		this.node = node;
 		this.typicalDay = typicalDay;
 	}
-	
+
 	/**
 	 * Add the delivery to the time window and delivery round
 	 */

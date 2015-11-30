@@ -14,11 +14,11 @@ public class DeleteState extends DefaultState {
 		deliveryRound.deleteDelivery(delivery, graph);
 		Controller.setCurrentState(Controller.deliveryState);
 	}
-	
+
 	public void cancel(){
 		Controller.setCurrentState(Controller.deliveryState);
 	}
-	
+
 	public void updateVue(Window window){
 		window.showButtons();
 	}

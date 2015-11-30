@@ -27,14 +27,14 @@ public class TimeWindow {
 	public void addDelivery(Delivery d) {
 		deliveries.add(d);
 	}
-	
+
 	public void insertDelivery(Delivery before, Delivery d){
 		ArrayList<Delivery> newDeliveries = new ArrayList<Delivery>();
 		for(int i=0;i<deliveries.size();++i)
 		{
 			newDeliveries.add(deliveries.get(i));
 			if(deliveries.get(i).getAddress() == before.getAddress()){
-				 newDeliveries.add(d);
+				newDeliveries.add(d);
 			}
 		}
 		deliveries = newDeliveries;
@@ -74,7 +74,7 @@ public class TimeWindow {
 			deliveries.set(j, tmp);
 		}
 	}
-	
+
 	public int getDeliveryPos(Delivery d){
 		for(int i=0;i<deliveries.size();++i){
 			if(d.equals(deliveries.get(i)))
@@ -82,7 +82,7 @@ public class TimeWindow {
 		}
 		return deliveries.size();
 	}
-	
+
 	public void insertAt(Delivery d, int pos){
 		ArrayList<Delivery> newDeliveries = new ArrayList<Delivery>();
 		for(int i=0;i<deliveries.size();++i){

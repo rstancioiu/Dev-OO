@@ -16,7 +16,7 @@ public class AdditionState extends DefaultState {
 		cmdList.add(new AddDeliveryCommand(delivery, deliveryRound, graph,node, typicalDay));
 		Delivery newDelivery = new Delivery(0, 0, node.getId(), new TimeWindow(0, 24));
 		deliveryRound.addDelivery(delivery, newDelivery, graph, new TimeWindow(-1, -1));
-		
+
 		if(delivery.getAddress() == typicalDay.getWareHouse()) {
 			Delivery firstReal = deliveryRound.getPaths().get(1).getArrival();
 			firstReal.getTimeWindow().insertDelivery(firstReal, newDelivery);
@@ -27,11 +27,11 @@ public class AdditionState extends DefaultState {
 		}
 		Controller.setCurrentState(Controller.deliveryState);
 	}
-	
+
 	public void cancel(){
 		Controller.setCurrentState(Controller.deliveryState);
 	}
-	
+
 	public void updateVue(Window window){
 		window.showButtons();
 	}

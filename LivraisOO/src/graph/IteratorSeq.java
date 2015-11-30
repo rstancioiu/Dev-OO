@@ -17,7 +17,7 @@ public class IteratorSeq implements Iterator<Integer> {
 				candidats[nbCandidats++] = s;
 		}
 	}
-	
+
 	@Override
 	public boolean hasNext() {
 		return nbCandidats > 0;

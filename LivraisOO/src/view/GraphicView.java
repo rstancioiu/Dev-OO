@@ -53,7 +53,7 @@ public class GraphicView extends JPanel {
 	public GraphicView(JLabel messageBox, JButton addButton, JButton deleteButton, JButton swapButton, JButton confirmButton, JButton cancelButton) {
 		super();
 		this.setLayout(new BorderLayout());
-		
+
 		bottomButtons.setOpaque(false);
 		bottomButtons.setLayout(new BoxLayout(bottomButtons, BoxLayout.X_AXIS));
 		bottomButtons.add(addButton);
@@ -154,7 +154,7 @@ public class GraphicView extends JPanel {
 			}
 			update();
 		}
-		
+
 		public void mouseEntered(MouseEvent e) {}
 		public void mouseExited(MouseEvent e) {}
 		public void mouseMoved(MouseEvent e) {}
@@ -183,23 +183,23 @@ public class GraphicView extends JPanel {
 		g.drawString(nodeId,(int) (n.getX() * getCoeff()-nodeId.length()*4),
 				(int) (n.getY() * getCoeff()+4));
 	}
-	
-    void drawArrow(Graphics g1, int x2, int y2, int x1, int y1) {
-    	int SIZE = 10;
-        Graphics2D g = (Graphics2D) g1.create();
-        double dx = x2 - x1;
-        double dy = y2 - y1;
-        double angle = Math.atan2(dy, dx);
-        dx = dx - Math.cos(angle)*16;
-        dy = dy - Math.sin(angle)*16;
-        int len = (int) Math.sqrt(dx*dx + dy*dy);
-        AffineTransform at = AffineTransform.getTranslateInstance(x1, y1);
-        at.concatenate(AffineTransform.getRotateInstance(angle));
-        g.transform(at);
-        g.drawLine(0, 0, len, 0);
-        g.fillPolygon(new int[] {len, len-SIZE, len-SIZE, len},
-                      new int[] {0, -SIZE, SIZE, 0}, 4);
-    }
+
+	void drawArrow(Graphics g1, int x2, int y2, int x1, int y1) {
+		int SIZE = 10;
+		Graphics2D g = (Graphics2D) g1.create();
+		double dx = x2 - x1;
+		double dy = y2 - y1;
+		double angle = Math.atan2(dy, dx);
+		dx = dx - Math.cos(angle)*16;
+		dy = dy - Math.sin(angle)*16;
+		int len = (int) Math.sqrt(dx*dx + dy*dy);
+		AffineTransform at = AffineTransform.getTranslateInstance(x1, y1);
+		at.concatenate(AffineTransform.getRotateInstance(angle));
+		g.transform(at);
+		g.drawLine(0, 0, len, 0);
+		g.fillPolygon(new int[] {len, len-SIZE, len-SIZE, len},
+				new int[] {0, -SIZE, SIZE, 0}, 4);
+	}
 
 	private void drawLine(Graphics g, Node n1, Node n2, Color c, boolean bold) {
 		Graphics2D graphics2D = (Graphics2D) g;
@@ -212,7 +212,7 @@ public class GraphicView extends JPanel {
 	/**
 	 * Paint the component
 	 */
-	public void paintComponent(Graphics g) {
+	 public void paintComponent(Graphics g) {
 		Graphics2D graphics2D = (Graphics2D) g;
 		graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
@@ -232,7 +232,7 @@ public class GraphicView extends JPanel {
 			Node n2 = map.getNodeById(s.getDeparture());
 			drawLine(g, n1, n2, Color.GRAY, false);
 		}
-		
+
 		ArrayList<Path> paths = deliveryRound.getPaths();
 		for (Path p : paths) {
 			for (Section s : p.getSections()) {
@@ -241,8 +241,8 @@ public class GraphicView extends JPanel {
 				drawLine(g, n1, n2, new Color(40,110,130), true);
 			}
 		}
-		
-		
+
+
 		//Draw late problems
 		for (Path p : paths) {
 			if(p.isLate() && p != paths.get(paths.size()-1)) {
@@ -265,17 +265,17 @@ public class GraphicView extends JPanel {
 				drawNode(g, n, new Color(140,210,230));
 			}
 		}
-		
+
 		for (Path p : paths) {
 			if(p.isLate() && p != paths.get(paths.size()-1)) {
 				drawNode(g, map.getNodeById(p.getArrival().getAddress()), Color.RED);
 			}
 		}
-		
+
 		if(typicalDay.getWareHouse() != -1) {
 			drawNode(g, map.getNodeById(typicalDay.getWareHouse()), Color.GREEN);
 		}
-		
+
 		for (Node n : selectedNodes) {
 			drawNode(g, n, Color.YELLOW);
 		}
@@ -284,46 +284,46 @@ public class GraphicView extends JPanel {
 		}
 
 		graphics2D.setTransform(saveTransform);
-	}
+	 }
 
-	/**
-	 * Change the map
-	 * 
-	 * @param map
-	 */
-	public void paintMap(CityMap map) {
-		this.map = map;
-	}
+	 /**
+	  * Change the map
+	  * 
+	  * @param map
+	  */
+	 public void paintMap(CityMap map) {
+		 this.map = map;
+	 }
 
-	/**
-	 * Change the typical day
-	 * 
-	 * @param typicalDay
-	 */
-	public void paintDeliveries(TypicalDay typicalDay) {
-		this.typicalDay = typicalDay;
-		update();
-	}
+	 /**
+	  * Change the typical day
+	  * 
+	  * @param typicalDay
+	  */
+	 public void paintDeliveries(TypicalDay typicalDay) {
+		 this.typicalDay = typicalDay;
+		 update();
+	 }
 
-	/**
-	 * Change the delivery round
-	 * 
-	 * @param deliveryRound
-	 */
-	public void paintDeliveryRound(DeliveryRound deliveryRound) {
-		this.deliveryRound = deliveryRound;
-	}
-	
-	public void clearNodes(){
-		selectedNodes.clear();
-		selectedDeliveries.clear();
-	}
+	 /**
+	  * Change the delivery round
+	  * 
+	  * @param deliveryRound
+	  */
+	 public void paintDeliveryRound(DeliveryRound deliveryRound) {
+		 this.deliveryRound = deliveryRound;
+	 }
 
-	public ArrayList<Delivery> getSelectedDeliveries() {
-		return selectedDeliveries;
-	}
+	 public void clearNodes(){
+		 selectedNodes.clear();
+		 selectedDeliveries.clear();
+	 }
 
-	public ArrayList<Node> getSelectedNodes() {
-		return selectedNodes;
-	}
+	 public ArrayList<Delivery> getSelectedDeliveries() {
+		 return selectedDeliveries;
+	 }
+
+	 public ArrayList<Node> getSelectedNodes() {
+		 return selectedNodes;
+	 }
 }

@@ -7,7 +7,7 @@ public class TypicalDay {
 	private ArrayList<TimeWindow> timeWindows = new ArrayList<TimeWindow>();
 	private int nbDeliveries;
 	private int wareHouse;
-	
+
 	public TypicalDay() {
 		nbDeliveries = 0;
 		wareHouse = -1;
@@ -40,11 +40,11 @@ public class TypicalDay {
 
 	/**
 	 * @return number of deliveries
- 	 */
+	 */
 	public int getNbDeliveries() {
 		return nbDeliveries;
 	}
-	
+
 	/**
 	 * @return wareHouse
 	 */

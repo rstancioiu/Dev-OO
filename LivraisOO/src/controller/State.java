@@ -50,7 +50,6 @@ public interface State {
 	 */
 	public void rightClick(Window window, CommandsList cmdList);
 	
-	
 	public void confirmAdd(DeliveryRound deliveryRound, Delivery delivery,Node node, TypicalDay typicalDay, Graph graph, CommandsList cmdList);
 	
 	public void confirmDelete(DeliveryRound deliveryRound,  Delivery delivery, TypicalDay typicalDay, Graph graph, CommandsList cmdList);
@@ -62,16 +61,16 @@ public interface State {
 	 * 
 	 */
 	public void cancel();
-	
+
 	/**
 	 * Method called by controller to update the view
 	 */
 	public void updateVue(Window window);
-	
+
 	public void clickAddButton();
-	
+
 	public void clickDeleteButton();
-	
+
 	public void clickSwapButton();
 
 }

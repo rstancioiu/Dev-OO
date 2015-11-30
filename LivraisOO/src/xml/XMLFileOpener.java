@@ -65,7 +65,7 @@ public class XMLFileOpener extends FileFilter {
 	/**
 	 * @param f
 	 * @return a string representing the extension of the file
- 	 */
+	 */
 	private String getExtension(File f) {
 		String filename = f.getName();
 		int i = filename.lastIndexOf('.');

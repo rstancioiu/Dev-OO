@@ -56,7 +56,7 @@ public class Controller {
 	public State getCurrentState() {
 		return currentState;
 	}
-	
+
 	public void computeDeliveries(){
 		graph = new Graph(map,typicalDay);
 		currentState.computeDeliveries(this.map, this.typicalDay, this.deliveryRound, this.window, this.graph);
@@ -74,7 +74,7 @@ public class Controller {
 	public void generateRoadmap() {
 		currentState.generateRoadmap(deliveryRound);
 	}
-		
+
 	public void rightClick(Window window, CommandsList cmdList) {
 		currentState.rightClick(window, cmdList);
 	}
@@ -89,13 +89,13 @@ public class Controller {
 		currentState.confirmAdd(deliveryRound, delivery, node, typicalDay, graph, cmdList);
 		window.drawDeliveryRound(deliveryRound,typicalDay);
 	}
-	
+
 	public void confirmDelete(Delivery delivery){
 		currentState.confirmDelete(deliveryRound, delivery , typicalDay, graph, cmdList);
 		window.drawDeliveryRound(deliveryRound, typicalDay);
 		window.drawDeliveries(typicalDay);
 	}
-	
+
 	public void confirmSwap(Delivery start, Delivery end){
 		System.out.println("Swap started");
 		currentState.confirmSwap(deliveryRound, start, end, graph, cmdList);
@@ -105,15 +105,15 @@ public class Controller {
 	public void cancel() {
 		currentState.cancel();
 	}
-	
+
 	public void clickAddButton(){
 		currentState.clickAddButton();
 	}
-	
+
 	public void clickDeleteButton(){
 		currentState.clickDeleteButton();	
 	}
-	
+
 	public void clickSwapButton(){
 		currentState.clickSwapButton();
 	}

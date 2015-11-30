@@ -34,7 +34,7 @@ public class NodeTest extends TestCase {
 	public void testNode() {
 		assertNotNull("Instance is created", node);
 	}
-	
+
 	public void testAddAndGetOutgoing(){
 		Section s = new Section("street", 1, 2, 3.0, 4.0);
 		node.addOutgoing(s);
