@@ -9,9 +9,9 @@ import view.Window;
 public class DeleteState extends DefaultState {
 	@Override
 	public void confirmDelete(DeliveryRound deliveryRound, Delivery delivery, TypicalDay typicalDay, Graph graph, CommandsList cmdList) {
-		cmdList.add(new DeleteDeliveryCommand(delivery, deliveryRound, graph, typicalDay));
 		delivery.getTimeWindow().deleteDelivery(delivery);
-		deliveryRound.deleteDelivery(delivery, graph);
+		Delivery deliveryPrev =deliveryRound.deleteDelivery(delivery, graph);
+		cmdList.add(new DeleteDeliveryCommand(delivery, deliveryRound, graph, typicalDay, deliveryPrev));
 		Controller.setCurrentState(Controller.deliveryState);
 	}
 

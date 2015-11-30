@@ -25,6 +25,7 @@ public class SwapDeliveriesCommand extends AbstractCommand {
 	public SwapDeliveriesCommand(Delivery start, Delivery end, DeliveryRound dr, Graph g){
 		super(start, dr, g);
 		this.end = end;
+		this.start=start;
 	}
 
 	/**

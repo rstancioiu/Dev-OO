@@ -15,9 +15,10 @@ public class DeleteDeliveryCommand extends AbstractCommand {
 	private Delivery deliveryPrev;
 	private Node node;
 	
-	public DeleteDeliveryCommand(Delivery d, DeliveryRound dr, Graph g, TypicalDay typicalDay){
+	public DeleteDeliveryCommand(Delivery d, DeliveryRound dr, Graph g, TypicalDay typicalDay, Delivery deliveryPrev){
 		super(d, dr, g);
 		this.typicalDay = typicalDay;
+		this.deliveryPrev = deliveryPrev;
 	}
 
 	/**
@@ -35,16 +36,15 @@ public class DeleteDeliveryCommand extends AbstractCommand {
 	 */
 	@Override
 	public void undoCmd() {
-		Delivery newDelivery = new Delivery(0, 0, node.getId(), new TimeWindow(0, 24));
-		deliveryRound.addDelivery(deliveryPrev, newDelivery, graph, new TimeWindow(-1, -1));
+		deliveryRound.addDelivery(deliveryPrev, delivery, graph, new TimeWindow(-1, -1));
 		
 		if(deliveryPrev.getAddress() == typicalDay.getWareHouse()) {
 			Delivery firstReal = deliveryRound.getPaths().get(1).getArrival();
-			firstReal.getTimeWindow().insertDelivery(firstReal, newDelivery);
-			newDelivery.setTimeWindow(firstReal.getTimeWindow());
+			firstReal.getTimeWindow().insertDelivery(firstReal, delivery);
+			delivery.setTimeWindow(firstReal.getTimeWindow());
 		} else {
-			deliveryPrev.getTimeWindow().insertDelivery(deliveryPrev, newDelivery);
-			newDelivery.setTimeWindow(deliveryPrev.getTimeWindow());
+			deliveryPrev.getTimeWindow().insertDelivery(deliveryPrev, delivery);
+			delivery.setTimeWindow(deliveryPrev.getTimeWindow());
 		}	
 	}
 }

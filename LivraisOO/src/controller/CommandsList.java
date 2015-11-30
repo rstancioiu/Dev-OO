@@ -21,7 +21,6 @@ public class CommandsList {
 			liste.remove(i);
 		indexCrt++;
 		liste.add(indexCrt, c);
-		c.doCmd();
 	}
 
 	/**

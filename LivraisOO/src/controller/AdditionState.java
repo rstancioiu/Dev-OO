@@ -13,7 +13,7 @@ public class AdditionState extends DefaultState {
 	//The user selects a node in the first list and a preceding delivery in the second list
 	@Override
 	public void confirmAdd(DeliveryRound deliveryRound, Delivery delivery, Node node, TypicalDay typicalDay, Graph graph, CommandsList cmdList) {
-		cmdList.add(new AddDeliveryCommand(delivery, deliveryRound, graph,node, typicalDay));
+		
 		Delivery newDelivery = new Delivery(0, 0, node.getId(), new TimeWindow(0, 24));
 		deliveryRound.addDelivery(delivery, newDelivery, graph, new TimeWindow(-1, -1));
 
@@ -25,6 +25,7 @@ public class AdditionState extends DefaultState {
 			delivery.getTimeWindow().insertDelivery(delivery, newDelivery);
 			newDelivery.setTimeWindow(delivery.getTimeWindow());
 		}
+		cmdList.add(new AddDeliveryCommand(delivery, deliveryRound, graph, newDelivery, typicalDay));
 		Controller.setCurrentState(Controller.deliveryState);
 	}
 

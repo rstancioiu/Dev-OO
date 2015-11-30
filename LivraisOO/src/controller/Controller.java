@@ -120,9 +120,13 @@ public class Controller {
 	
 	public void undo(){
 		cmdList.undo();
+		window.drawDeliveryRound(deliveryRound, typicalDay);
+		window.drawDeliveries(typicalDay);
 	}
 	
 	public void redo(){
 		cmdList.redo();
+		window.drawDeliveryRound(deliveryRound, typicalDay);
+		window.drawDeliveries(typicalDay);
 	}
 }

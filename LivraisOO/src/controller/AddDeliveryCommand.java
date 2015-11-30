@@ -15,11 +15,13 @@ import model.Node;
 public class AddDeliveryCommand extends AbstractCommand {
 	private Node node;
 	private TypicalDay typicalDay;
+	private Delivery newDelivery;
 
-	public AddDeliveryCommand(Delivery delivery, DeliveryRound deliveryRound, Graph graph, Node node, TypicalDay typicalDay){
+	public AddDeliveryCommand(Delivery delivery, DeliveryRound deliveryRound, Graph graph, Delivery newDelivery, TypicalDay typicalDay){
 		super(delivery, deliveryRound, graph);
 		this.node = node;
 		this.typicalDay = typicalDay;
+		this.newDelivery = newDelivery;
 	}
 
 	/**
@@ -27,7 +29,6 @@ public class AddDeliveryCommand extends AbstractCommand {
 	 */
 	@Override
 	public void doCmd() {
-		Delivery newDelivery = new Delivery(0, 0, node.getId(), new TimeWindow(0, 24));
 		deliveryRound.addDelivery(delivery, newDelivery, graph, new TimeWindow(-1, -1));
 		
 		if(delivery.getAddress() == typicalDay.getWareHouse()) {
@@ -45,7 +46,8 @@ public class AddDeliveryCommand extends AbstractCommand {
 	 */
 	@Override
 	public void undoCmd() {
-		delivery.getTimeWindow().deleteDelivery(delivery);
-		deliveryRound.deleteDelivery(delivery, graph);
+		System.out.println("Trying to remove " + newDelivery.getAddress());
+		newDelivery.getTimeWindow().deleteDelivery(newDelivery);
+		deliveryRound.deleteDelivery(newDelivery, graph);
 	}
 }

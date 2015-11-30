@@ -113,13 +113,14 @@ public class DeliveryRound {
 	public Delivery deleteDelivery(Delivery delivery, Graph graph) {
 		ArrayList<Path> newPaths = new ArrayList<Path>();
 		Delivery ret= null;
+		System.out.println("Delete results : ");
 		for (int i = 0; i < paths.size(); ++i) {
 			System.out.print(paths.get(i).getDeparture().getAddress() + " ");
 		}
 		System.out.println(paths.get(paths.size() - 1).getArrival().getAddress());
 		boolean found = false;
 		for (int i = 0; i < paths.size(); i++) {
-			if (paths.get(i).getArrival().equals(delivery) && !found) {
+			if (paths.get(i).getArrival().getAddress() == delivery.getAddress() && !found) {
 				Path path = graph.generatePath(paths.get(i).getDeparture(), paths.get(i + 1).getArrival());
 				ret = paths.get(i).getDeparture();
 				newPaths.add(path);
