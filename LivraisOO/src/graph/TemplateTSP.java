@@ -19,11 +19,8 @@ public abstract class TemplateTSP implements TSP {
 			nonVus.add(i);
 		Collection<Integer> vus = new ArrayList<Integer>(g.getNbNodesDelivery());
 		vus.add(0);
-		coutMeilleureSolution = Integer.MAX_VALUE;
-		long tpsDebut = System.currentTimeMillis();	
-		branchAndBound(0, nonVus, vus, 0);
-		long tpsFin = System.currentTimeMillis();	
-		System.out.println(tpsFin - tpsDebut);
+		coutMeilleureSolution = 1e12;
+		branchAndBound(0, nonVus, vus, 0);	
 	}
 
 	public Integer getSolution(int i) {
@@ -38,7 +35,7 @@ public abstract class TemplateTSP implements TSP {
 		return -1;
 	}
 
-	protected abstract int bound(Integer sommetCourant, Collection<Integer> nonVus);
+	protected abstract double bound(Integer sommetCourant, Collection<Integer> nonVus);
 
 	protected abstract Iterator<Integer> iterator(Integer sommetCrt, Collection<Integer> nonVus, Graph g);
 
@@ -47,16 +44,13 @@ public abstract class TemplateTSP implements TSP {
 			if (g.isEdge(sommetCrt, 0)) {
 				if (coutVus + g.getCost(sommetCrt, 0) < coutMeilleureSolution) {
 					vus.toArray(meilleureSolution);
+					for(Integer i : vus)
+						System.out.print(i+" ");
+					System.out.println();
 					coutMeilleureSolution = coutVus + g.getCost(sommetCrt, 0);
 				}
 			}
-		} else if ((g.getRank(sommetCrt) <= g.getNbNodesDelivery() - nonVus.size())
-				&& (coutVus + bound(sommetCrt, nonVus) < coutMeilleureSolution)) {
-			if(g.getRank(sommetCrt) == g.getNbNodesDelivery() - nonVus.size()){
-				if(g.getDelivery(sommetCrt).getTimeWindow().getStart()>= coutVus)
-					coutVus += g.getDelivery(sommetCrt).getTimeWindow().getStart() - coutVus;
-			}
-			coutVus+=600;
+		} else if (coutVus + bound(sommetCrt, nonVus) < coutMeilleureSolution) {
 			Iterator<Integer> it = iterator(sommetCrt, nonVus, g);
 			while (it.hasNext()) {
 				Integer prochainSommet = it.next();
