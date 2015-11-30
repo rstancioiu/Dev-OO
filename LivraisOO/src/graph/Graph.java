@@ -303,6 +303,7 @@ public class Graph {
 			out = parent[out].getDeparture();
 		}
 		reversePath(path);
+		path = reversePath(path);
 		return new Path(start, end, path, dist[end.getAddress()]);
 	}
 }

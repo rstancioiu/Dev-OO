@@ -21,7 +21,7 @@ public class Path {
 	 * @param sections
 	 * @param duration
 	 */
-	public Path(Delivery arrival, Delivery departure, ArrayList<Section> sections, double duration) {
+	public Path(Delivery departure, Delivery arrival, ArrayList<Section> sections, double duration) {
 		this.sections = sections;
 		this.departure = departure;
 		this.arrival = arrival;

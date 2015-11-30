@@ -20,9 +20,9 @@ public class RequestState extends DefaultState {
 		ArrayList<Path> paths = new ArrayList<Path>();
 		for(int i=0;i<graph.getNbNodesDelivery()-1;++i)
 		{
-			paths.add(graph.getPath(tsp.getSolution(i+1), tsp.getSolution(i)));
+			paths.add(graph.getPath(tsp.getSolution(i), tsp.getSolution(i+1)));
 		}
-		paths.add(graph.getPath(0, tsp.getSolution(graph.getNbNodesDelivery()-1)));
+		paths.add(graph.getPath(tsp.getSolution(graph.getNbNodesDelivery()-1),0));
 		deliveryRound.setPaths(paths);
 		deliveryRound.setTypicalDay(typicalDay);
 		window.drawDeliveryRound(deliveryRound, typicalDay);

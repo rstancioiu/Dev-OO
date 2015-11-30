@@ -34,22 +34,30 @@ public class DeliveryRound {
 	 */
 	public void addDelivery(Delivery previous, Delivery newDelivery, Graph graph) {
 		ArrayList<Path> newPaths = new ArrayList<Path>();
+		for(int i=0;i<paths.size();++i)
+		{
+			System.out.print(paths.get(i).getDeparture().getAddress()+" ");
+		}
+		System.out.println(paths.get(paths.size()-1).getArrival().getAddress());
 		for (int i = 0; i < paths.size(); i++) {
 			if (paths.get(i).getDeparture().equals(previous)) {
-				duration -= paths.get(i).getDuration();
-				Path path1 = graph.generatePath(previous, newDelivery);
+				Path path1 = graph.generatePath(paths.get(i).getDeparture(), newDelivery);
 				Path path2 = graph.generatePath(newDelivery, paths.get(i).getArrival());
 				newPaths.add(path1);
 				newPaths.add(path2);
 				for(int k=0;k<typicalDay.getTimeWindows().size();++k){
 					typicalDay.getTimeWindows().get(k).insertDelivery(paths.get(i).getDeparture(),newDelivery);
 				}
-				duration += path1.getDuration() + path2.getDuration();
 			} else {
 				newPaths.add(paths.get(i));
 			}
 		}
 		setPaths(newPaths);
+		for(int i=0;i<paths.size();++i)
+		{
+			System.out.print(paths.get(i).getDeparture().getAddress()+" ");
+		}
+		System.out.println(paths.get(paths.size()-1).getArrival().getAddress());
 	}
 
 	/**
@@ -60,18 +68,29 @@ public class DeliveryRound {
 	 */
 	public void deleteDelivery(Delivery delivery, Graph graph) {
 		ArrayList<Path> newPaths = new ArrayList<Path>();
-		for (int i = 0; i < paths.size() - 1; i++) {
+		for(int i=0;i<paths.size();++i)
+		{
+			System.out.print(paths.get(i).getDeparture().getAddress()+" ");
+		}
+		System.out.println(paths.get(paths.size()-1).getArrival().getAddress());
+		for (int i = 0; i < paths.size(); i++) {
 			if (paths.get(i).getArrival().equals(delivery)) {
 				Path path = graph.generatePath(paths.get(i).getDeparture(), paths.get(i + 1).getArrival());
+				newPaths.add(path);
 				for(int k=0;k<typicalDay.getTimeWindows().size();++k){
 					typicalDay.getTimeWindows().get(k).deleteDelivery(paths.get(i).getArrival());
 				}
-				newPaths.add(path);
+				++i;
 			} else {
 				newPaths.add(paths.get(i));
 			}
 		}
 		setPaths(newPaths);
+		for(int i=0;i<paths.size();++i)
+		{
+			System.out.print(paths.get(i).getDeparture().getAddress()+" ");
+		}
+		System.out.println(paths.get(paths.size()-1).getArrival().getAddress());
 	}
 
 	/**
@@ -83,6 +102,7 @@ public class DeliveryRound {
 	public void swapDeliveries(Delivery first, Delivery second, Graph graph) {
 		int i = 0, j = 0;
 		System.out.println("swap Done");
+		System.out.println(first.getAddress()+" "+ second.getAddress());
 		for (int k = 0; k < paths.size(); ++k) {
 			if (paths.get(k).getArrival().equals(first)) {
 				i = k;
