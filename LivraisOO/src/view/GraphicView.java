@@ -151,6 +151,7 @@ public class GraphicView extends JPanel {
 					selectedNodes.add(selectedNode);
 				}
 			}
+			update();
 		}
 		
 		public void mouseEntered(MouseEvent e) {}
@@ -182,7 +183,7 @@ public class GraphicView extends JPanel {
 				(int) (n.getY() * getCoeff()+4));
 	}
 	
-    void drawArrow(Graphics g1, int x1, int y1, int x2, int y2) {
+    void drawArrow(Graphics g1, int x2, int y2, int x1, int y1) {
     	int SIZE = 10;
         Graphics2D g = (Graphics2D) g1.create();
         double dx = x2 - x1;
@@ -270,6 +271,9 @@ public class GraphicView extends JPanel {
 		
 		for (Node n : selectedNodes) {
 			drawNode(g, n, Color.YELLOW);
+		}
+		for (Delivery d : selectedDeliveries) {
+			drawNode(g, map.getNodeById(d.getAddress()), Color.YELLOW);
 		}
 
 		graphics2D.setTransform(saveTransform);

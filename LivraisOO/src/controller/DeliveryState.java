@@ -75,6 +75,7 @@ public class DeliveryState extends DefaultState {
 		window.enableAddButton(true);
 		window.enableDeleteButton(true);
 		window.enableSwapButton(true);
+		window.enableGenerateRoadmap(true);
 	}
 
 }

@@ -92,6 +92,7 @@ public class Window extends JFrame {
 				if(deliveries.size()>=2){
 					controller.confirmSwap(deliveries.get(deliveries.size()-2), deliveries.get(deliveries.size()-1));
 				}
+				graphicView.clearNodes();
 			}
 		});
 
