@@ -13,9 +13,7 @@ public class DeleteState extends DefaultState {
 	@Override
 	public void confirmDelete(DeliveryRound deliveryRound, Delivery delivery, TypicalDay typicalDay, Graph graph) {
 		deliveryRound.deleteDelivery(delivery, graph);
-		for (TimeWindow tm : typicalDay.getTimeWindows()) {
-			tm.deleteDelivery(delivery);
-		}
+		delivery.getTimeWindow().deleteDelivery(delivery);
 		Controller.setCurrentState(Controller.deliveryState);
 	}
 	

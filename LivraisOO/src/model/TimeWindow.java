@@ -74,6 +74,28 @@ public class TimeWindow {
 			deliveries.set(j, tmp);
 		}
 	}
+	
+	public int getDeliveryPos(Delivery d){
+		for(int i=0;i<deliveries.size();++i){
+			if(d.equals(deliveries.get(i)))
+				return i;
+		}
+		return deliveries.size();
+	}
+	
+	public void insertAt(Delivery d, int pos){
+		ArrayList<Delivery> newDeliveries = new ArrayList<Delivery>();
+		for(int i=0;i<deliveries.size();++i){
+			if(pos==i){
+				newDeliveries.add(d);
+			}
+			newDeliveries.add(deliveries.get(i));
+		}
+		if(pos==deliveries.size()){
+			newDeliveries.add(d);
+		}
+		deliveries = newDeliveries;
+	}
 
 	/**
 	 * Return the starting time of the time window

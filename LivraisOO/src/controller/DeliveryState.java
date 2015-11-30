@@ -29,10 +29,10 @@ public class DeliveryState extends DefaultState {
 		    	double duration = 0;
 	            FileWriter roadmap = new FileWriter(fileChooser.getSelectedFile()+".txt");
 	            // write file header
-	            roadmap.write("ROADMAP \n START: " + deliveryRound.getStart() + " \n END: " + deliveryRound.getEnd() + "\n DURANTION: " + Double.toString(deliveryRound.getDuration()));
+	            roadmap.write("ROADMAP \n START: " + deliveryRound.getStart() + " \n END: " + deliveryRound.getEnd() + "\n DURATION: " + Double.toString(deliveryRound.getDuration()));
 	            // write deliveries
 	            for (Path p : deliveryRound.getPaths()){
-	            	// Describe the delivery:  order, adress and client
+	            	// Describe the delivery:  order, address and client
 	            	roadmap.write("Delivery number: " + Integer.toString(count));
 	            	count++;
 	            	roadmap.write(" \n Adress: " + Integer.toString(p.getArrival().getAddress()));
