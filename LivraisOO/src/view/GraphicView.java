@@ -26,16 +26,23 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.Shape;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.FlatteningPathIterator;
+import java.awt.geom.Line2D;
 import java.awt.geom.NoninvertibleTransformException;
+import java.awt.geom.Path2D;
+import java.awt.geom.PathIterator;
 import java.awt.geom.Point2D;
+import java.awt.geom.QuadCurve2D;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Vector;
 
 public class GraphicView extends JPanel {
 
@@ -188,28 +195,60 @@ public class GraphicView extends JPanel {
 				(int) (n.getY() * getCoeff()+4));
 	}
 
-	void drawArrow(Graphics g1, int x2, int y2, int x1, int y1) {
-		int SIZE = 10;
+	private static Shape createArrowHead(Line2D line, double length, double width)
+	{
+		Point2D p0 = line.getP1();
+		Point2D p1 = line.getP2();
+		double x0 = p0.getX();
+		double y0 = p0.getY();
+		double x1 = p1.getX();
+		double y1 = p1.getY();
+		double dx = x1 - x0;
+		double dy = y1 - y0;
+		double invLength = 1.0 / Math.sqrt(dx*dx+dy*dy);
+		double dirX = dx * invLength;
+		double dirY = dy * invLength;
+		double ax = x1 - length * dirX;
+		double ay = y1 - length * dirY;
+		double offsetX = width * -dirY * 0.5;
+		double offsetY = width * dirX * 0.5;
+		double c0x = ax + offsetX;
+		double c0y = ay + offsetY;
+		double c1x = ax - offsetX;
+		double c1y = ay - offsetY;
+		Path2D arrowHead = new Path2D.Double();
+		arrowHead.moveTo(x1, y1);
+		arrowHead.lineTo(c0x, c0y);
+		arrowHead.lineTo(c1x, c1y);
+		arrowHead.closePath();
+		return arrowHead;
+	}
+
+	void drawArrow(Graphics g1, int x2, int y2, int x1, int y1, boolean bold) {
 		Graphics2D g = (Graphics2D) g1.create();
+		QuadCurve2D q = new QuadCurve2D.Float();
 		double dx = x2 - x1;
 		double dy = y2 - y1;
 		double angle = Math.atan2(dy, dx);
-		dx = dx - Math.cos(angle)*16;
-		dy = dy - Math.sin(angle)*16;
-		int len = (int) Math.sqrt(dx*dx + dy*dy);
-		AffineTransform at = AffineTransform.getTranslateInstance(x1, y1);
-		at.concatenate(AffineTransform.getRotateInstance(angle));
-		g.transform(at);
-		g.drawLine(0, 0, len, 0);
-		g.fillPolygon(new int[] {len, len-SIZE, len-SIZE, len},
-				new int[] {0, -SIZE, SIZE, 0}, 4);
+		x2 = (int) (x1 + dx - 16*Math.cos(angle));
+		y2 = (int) (y1 + dy - 16*Math.sin(angle));
+		double COEF = 20;
+		Point2D vec = new Point2D.Double(dy, -dx);
+		double norme = Math.sqrt(vec.getX()*vec.getX() + vec.getY()*vec.getY());
+		vec.setLocation(vec.getX()/norme, vec.getY()/norme);
+		Point2D middlePoint = new Point2D.Double(x1 + dx/2, y1 + dy/2);
+		q.setCurve(x1, y1, middlePoint.getX()+vec.getX()*COEF, middlePoint.getY()+vec.getY()*COEF, x2, y2);
+		g.draw(q);
+		Point2D recul = q.getP2();
+		Line2D l = new Line2D.Double(q.getCtrlPt(), recul);
+		g.fill(createArrowHead(l, 30, 20));
 	}
 
 	private void drawLine(Graphics g, Node n1, Node n2, Color c, boolean bold) {
 		Graphics2D graphics2D = (Graphics2D) g;
 		g.setColor(c);
 		graphics2D.setStroke(new BasicStroke(bold ? 6 : 1));
-		drawArrow(g, (int) (n1.getX() * getCoeff()), (int) (n1.getY() * getCoeff()), (int) (n2.getX() * getCoeff()), (int) (n2.getY() * getCoeff()));
+		drawArrow(g, (int) (n1.getX() * getCoeff()), (int) (n1.getY() * getCoeff()), (int) (n2.getX() * getCoeff()), (int) (n2.getY() * getCoeff()), bold);
 		graphics2D.setStroke(new BasicStroke(1));
 	}
 
@@ -234,7 +273,7 @@ public class GraphicView extends JPanel {
 		for (Section s : map.getSections()) {
 			Node n1 = map.getNodeById(s.getArrival());
 			Node n2 = map.getNodeById(s.getDeparture());
-			drawLine(g, n1, n2, Color.GRAY, false);
+			drawLine(g, n1, n2, Color.LIGHT_GRAY, false);
 		}
 
 		ArrayList<Path> paths = deliveryRound.getPaths();

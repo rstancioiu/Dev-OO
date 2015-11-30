@@ -41,7 +41,7 @@ public class Window extends JFrame {
 
 	private void createAndShowGui() {
 		setSize(1000, 600);
-		setMinimumSize(new Dimension(1000, 500));
+		setMinimumSize(new Dimension(900, 500));
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -173,10 +173,10 @@ public class Window extends JFrame {
 								.addComponent(deliveryRoundScroll).addComponent(compute).addComponent(generateRoadmap)
 								.addComponent(loadMap).addComponent(loadDeliveries))));
 
-		typicalDayView.setMinimumSize(new Dimension(250, 150));
-		typicalDayView.setMaximumSize(new Dimension(250, 400));
-		deliveryRoundView.setMinimumSize(new Dimension(250, 150));
-		deliveryRoundView.setMaximumSize(new Dimension(250, 400));
+		typicalDayScroll.setMinimumSize(new Dimension(300, 150));
+		typicalDayScroll.setMaximumSize(new Dimension(300, 400));
+		deliveryRoundScroll.setMinimumSize(new Dimension(300, 150));
+		deliveryRoundScroll.setMaximumSize(new Dimension(300, 400));
 
 		loadMap.setMinimumSize(new Dimension(150, 20));
 		loadDeliveries.setMinimumSize(new Dimension(150, 20));
