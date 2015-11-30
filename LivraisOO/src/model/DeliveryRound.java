@@ -23,6 +23,29 @@ public class DeliveryRound {
 		paths = new ArrayList<Path>();
 		duration = 0;
 	}
+	
+	/**
+	 * Update delivery effective times
+	 */
+	public void updateTimes() {
+		int STOPTIME = 10;
+		Path first = paths.get(0);
+		int firstTime = first.getArrival().getTimeWindow().getStart();
+		int departure = (int) (firstTime - first.getDuration() + 1);
+		first.getDeparture().setTime(departure);
+		departure -= STOPTIME;
+		for (Path p : paths) {
+			departure += STOPTIME + p.getDuration();
+			Delivery arrival = p.getArrival();
+			arrival.setTime(departure);
+			TimeWindow currentWindow = arrival.getTimeWindow();
+			//Wait until the window starts
+			if(departure<currentWindow.getStart()) {
+				int delta = currentWindow.getStart() - departure;
+				departure += delta;
+			}
+		}
+	}
 
 	/**
 	 * Adds a delivery after the "previous" delivery
@@ -43,6 +66,7 @@ public class DeliveryRound {
 				newPaths.add(path1);
 				newPaths.add(path2);
 				paths.get(i).getDeparture().getTimeWindow().insertDelivery(paths.get(i).getDeparture(),newDelivery);
+				newDelivery.setTimeWindow(paths.get(i).getDeparture().getTimeWindow());
 				duration += path1.getDuration() + path2.getDuration();
 			} else {
 				newPaths.add(paths.get(i));

@@ -60,31 +60,23 @@ public class DeliveryRoundView extends JList {
 
 	public void listDeliveryRound(DeliveryRound deliveryRound, TypicalDay typicalDay) {
 		model.clear();
-		int STOPTIME = 10;
+		deliveryRound.updateTimes();
 		ArrayList<Path> paths = deliveryRound.getPaths();
-		Path first = paths.get(0);
-		int firstTime = getWindowByDelivery(first.getArrival(), typicalDay).getStart();
-		int departure = (int) (firstTime - first.getDuration() + 1);
-		model.addElement("Warehouse departure : " + formatHour(departure));
-		departure -= STOPTIME;
+		int firstTime = (int)(paths.get(0).getDeparture().getTime() - deliveryRound.getDuration());
+		model.addElement("Warehouse departure : " + formatHour(firstTime));
 		for (Path p : paths) {
-			departure += STOPTIME + p.getDuration();
-			Delivery arrival = p.getArrival();
-			TimeWindow currentWindow = getWindowByDelivery(arrival, typicalDay);
-			String line;
-			line = "" + arrival.getAddress() + " at " + formatHour(departure);
-			if(departure<currentWindow.getStart()) {
-				int delta = currentWindow.getStart() - departure;
+			int time = p.getArrival().getTime();
+			String line = "" + p.getArrival().getAddress() + " at " + formatHour(time);
+			if(time < p.getArrival().getTimeWindow().getStart()) {
+				int delta = p.getArrival().getTimeWindow().getStart() - time;
 				line += " (wait " + formatHour(delta) + ")";
-				departure += delta;
-			} else if(departure>currentWindow.getEnd()) {
-				int delta = departure - currentWindow.getEnd();
+			} else if(time > p.getArrival().getTimeWindow().getEnd()) {
+				int delta = time - p.getArrival().getTimeWindow().getEnd();
 				line += " (late " + formatHour(delta) + ")";
 			}
 			if(p == paths.get(paths.size()-1)) {
-				line = "Warehouse arrival : " + formatHour(departure);
+				line = "Warehouse arrival : " + formatHour(time);
 			}
-
 			model.addElement(line);
 		}
 	}
