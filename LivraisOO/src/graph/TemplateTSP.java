@@ -2,6 +2,7 @@ package graph;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 
 public abstract class TemplateTSP implements TSP {
@@ -51,6 +52,11 @@ public abstract class TemplateTSP implements TSP {
 			}
 		} else if ((g.getRank(sommetCrt) <= g.getNbNodesDelivery() - nonVus.size())
 				&& (coutVus + bound(sommetCrt, nonVus) < coutMeilleureSolution)) {
+			if(g.getRank(sommetCrt) == g.getNbNodesDelivery() - nonVus.size()){
+				if(g.getDelivery(sommetCrt).getTimeWindow().getStart()>= coutVus)
+					coutVus += g.getDelivery(sommetCrt).getTimeWindow().getStart() - coutVus;
+			}
+			coutVus+=600;
 			Iterator<Integer> it = iterator(sommetCrt, nonVus, g);
 			while (it.hasNext()) {
 				Integer prochainSommet = it.next();

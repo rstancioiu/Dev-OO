@@ -218,7 +218,7 @@ public class Graph {
 				paths[pos][k] = new Path(nodes.get(pos), nodes.get(k), path, cost[pos][k]);
 			} else {
 				paths[pos][k] = null;
-				cost[pos][k] = -1;
+				cost[pos][k] = INF;
 			}
 		}
 	}
@@ -305,5 +305,9 @@ public class Graph {
 		reversePath(path);
 		path = reversePath(path);
 		return new Path(start, end, path, dist[end.getAddress()]);
+	}
+	
+	public Delivery getDelivery(int i){
+		return nodes.get(i);
 	}
 }
