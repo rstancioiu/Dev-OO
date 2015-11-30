@@ -27,6 +27,11 @@ public class Path {
 		this.arrival = arrival;
 		this.duration = duration;
 	}
+	
+	public boolean isLate() {
+		int time = getArrival().getTime();
+		return (time > getArrival().getTimeWindow().getEnd());
+	}
 
 	/**
 	 * @return sections list

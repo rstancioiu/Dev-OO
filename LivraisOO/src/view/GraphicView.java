@@ -230,8 +230,9 @@ public class GraphicView extends JPanel {
 			Node n2 = map.getNodeById(s.getDeparture());
 			drawLine(g, n1, n2, Color.GRAY, false);
 		}
-
-		for (Path p : deliveryRound.getPaths()) {
+		
+		ArrayList<Path> paths = deliveryRound.getPaths();
+		for (Path p : paths) {
 			for (Section s : p.getSections()) {
 				Node n1 = map.getNodeById(s.getArrival());
 				Node n2 = map.getNodeById(s.getDeparture());
@@ -253,6 +254,18 @@ public class GraphicView extends JPanel {
 		
 		if(typicalDay.getWareHouse() != -1) {
 			drawNode(g, map.getNodeById(typicalDay.getWareHouse()), Color.GREEN);
+		}
+		
+		//Draw late problems
+		for (Path p : paths) {
+			if(p.isLate() && p != paths.get(paths.size()-1)) {
+				for (Section s : p.getSections()) {
+					Node n1 = map.getNodeById(s.getArrival());
+					Node n2 = map.getNodeById(s.getDeparture());
+					drawLine(g, n1, n2, Color.RED, true);
+				}
+				drawNode(g, map.getNodeById(p.getArrival().getAddress()), Color.RED);
+			}
 		}
 		
 		for (Node n : selectedNodes) {
