@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import junit.framework.TestCase;
 import model.Delivery;
+import model.TimeWindow;
 
 public class DeliveryTest extends TestCase  {
 
@@ -20,7 +21,7 @@ public class DeliveryTest extends TestCase  {
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		delivery = new Delivery(1,2,3);
+		delivery = new Delivery(1, 2, 3, new TimeWindow(0, 24));
 	}
 
 	@After

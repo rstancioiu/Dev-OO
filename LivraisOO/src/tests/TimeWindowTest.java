@@ -21,7 +21,7 @@ public class TimeWindowTest extends TestCase {
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		timeWindow = new TimeWindow(1,2);
+		timeWindow = new TimeWindow(1, 2);
 	}
 
 	@After
@@ -41,21 +41,21 @@ public class TimeWindowTest extends TestCase {
 		assertEquals("Is that start correct",2, timeWindow.getEnd());
 	}
 	public void testAddAndGetDeliveries() {
-		Delivery d = new Delivery(1,1,1);
+		Delivery d = new Delivery(1, 1, 1, new TimeWindow(0, 24));
 		timeWindow.addDelivery(d);
 		assertEquals("Is that length correct",1, timeWindow.getDeliveries().size());
 		assertEquals("Is that delivery correct",d,  timeWindow.getDeliveries().get(0));
 	}
 	public void testAddDelivery(){
 		int beforeLength = timeWindow.getDeliveries().size();
-		Delivery d = new Delivery(2,2,2);
+		Delivery d = new Delivery(2, 2, 2, new TimeWindow(0, 24));
 		timeWindow.addDelivery(d);
 		ArrayList <Delivery> after = timeWindow.getDeliveries();
 		assertEquals("Is that length correct",beforeLength+1, after.size());
 		assertEquals("Is that delivery added",d,after.get(beforeLength));
 	}
 	public void testDeleteDelivery(){
-		Delivery d = new Delivery(3,3,3);
+		Delivery d = new Delivery(3, 3, 3, new TimeWindow(0, 24));
 		timeWindow.addDelivery(d);
 		int beforeLength = timeWindow.getDeliveries().size();
 		timeWindow.deleteDelivery(d);
@@ -64,8 +64,8 @@ public class TimeWindowTest extends TestCase {
 	}
 	public void testSwapDeliveries(){
 		int beforeLength = timeWindow.getDeliveries().size();
-		Delivery d = new Delivery(4,4,4);
-		Delivery d2 = new Delivery(5,5,5);
+		Delivery d = new Delivery(4, 4, 4, new TimeWindow(0, 24));
+		Delivery d2 = new Delivery(5, 5, 5, new TimeWindow(0, 24));
 		timeWindow.addDelivery(d);
 		timeWindow.addDelivery(d2);
 		timeWindow.swapDeliveries(d,d2);

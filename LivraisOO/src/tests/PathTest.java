@@ -12,6 +12,7 @@ import junit.framework.TestCase;
 import model.Delivery;
 import model.Path;
 import model.Section;
+import model.TimeWindow;
 
 public class PathTest extends TestCase{
 	
@@ -27,8 +28,8 @@ public class PathTest extends TestCase{
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		departure = new Delivery(1,2,0);
-		arrival = new Delivery(2,4,2);
+		departure = new Delivery(1, 2, 0, new TimeWindow(0, 24));
+		arrival = new Delivery(2, 4, 2, new TimeWindow(0, 24));
 		sections = new ArrayList<Section>();
 		sections.add(new Section("v0",0,1,4.3,100.0));
 		sections.add(new Section("v1",0,2,3.2,50.0));
@@ -60,14 +61,14 @@ public class PathTest extends TestCase{
 	
 	@Test
 	public void testGetSetDeparture() {
-		Delivery d = new Delivery (1,2,3);
+		Delivery d = new Delivery (1, 2, 3, new TimeWindow(0, 24));
 		path.setDeparture(d);
 		assertEquals("Is that departure correct", d, path.getDeparture());
 	}
 	
 	@Test
 	public void testGetSetArrival() {
-		Delivery a = new Delivery (1,2,3);
+		Delivery a = new Delivery (1, 2, 3, new TimeWindow(0, 24));
 		path.setArrival(a);
 		assertEquals("Is that arrival correct", a, path.getArrival());
 	}
