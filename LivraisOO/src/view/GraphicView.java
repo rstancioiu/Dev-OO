@@ -130,19 +130,16 @@ public class GraphicView extends JPanel {
 					selectedNode = n;
 				}
 			}
-			ArrayList<TimeWindow> timeWindows = typicalDay.getTimeWindows();
 			System.out.println(selectedNode.getId());
 			if(selectedNode.getId()!=-1)
 			{
 				boolean found=false;
-				for(int i=0;i<timeWindows.size();++i){
-					ArrayList<Delivery> deliveries = timeWindows.get(i).getDeliveries();
-					for(int j=0;j<deliveries.size();++j){
-						if(selectedNode.getId()==deliveries.get(j).getAddress()){
-							selectedDeliveries.add(deliveries.get(j));
-							found=true;
-							System.out.println("Delivery Found");
-						}
+				ArrayList<Path> paths = deliveryRound.getPaths();
+				for(int j=0;j<paths.size();++j){
+					if(selectedNode.getId()== paths.get(j).getDeparture().getAddress()){
+						selectedDeliveries.add(paths.get(j).getDeparture());
+						found=true;
+						System.out.println("Delivery Found");
 					}
 				}
 				if(!found){

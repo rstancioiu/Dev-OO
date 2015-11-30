@@ -24,7 +24,6 @@ public class RequestState extends DefaultState {
 		}
 		paths.add(graph.getPath(tsp.getSolution(graph.getNbNodesDelivery()-1),0));
 		deliveryRound.setPaths(paths);
-		deliveryRound.setTypicalDay(typicalDay);
 		window.drawDeliveryRound(deliveryRound, typicalDay);
 		
 		Controller.setCurrentState(Controller.deliveryState);
