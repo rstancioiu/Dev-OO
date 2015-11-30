@@ -150,7 +150,7 @@ public class XMLDeserializer {
 			TimeWindow tm = new TimeWindow(computeTime(start), computeTime(end));
 			NodeList deliveries = ((Element) nodeList.item(i)).getElementsByTagName("Livraison");
 			for (int j = 0; j < deliveries.getLength(); ++j) {
-				tm.addDelivery(createDelivery((Element) deliveries.item(j)));
+				tm.addDelivery(createDelivery((Element) deliveries.item(j), tm));
 			}
 			typicalDay.addTimeWindow(tm);
 		}
@@ -164,11 +164,11 @@ public class XMLDeserializer {
 	 * @throws XMLException
 	 * @throws NumberFormatException
 	 */
-	private static Delivery createDelivery(Element elt) throws XMLException, NumberFormatException {
+	private static Delivery createDelivery(Element elt, TimeWindow tm) throws XMLException, NumberFormatException {
 		int id = Integer.parseInt(elt.getAttribute("id"));
 		int client = Integer.parseInt(elt.getAttribute("client"));
 		int address = Integer.parseInt(elt.getAttribute("adresse"));
-		return new Delivery(id, client, address);
+		return new Delivery(id, client, address, tm);
 	}
 
 	/**

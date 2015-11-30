@@ -5,6 +5,8 @@ public class Delivery {
 	private int id;
 	private int client;
 	private int address;
+	private TimeWindow timeWindow;
+	private int time;
 
 	/**
 	 * A delivery is contained in a TimeWindow
@@ -13,10 +15,11 @@ public class Delivery {
 	 * @param client
 	 * @param address
 	 */
-	public Delivery(int id, int client, int address) {
+	public Delivery(int id, int client, int address, TimeWindow timeWindow) {
 		this.id = id;
 		this.client = client;
 		this.address = address;
+		this.setTimeWindow(timeWindow);
 	}
 
 	/**
@@ -44,5 +47,21 @@ public class Delivery {
 	 */
 	public int getAddress() {
 		return address;
+	}
+
+	public TimeWindow getTimeWindow() {
+		return timeWindow;
+	}
+
+	public void setTimeWindow(TimeWindow timeWindow) {
+		this.timeWindow = timeWindow;
+	}
+
+	public int getTime() {
+		return time;
+	}
+
+	public void setTime(int time) {
+		this.time = time;
 	}
 }

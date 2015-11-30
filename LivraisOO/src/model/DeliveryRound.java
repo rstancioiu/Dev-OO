@@ -42,6 +42,8 @@ public class DeliveryRound {
 				Path path2 = graph.generatePath(newDelivery, paths.get(i).getArrival());
 				newPaths.add(path1);
 				newPaths.add(path2);
+				paths.get(i).getDeparture().getTimeWindow().insertDelivery(paths.get(i).getDeparture(),newDelivery);
+				duration += path1.getDuration() + path2.getDuration();
 			} else {
 				newPaths.add(paths.get(i));
 			}

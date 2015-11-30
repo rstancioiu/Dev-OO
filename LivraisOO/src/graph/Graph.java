@@ -54,7 +54,7 @@ public class Graph {
 		parent = new Section[nbNodes];
 		ArrayList<TimeWindow> timeWindows = typicalDay.getTimeWindows();
 		int count = 0;
-		Delivery start = new Delivery(0, 0, typicalDay.getWareHouse());
+		Delivery start = new Delivery(0, 0, typicalDay.getWareHouse(), new TimeWindow(0, 24));
 		nodes.add(start);
 		hashArray[typicalDay.getWareHouse()] = count++;
 		for (int i = 0; i < timeWindows.size(); ++i) {

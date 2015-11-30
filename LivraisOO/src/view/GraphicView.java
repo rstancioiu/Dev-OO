@@ -1,5 +1,6 @@
 package view;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -48,6 +49,7 @@ public class GraphicView extends JPanel {
 	private JPanel bottomButtons = new JPanel();
 	private ArrayList<Delivery> selectedDeliveries = new ArrayList<Delivery>();
 	private ArrayList<Node> selectedNodes = new ArrayList<Node>();
+	private JLabel messageBox;
 
 	public GraphicView(JButton addButton, JButton deleteButton, JButton swapButton, JButton confirmButton, JButton cancelButton) {
 		super();
@@ -65,6 +67,9 @@ public class GraphicView extends JPanel {
 		bottomButtons.add(Box.createRigidArea(new Dimension(5,0)));
 		bottomButtons.add(cancelButton);
 		add(bottomButtons, BorderLayout.PAGE_END);
+		messageBox = new JLabel(" ");
+		messageBox.setBorder(BorderFactory.createTitledBorder("Message Box"));
+		add(messageBox, BorderLayout.PAGE_START);
 
 		setBackground(Color.white);
 		translateX = 0;
@@ -147,6 +152,7 @@ public class GraphicView extends JPanel {
 				}
 			}
 		}
+		
 		public void mouseEntered(MouseEvent e) {}
 		public void mouseExited(MouseEvent e) {}
 		public void mouseMoved(MouseEvent e) {}
@@ -197,7 +203,6 @@ public class GraphicView extends JPanel {
 		Graphics2D graphics2D = (Graphics2D) g;
 		g.setColor(c);
 		graphics2D.setStroke(new BasicStroke(bold ? 6 : 1));
-		//g.drawLine((int) (n1.getX() * getCoeff()), (int) (n1.getY() * getCoeff()), (int) (n2.getX() * getCoeff()), (int) (n2.getY() * getCoeff()));
 		drawArrow(g, (int) (n1.getX() * getCoeff()), (int) (n1.getY() * getCoeff()), (int) (n2.getX() * getCoeff()), (int) (n2.getY() * getCoeff()));
 		graphics2D.setStroke(new BasicStroke(1));
 	}
@@ -248,6 +253,10 @@ public class GraphicView extends JPanel {
 		
 		if(typicalDay.getWareHouse() != -1) {
 			drawNode(g, map.getNodeById(typicalDay.getWareHouse()), Color.GREEN);
+		}
+		
+		for (Node n : selectedNodes) {
+			drawNode(g, n, Color.YELLOW);
 		}
 
 		graphics2D.setTransform(saveTransform);
