@@ -61,7 +61,7 @@ public class GraphicView extends JPanel {
 		bottomButtons.add(deleteButton);
 		bottomButtons.add(Box.createRigidArea(new Dimension(5,0)));
 		bottomButtons.add(swapButton);
-		bottomButtons.add(Box.createRigidArea(new Dimension(100,0)));
+		bottomButtons.add(Box.createRigidArea(new Dimension(20,0)));
 		bottomButtons.add(confirmButton);
 		bottomButtons.add(Box.createRigidArea(new Dimension(5,0)));
 		bottomButtons.add(cancelButton);

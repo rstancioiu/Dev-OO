@@ -32,7 +32,6 @@ public class DeliveryRoundView extends JList {
 		JScrollPane listScroller = new JScrollPane(this);
 		model = new DefaultListModel();
 		this.setModel(model);
-		setBorder(BorderFactory.createTitledBorder("Round"));
 	}
 
 	private void addElement(String label) {

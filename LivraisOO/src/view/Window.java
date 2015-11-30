@@ -10,6 +10,7 @@ import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import javax.swing.JButton;
 
@@ -40,7 +41,7 @@ public class Window extends JFrame {
 
 	private void createAndShowGui() {
 		setSize(1000, 600);
-		setMinimumSize(new Dimension(900, 500));
+		setMinimumSize(new Dimension(1000, 500));
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -155,16 +156,21 @@ public class Window extends JFrame {
 				controller.generateRoadmap();
 			}
 		});
-
+		
+		JScrollPane typicalDayScroll = new JScrollPane(typicalDayView);
+		JScrollPane deliveryRoundScroll = new JScrollPane(deliveryRoundView);
+		deliveryRoundScroll.setBorder(BorderFactory.createTitledBorder("Round"));
+		typicalDayScroll.setBorder(BorderFactory.createTitledBorder("Deliveries"));
+		
 		layout.setHorizontalGroup(layout.createSequentialGroup().addComponent(graphicView)
-				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER).addComponent(typicalDayView)
-						.addComponent(deliveryRoundView).addComponent(compute).addComponent(generateRoadmap)
+				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER).addComponent(typicalDayScroll)
+						.addComponent(deliveryRoundScroll).addComponent(compute).addComponent(generateRoadmap)
 						.addComponent(loadMap).addComponent(loadDeliveries)));
 
 		layout.setVerticalGroup(layout.createSequentialGroup()
 				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(graphicView)
-						.addGroup(layout.createSequentialGroup().addComponent(typicalDayView)
-								.addComponent(deliveryRoundView).addComponent(compute).addComponent(generateRoadmap)
+						.addGroup(layout.createSequentialGroup().addComponent(typicalDayScroll)
+								.addComponent(deliveryRoundScroll).addComponent(compute).addComponent(generateRoadmap)
 								.addComponent(loadMap).addComponent(loadDeliveries))));
 
 		typicalDayView.setMinimumSize(new Dimension(250, 150));

@@ -24,7 +24,6 @@ public class TypicalDayView extends JList {
 		JScrollPane listScroller = new JScrollPane(this);
 		model = new DefaultListModel();
 		this.setModel(model);
-		setBorder(BorderFactory.createTitledBorder("Deliveries"));
 	}
 
 	private void addElement(String label) {
