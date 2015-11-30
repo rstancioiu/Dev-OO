@@ -51,7 +51,7 @@ public interface State {
 	public void rightClick(Window window, CommandsList cmdList);
 	
 	
-	public void confirmAdd(DeliveryRound deliveryRound, Delivery delivery,Node node, Graph graph);
+	public void confirmAdd(DeliveryRound deliveryRound, Delivery delivery,Node node, TypicalDay typicalDay, Graph graph);
 	
 	public void confirmDelete(DeliveryRound deliveryRound,  Delivery delivery, TypicalDay typicalDay, Graph graph);
 	

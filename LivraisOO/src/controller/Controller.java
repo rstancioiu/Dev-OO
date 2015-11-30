@@ -86,7 +86,7 @@ public class Controller {
 	}
 
 	public void confirmAdd(Delivery delivery, Node node) {
-		currentState.confirmAdd(deliveryRound, delivery, node, graph);
+		currentState.confirmAdd(deliveryRound, delivery, node, typicalDay, graph);
 		window.drawDeliveryRound(deliveryRound,typicalDay);
 	}
 	

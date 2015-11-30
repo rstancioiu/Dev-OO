@@ -12,11 +12,18 @@ public class AdditionState extends DefaultState {
 	//State reached when the user clicks the add button
 	//The user selects a node in the first list and a preceding delivery in the second list
 	@Override
-	public void confirmAdd(DeliveryRound deliveryRound, Delivery delivery, Node node, Graph graph) {
+	public void confirmAdd(DeliveryRound deliveryRound, Delivery delivery, Node node, TypicalDay typicalDay, Graph graph) {
 		Delivery newDelivery = new Delivery(0, 0, node.getId(), new TimeWindow(0, 24));
 		deliveryRound.addDelivery(delivery, newDelivery, graph, new TimeWindow(-1, -1));
-		delivery.getTimeWindow().insertDelivery(delivery, newDelivery);
-		newDelivery.setTimeWindow(delivery.getTimeWindow());
+		
+		if(delivery.getAddress() == typicalDay.getWareHouse()) {
+			Delivery firstReal = deliveryRound.getPaths().get(1).getArrival();
+			firstReal.getTimeWindow().insertDelivery(firstReal, newDelivery);
+			newDelivery.setTimeWindow(firstReal.getTimeWindow());
+		} else {
+			delivery.getTimeWindow().insertDelivery(delivery, newDelivery);
+			newDelivery.setTimeWindow(delivery.getTimeWindow());
+		}
 		Controller.setCurrentState(Controller.deliveryState);
 	}
 	

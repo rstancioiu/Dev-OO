@@ -77,13 +77,13 @@ public class DeliveryRound {
 		for (int i = 0; i < paths.size(); i++) {
 			if (paths.get(i).getDeparture().equals(previous)) {
 				Path path1 = graph.generatePath(paths.get(i).getDeparture(), newDelivery);
-				/*
+				
 				if(tm.getStart()>0 && i==0) {
-					newDelivery.setTimeWindow(tm);
+					//newDelivery.setTimeWindow(tm);
 				} else {
 					newDelivery.setTimeWindow(paths.get(i).getDeparture().getTimeWindow());
 				}
-				*/
+				
 				if(i == 0) {
 					newDelivery.setTime(newDelivery.getTimeWindow().getStart());
 				} else {
