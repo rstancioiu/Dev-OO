@@ -90,8 +90,9 @@ public class Controller {
 	}
 	
 	public void confirmDelete(Delivery delivery){
-		currentState.confirmDelete(deliveryRound, delivery , graph);
-		window.drawDeliveryRound(deliveryRound,typicalDay);
+		currentState.confirmDelete(deliveryRound, delivery , typicalDay, graph);
+		window.drawDeliveryRound(deliveryRound, typicalDay);
+		window.drawDeliveries(typicalDay);
 	}
 	
 	public void confirmSwap(Delivery start, Delivery end){

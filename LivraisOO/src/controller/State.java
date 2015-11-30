@@ -53,7 +53,7 @@ public interface State {
 	
 	public void confirmAdd(DeliveryRound deliveryRound, Delivery delivery,Node node, Graph graph);
 	
-	public void confirmDelete(DeliveryRound deliveryRound,  Delivery delivery, Graph graph);
+	public void confirmDelete(DeliveryRound deliveryRound,  Delivery delivery, TypicalDay typicalDay, Graph graph);
 	
 	public void confirmSwap(DeliveryRound deliveryRound, Delivery start, Delivery end, Graph graph);
 	
