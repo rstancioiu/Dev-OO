@@ -1,19 +1,16 @@
 package controller;
 
 import graph.Graph;
-import model.CityMap;
 import model.Delivery;
 import model.DeliveryRound;
-import model.Node;
-import model.TimeWindow;
 import model.TypicalDay;
 import view.Window;
 
 public class DeleteState extends DefaultState {
 	@Override
 	public void confirmDelete(DeliveryRound deliveryRound, Delivery delivery, TypicalDay typicalDay, Graph graph) {
-		deliveryRound.deleteDelivery(delivery, graph);
 		delivery.getTimeWindow().deleteDelivery(delivery);
+		deliveryRound.deleteDelivery(delivery, graph);
 		Controller.setCurrentState(Controller.deliveryState);
 	}
 	

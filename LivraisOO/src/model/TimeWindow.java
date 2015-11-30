@@ -33,7 +33,7 @@ public class TimeWindow {
 		for(int i=0;i<deliveries.size();++i)
 		{
 			newDeliveries.add(deliveries.get(i));
-			if(deliveries.get(i).equals(before)){
+			if(deliveries.get(i).getAddress() == before.getAddress()){
 				 newDeliveries.add(d);
 			}
 		}
@@ -47,7 +47,7 @@ public class TimeWindow {
 	 */
 	public void deleteDelivery(Delivery d) {
 		for (int i = 0; i < deliveries.size(); ++i) {
-			if (deliveries.get(i).equals(d)) {
+			if (deliveries.get(i).getAddress() == d.getAddress()) {
 				deliveries.remove(i);
 				break;
 			}

@@ -16,6 +16,7 @@ public class AdditionState extends DefaultState {
 		Delivery newDelivery = new Delivery(0, 0, node.getId(), new TimeWindow(0, 24));
 		deliveryRound.addDelivery(delivery, newDelivery, graph, new TimeWindow(-1, -1));
 		delivery.getTimeWindow().insertDelivery(delivery, newDelivery);
+		newDelivery.setTimeWindow(delivery.getTimeWindow());
 		Controller.setCurrentState(Controller.deliveryState);
 	}
 	
