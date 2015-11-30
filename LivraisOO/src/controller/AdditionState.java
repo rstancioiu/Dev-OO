@@ -34,5 +34,6 @@ public class AdditionState extends DefaultState {
 
 	public void updateVue(Window window){
 		window.showButtons();
+		window.setMessage("Please select an empty node and a delivery node to insert after");
 	}
 }

@@ -43,5 +43,6 @@ public class SwapState extends DefaultState {
 
 	public void updateVue(Window window){
 		window.showButtons();
+		window.setMessage("Please select two delivery nodes to be swapped");
 	}
 }

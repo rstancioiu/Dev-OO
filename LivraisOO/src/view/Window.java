@@ -57,8 +57,6 @@ public class Window extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				controller.clickAddButton();
-				graphicView.clearNodes();
-				messageBox.setText("Please select an empty node and a delivery node to insert after");
 			}
 		});
 
@@ -67,8 +65,6 @@ public class Window extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				controller.clickDeleteButton();
-				graphicView.clearNodes();
-				messageBox.setText("Please select a delivery node to remove");
 			}
 		});
 
@@ -77,8 +73,6 @@ public class Window extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				controller.clickSwapButton();
-				graphicView.clearNodes();
-				messageBox.setText("Please select two delivery nodes to be swapped");
 			}
 		});
 
@@ -225,8 +219,8 @@ public class Window extends JFrame {
 		enableSwapButton(false);
 	}
 
-	public void clearMessage() {
-		messageBox.setText(" ");
+	public void setMessage(String message) {
+		messageBox.setText(message);
 	}
 
 	public void showButtons() {

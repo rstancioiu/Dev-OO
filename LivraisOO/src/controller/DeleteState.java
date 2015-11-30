@@ -21,5 +21,6 @@ public class DeleteState extends DefaultState {
 
 	public void updateVue(Window window){
 		window.showButtons();
+		window.setMessage("Please select a delivery node to remove");
 	}
 }

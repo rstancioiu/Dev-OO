@@ -44,8 +44,8 @@ public class Controller {
 	 */
 	protected static void setCurrentState(State state) {
 		currentState = state;
+		window.setMessage(" ");
 		currentState.updateVue(window);
-		window.clearMessage();
 	}
 
 	/**
