@@ -20,6 +20,7 @@ public class Delivery {
 		this.client = client;
 		this.address = address;
 		this.setTimeWindow(timeWindow);
+		this.time = -1;
 	}
 
 	/**

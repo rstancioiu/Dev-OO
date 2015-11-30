@@ -11,8 +11,8 @@ import graph.Graph;
  */
 public class DeliveryRound {
 
-	private String start;
-	private String end;
+	private int start;
+	private int end;
 	private double duration;
 	private ArrayList<Path> paths;
 
@@ -28,11 +28,12 @@ public class DeliveryRound {
 	 * Update delivery effective times
 	 */
 	public void updateTimes() {
-		int STOPTIME = 10;
+		int STOPTIME = 600;
 		Path first = paths.get(0);
 		int firstTime = first.getArrival().getTimeWindow().getStart();
 		int departure = (int) (firstTime - first.getDuration() + 1);
 		first.getDeparture().setTime(departure);
+		start = departure;
 		departure -= STOPTIME;
 		for (Path p : paths) {
 			departure += STOPTIME + p.getDuration();
@@ -45,6 +46,8 @@ public class DeliveryRound {
 				departure += delta;
 			}
 		}
+		end = departure;
+		duration = end-start;
 	}
 
 	/**
@@ -161,14 +164,14 @@ public class DeliveryRound {
 	/**
 	 * @param start
 	 */
-	public void setStart(String s) {
+	public void setStart(int s) {
 		this.start = s;
 	}
 
 	/**
 	 * @param end
 	 */
-	public void setEnd(String end) {
+	public void setEnd(int end) {
 		this.end = end;
 	}
 
@@ -201,14 +204,14 @@ public class DeliveryRound {
 	/**
 	 * @return start
 	 */
-	public String getStart() {
+	public int getStart() {
 		return this.start;
 	}
 
 	/**
 	 * @return end
 	 */
-	public String getEnd() {
+	public int getEnd() {
 		return this.end;
 	}
 

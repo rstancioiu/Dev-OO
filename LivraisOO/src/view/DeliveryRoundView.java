@@ -62,7 +62,7 @@ public class DeliveryRoundView extends JList {
 		model.clear();
 		deliveryRound.updateTimes();
 		ArrayList<Path> paths = deliveryRound.getPaths();
-		int firstTime = (int)(paths.get(0).getDeparture().getTime() - deliveryRound.getDuration());
+		int firstTime = deliveryRound.getStart();
 		model.addElement("Warehouse departure : " + formatHour(firstTime));
 		for (Path p : paths) {
 			int time = p.getArrival().getTime();

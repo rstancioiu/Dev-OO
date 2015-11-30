@@ -149,6 +149,8 @@ public class GraphicView extends JPanel {
 				if(!found){
 					selectedNodes.add(selectedNode);
 				}
+			} else {
+				clearNodes();
 			}
 			update();
 		}

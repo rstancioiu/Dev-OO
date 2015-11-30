@@ -139,6 +139,7 @@ public class Window extends JFrame {
 		generateRoadmap.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				controller.generateRoadmap();
 			}
 		});
 
