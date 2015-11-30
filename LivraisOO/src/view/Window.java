@@ -31,7 +31,8 @@ public class Window extends JFrame {
 	private JButton loadMap, loadDeliveries, compute, generateRoadmap;
 	private JButton addButton, deleteButton, swapButton, confirmButton, cancelButton;
 	private DeliveryRound deliveryRound;
-
+	private JLabel messageBox;
+	
 	public Window(Controller controller) {
 		this.controller = controller;
 		createAndShowGui();
@@ -49,13 +50,15 @@ public class Window extends JFrame {
 		layout.setAutoCreateGaps(true);
 		layout.setAutoCreateContainerGaps(true);
 		panel.setLayout(layout);
-
+		
+		messageBox = new JLabel(" ");
 		addButton = new JButton("Add");
 		addButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				controller.clickAddButton();
 				graphicView.clearNodes();
+				messageBox.setText("Please select an empty node and a delivery node to insert after");
 			}
 		});
 
@@ -65,6 +68,7 @@ public class Window extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				controller.clickDeleteButton();
 				graphicView.clearNodes();
+				messageBox.setText("Please select a delivery node to remove");
 			}
 		});
 
@@ -74,6 +78,7 @@ public class Window extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				controller.clickSwapButton();
 				graphicView.clearNodes();
+				messageBox.setText("Please select two delivery nodes to be swapped");
 			}
 		});
 
@@ -106,7 +111,7 @@ public class Window extends JFrame {
 			}
 		});
 		hideButtons();
-		graphicView = new GraphicView(addButton, deleteButton, swapButton, confirmButton, cancelButton);
+		graphicView = new GraphicView(messageBox, addButton, deleteButton, swapButton, confirmButton, cancelButton);
 		typicalDayView = new TypicalDayView();
 		deliveryRoundView = new DeliveryRoundView();
 		loadMap = new JButton("Load Map");
@@ -217,6 +222,10 @@ public class Window extends JFrame {
 		enableAddButton(false);
 		enableDeleteButton(false);
 		enableSwapButton(false);
+	}
+	
+	public void clearMessage() {
+		messageBox.setText(" ");
 	}
 	
 	public void showButtons() {

@@ -49,9 +49,8 @@ public class GraphicView extends JPanel {
 	private JPanel bottomButtons = new JPanel();
 	private ArrayList<Delivery> selectedDeliveries = new ArrayList<Delivery>();
 	private ArrayList<Node> selectedNodes = new ArrayList<Node>();
-	private JLabel messageBox;
 
-	public GraphicView(JButton addButton, JButton deleteButton, JButton swapButton, JButton confirmButton, JButton cancelButton) {
+	public GraphicView(JLabel messageBox, JButton addButton, JButton deleteButton, JButton swapButton, JButton confirmButton, JButton cancelButton) {
 		super();
 		this.setLayout(new BorderLayout());
 		
@@ -67,7 +66,7 @@ public class GraphicView extends JPanel {
 		bottomButtons.add(Box.createRigidArea(new Dimension(5,0)));
 		bottomButtons.add(cancelButton);
 		add(bottomButtons, BorderLayout.PAGE_END);
-		messageBox = new JLabel(" ");
+
 		messageBox.setBorder(BorderFactory.createTitledBorder("Message Box"));
 		add(messageBox, BorderLayout.PAGE_START);
 
