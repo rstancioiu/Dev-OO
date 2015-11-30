@@ -247,7 +247,7 @@ public class GraphicView extends JPanel {
 	private void drawLine(Graphics g, Node n1, Node n2, Color c, boolean bold) {
 		Graphics2D graphics2D = (Graphics2D) g;
 		g.setColor(c);
-		graphics2D.setStroke(new BasicStroke(bold ? 6 : 1));
+		graphics2D.setStroke(new BasicStroke(bold ? 4 : 1));
 		drawArrow(g, (int) (n1.getX() * getCoeff()), (int) (n1.getY() * getCoeff()), (int) (n2.getX() * getCoeff()), (int) (n2.getY() * getCoeff()), bold);
 		graphics2D.setStroke(new BasicStroke(1));
 	}
