@@ -29,7 +29,7 @@ public class Window extends JFrame {
 	private DeliveryRoundView deliveryRoundView;
 	private Controller controller;
 	private JButton loadMap, loadDeliveries, compute, generateRoadmap;
-	private JButton addButton, deleteButton, swapButton, confirmButton, cancelButton;
+	private JButton addButton, deleteButton, swapButton, confirmButton, cancelButton, undoButton, redoButton;
 	private DeliveryRound deliveryRound;
 	private JLabel messageBox;
 
@@ -40,7 +40,7 @@ public class Window extends JFrame {
 
 	private void createAndShowGui() {
 		setSize(1000, 600);
-		setMinimumSize(new Dimension(700, 500));
+		setMinimumSize(new Dimension(900, 500));
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -104,8 +104,27 @@ public class Window extends JFrame {
 				graphicView.clearNodes();
 			}
 		});
+		
+		undoButton = new JButton("Undo");
+		undoButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				controller.undo();
+			}
+		});
+		
+		redoButton = new JButton("Redo");
+		redoButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				controller.redo();
+			}
+		});
+		
 		hideButtons();
-		graphicView = new GraphicView(messageBox, addButton, deleteButton, swapButton, confirmButton, cancelButton);
+		graphicView = new GraphicView(messageBox, addButton, deleteButton, swapButton, confirmButton, cancelButton, undoButton, redoButton);
 		typicalDayView = new TypicalDayView();
 		deliveryRoundView = new DeliveryRoundView();
 		loadMap = new JButton("Load Map");
@@ -208,6 +227,14 @@ public class Window extends JFrame {
 	public void enableSwapButton(boolean state) {
 		swapButton.setEnabled(state);
 	}
+	
+	public void enableUndoButton(boolean state) {
+		undoButton.setEnabled(state);
+	}
+	
+	public void enableRedoButton(boolean state) {
+		redoButton.setEnabled(state);
+	}
 
 	public void disableAll() {
 		enableLoadMap(false);
@@ -217,6 +244,8 @@ public class Window extends JFrame {
 		enableAddButton(false);
 		enableDeleteButton(false);
 		enableSwapButton(false);
+		undoButton.setEnabled(false);
+		redoButton.setEnabled(false);
 	}
 
 	public void setMessage(String message) {

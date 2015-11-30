@@ -92,6 +92,8 @@ public class DeliveryState extends DefaultState {
 		window.enableDeleteButton(true);
 		window.enableSwapButton(true);
 		window.enableGenerateRoadmap(true);
+		window.enableUndoButton(true);
+		window.enableRedoButton(true);
 	}
 
 }
