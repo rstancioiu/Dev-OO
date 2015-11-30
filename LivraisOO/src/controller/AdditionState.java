@@ -14,7 +14,7 @@ public class AdditionState extends DefaultState {
 	@Override
 	public void confirmAdd(DeliveryRound deliveryRound, Delivery delivery, Node node, Graph graph) {
 		Delivery newDelivery = new Delivery(0, 0, node.getId(), new TimeWindow(0, 24));
-		deliveryRound.addDelivery(delivery, newDelivery, graph);
+		deliveryRound.addDelivery(delivery, newDelivery, graph, new TimeWindow(-1, -1));
 		delivery.getTimeWindow().insertDelivery(delivery, newDelivery);
 		Controller.setCurrentState(Controller.deliveryState);
 	}

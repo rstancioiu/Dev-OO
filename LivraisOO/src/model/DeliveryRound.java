@@ -1,5 +1,6 @@
 package model;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import graph.Graph;
@@ -24,6 +25,14 @@ public class DeliveryRound {
 		duration = 0;
 	}
 	
+	private String formatHour(int seconds) {
+		DecimalFormat formatter = new DecimalFormat("00");
+		String result = formatter.format(seconds/3600) + ":"
+				+ formatter.format(seconds%3600/60) + ":"
+				+ formatter.format(seconds%60);
+		return result;
+	}
+	
 	/**
 	 * Update delivery effective times
 	 */
@@ -31,6 +40,8 @@ public class DeliveryRound {
 		int STOPTIME = 600;
 		Path first = paths.get(0);
 		int firstTime = first.getArrival().getTimeWindow().getStart();
+		System.out.println("First time : " + formatHour(firstTime));
+		System.out.println("First path cost : " + first.getDuration());
 		int departure = (int) (firstTime - first.getDuration() + 1);
 		first.getDeparture().setTime(departure);
 		start = departure;
@@ -39,6 +50,7 @@ public class DeliveryRound {
 			departure += STOPTIME + p.getDuration();
 			Delivery arrival = p.getArrival();
 			arrival.setTime(departure);
+			System.out.println("Found time for node " + arrival.getAddress() + " : " + formatHour(departure));
 			TimeWindow currentWindow = arrival.getTimeWindow();
 			//Wait until the window starts
 			if(departure<currentWindow.getStart()) {
@@ -56,7 +68,7 @@ public class DeliveryRound {
 	 * @param previous
 	 * @param newDelivery
 	 */
-	public void addDelivery(Delivery previous, Delivery newDelivery, Graph graph) {
+	public void addDelivery(Delivery previous, Delivery newDelivery, Graph graph, TimeWindow tm) {
 		ArrayList<Path> newPaths = new ArrayList<Path>();
 		for (int i = 0; i < paths.size(); ++i) {
 			System.out.print(paths.get(i).getDeparture().getAddress() + " ");
@@ -65,10 +77,22 @@ public class DeliveryRound {
 		for (int i = 0; i < paths.size(); i++) {
 			if (paths.get(i).getDeparture().equals(previous)) {
 				Path path1 = graph.generatePath(paths.get(i).getDeparture(), newDelivery);
+				/*
+				if(tm.getStart()>0 && i==0) {
+					newDelivery.setTimeWindow(tm);
+				} else {
+					newDelivery.setTimeWindow(paths.get(i).getDeparture().getTimeWindow());
+				}
+				*/
+				if(i == 0) {
+					newDelivery.setTime(newDelivery.getTimeWindow().getStart());
+				} else {
+					newDelivery.setTime((int)(path1.getDeparture().getTime() + path1.getDuration()));
+				}
 				Path path2 = graph.generatePath(newDelivery, paths.get(i).getArrival());
 				newPaths.add(path1);
 				newPaths.add(path2);
-				newDelivery.setTimeWindow(paths.get(i).getDeparture().getTimeWindow());
+				
 			} else {
 				newPaths.add(paths.get(i));
 			}
@@ -136,11 +160,15 @@ public class DeliveryRound {
 			j = aux;
 		}
 		if (i != j) {
+			TimeWindow tm1 = paths.get(i).getArrival().getTimeWindow();
 			deleteDelivery(paths.get(i).getArrival(), graph);
-			addDelivery(paths.get(i).getDeparture(), second, graph);
+			addDelivery(paths.get(i).getDeparture(), second, graph, tm1);
+			TimeWindow tm2 = paths.get(j).getArrival().getTimeWindow();
 			deleteDelivery(paths.get(j).getArrival(), graph);
-			addDelivery(paths.get(j).getDeparture(), first, graph);
+			addDelivery(paths.get(j).getDeparture(), first, graph, tm2);
 		}
+		System.out.println("Delivery " + first.getAddress() + " has now start " + first.getTimeWindow().getStart());
+		System.out.println("Delivery " + second.getAddress() + " has now start " + second.getTimeWindow().getStart());
 	}
 
 	/**

@@ -241,6 +241,18 @@ public class GraphicView extends JPanel {
 				drawLine(g, n1, n2, new Color(40,110,130), true);
 			}
 		}
+		
+		
+		//Draw late problems
+		for (Path p : paths) {
+			if(p.isLate() && p != paths.get(paths.size()-1)) {
+				for (Section s : p.getSections()) {
+					Node n1 = map.getNodeById(s.getArrival());
+					Node n2 = map.getNodeById(s.getDeparture());
+					drawLine(g, n1, n2, Color.RED, true);
+				}
+			}
+		}
 
 		for (Node n : map.getNodes()) {
 			drawNode(g, n, Color.WHITE);
@@ -254,22 +266,14 @@ public class GraphicView extends JPanel {
 			}
 		}
 		
-		
+		for (Path p : paths) {
+			if(p.isLate() && p != paths.get(paths.size()-1)) {
+				drawNode(g, map.getNodeById(p.getArrival().getAddress()), Color.RED);
+			}
+		}
 		
 		if(typicalDay.getWareHouse() != -1) {
 			drawNode(g, map.getNodeById(typicalDay.getWareHouse()), Color.GREEN);
-		}
-		
-		//Draw late problems
-		for (Path p : paths) {
-			if(p.isLate() && p != paths.get(paths.size()-1)) {
-				for (Section s : p.getSections()) {
-					Node n1 = map.getNodeById(s.getArrival());
-					Node n2 = map.getNodeById(s.getDeparture());
-					drawLine(g, n1, n2, Color.RED, true);
-				}
-				drawNode(g, map.getNodeById(p.getArrival().getAddress()), Color.RED);
-			}
 		}
 		
 		for (Node n : selectedNodes) {
