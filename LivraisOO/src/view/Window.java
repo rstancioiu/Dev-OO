@@ -175,6 +175,7 @@ public class Window extends JFrame {
 
 	public void drawDeliveryRound(DeliveryRound deliveryRound, TypicalDay typicalDay) {
 		graphicView.paintDeliveryRound(deliveryRound);
+		typicalDayView.listDeliveries(typicalDay);
 		deliveryRoundView.listDeliveryRound(deliveryRound, typicalDay);
 		graphicView.update();
 	}

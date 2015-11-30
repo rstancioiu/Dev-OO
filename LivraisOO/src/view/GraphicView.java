@@ -252,6 +252,8 @@ public class GraphicView extends JPanel {
 			}
 		}
 		
+		
+		
 		if(typicalDay.getWareHouse() != -1) {
 			drawNode(g, map.getNodeById(typicalDay.getWareHouse()), Color.GREEN);
 		}
