@@ -50,13 +50,13 @@ public abstract class DefaultState implements State {
 	public void clickSwapButton(){
 	}
 	
-	public void confirmAdd(DeliveryRound deliveryRound, Delivery delivery,Node node, TypicalDay typicalDay, Graph graph){	
+	public void confirmAdd(DeliveryRound deliveryRound, Delivery delivery,Node node, TypicalDay typicalDay, Graph graph,CommandsList cmdList){	
 	}
 	
-	public void confirmDelete(DeliveryRound deliveryRound, Delivery delivery, TypicalDay typicalDay, Graph graph){
+	public void confirmDelete(DeliveryRound deliveryRound, Delivery delivery, TypicalDay typicalDay, Graph graph, CommandsList cmdList){
 	}
 	
-	public void confirmSwap(DeliveryRound deliveryRound, Delivery start, Delivery end, Graph graph){
+	public void confirmSwap(DeliveryRound deliveryRound, Delivery start, Delivery end, Graph graph, CommandsList cmdList){
 	}
 	
 }

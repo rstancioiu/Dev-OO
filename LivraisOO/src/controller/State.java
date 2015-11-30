@@ -51,11 +51,11 @@ public interface State {
 	public void rightClick(Window window, CommandsList cmdList);
 	
 	
-	public void confirmAdd(DeliveryRound deliveryRound, Delivery delivery,Node node, TypicalDay typicalDay, Graph graph);
+	public void confirmAdd(DeliveryRound deliveryRound, Delivery delivery,Node node, TypicalDay typicalDay, Graph graph, CommandsList cmdList);
 	
-	public void confirmDelete(DeliveryRound deliveryRound,  Delivery delivery, TypicalDay typicalDay, Graph graph);
+	public void confirmDelete(DeliveryRound deliveryRound,  Delivery delivery, TypicalDay typicalDay, Graph graph, CommandsList cmdList);
 	
-	public void confirmSwap(DeliveryRound deliveryRound, Delivery start, Delivery end, Graph graph);
+	public void confirmSwap(DeliveryRound deliveryRound, Delivery start, Delivery end, Graph graph,CommandsList cmdList);
 	
 	/**
 	 * Method called by controller after a right click

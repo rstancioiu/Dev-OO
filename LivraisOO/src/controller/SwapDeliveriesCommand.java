@@ -8,23 +8,24 @@ import model.DeliveryRound;
 /**
  * Command to swap two deliveries in a time window and a delivery round
  * extending AstractCommand abstract class
- * @author Heptaswagnome
  *
  */
 public class SwapDeliveriesCommand extends AbstractCommand {
 
-	protected Delivery delivery2;
+	private Delivery start;
+	private Delivery end;
 	
 	/**
-	 * Constructor of SwapDeliveriesCommand
+	 * 
 	 * @param tw
-	 * @param d
-	 * @param d2
+	 * @param start
+	 * @param end
 	 * @param dr
+	 * @param g
 	 */
-	public SwapDeliveriesCommand(TimeWindow tw, Delivery d, Delivery d2, DeliveryRound dr, Graph g){
-		super(tw, d, dr, g);
-		delivery2 = d2;
+	public SwapDeliveriesCommand(Delivery start, Delivery end, DeliveryRound dr, Graph g){
+		super(start, dr, g);
+		this.end = end;
 	}
 	
 	/**
@@ -32,8 +33,26 @@ public class SwapDeliveriesCommand extends AbstractCommand {
 	 */
 	@Override
 	public void doCmd() {
-		timeWindow.swapDeliveries(delivery, delivery2);
-		//TODO : faire également dans DeliveryRound
+		if(start.getTimeWindow().equals(end.getTimeWindow())){
+			start.getTimeWindow().swapDeliveries(start, end);
+		} else {
+			TimeWindow timeWindow1 = start.getTimeWindow();
+			TimeWindow timeWindow2 = end.getTimeWindow();
+			
+			int pos1 = timeWindow1.getDeliveryPos(start);
+			int pos2 = timeWindow2.getDeliveryPos(end);
+			timeWindow1.getDeliveries().remove(pos1);
+			timeWindow2.getDeliveries().remove(pos2);
+			timeWindow1.insertAt(end, pos1);
+			timeWindow2.insertAt(start, pos2);
+			
+			end.setTimeWindow(timeWindow1);
+			System.out.println("Delivery " + end.getAddress() + " has now start " + timeWindow1.getStart());
+			System.out.println("Delivery " + end.getAddress() + " has now start " + end.getTimeWindow().getStart());
+			start.setTimeWindow(timeWindow2);
+			System.out.println("Delivery " + start.getAddress() + " has now start " + timeWindow2.getStart());
+		}
+		deliveryRound.swapDeliveries(start, end, graph);
 	}
 
 	/**
@@ -41,8 +60,26 @@ public class SwapDeliveriesCommand extends AbstractCommand {
 	 */
 	@Override
 	public void undoCmd() {
-		timeWindow.swapDeliveries(delivery, delivery2);
-		//TODO : faire également dans DeliveryRound
+		if(start.getTimeWindow().equals(end.getTimeWindow())){
+			start.getTimeWindow().swapDeliveries(start, end);
+		} else {
+			TimeWindow timeWindow1 = start.getTimeWindow();
+			TimeWindow timeWindow2 = end.getTimeWindow();
+			
+			int pos1 = timeWindow1.getDeliveryPos(start);
+			int pos2 = timeWindow2.getDeliveryPos(end);
+			timeWindow1.getDeliveries().remove(pos1);
+			timeWindow2.getDeliveries().remove(pos2);
+			timeWindow1.insertAt(end, pos1);
+			timeWindow2.insertAt(start, pos2);
+			
+			end.setTimeWindow(timeWindow1);
+			System.out.println("Delivery " + end.getAddress() + " has now start " + timeWindow1.getStart());
+			System.out.println("Delivery " + end.getAddress() + " has now start " + end.getTimeWindow().getStart());
+			start.setTimeWindow(timeWindow2);
+			System.out.println("Delivery " + start.getAddress() + " has now start " + timeWindow2.getStart());
+		}
+		deliveryRound.swapDeliveries(start, end, graph);
 	}
 
 }

@@ -110,8 +110,9 @@ public class DeliveryRound {
 	 * @param delivery
 	 * @param graph
 	 */
-	public void deleteDelivery(Delivery delivery, Graph graph) {
+	public Delivery deleteDelivery(Delivery delivery, Graph graph) {
 		ArrayList<Path> newPaths = new ArrayList<Path>();
+		Delivery ret= null;
 		for (int i = 0; i < paths.size(); ++i) {
 			System.out.print(paths.get(i).getDeparture().getAddress() + " ");
 		}
@@ -120,6 +121,7 @@ public class DeliveryRound {
 		for (int i = 0; i < paths.size(); i++) {
 			if (paths.get(i).getArrival().equals(delivery) && !found) {
 				Path path = graph.generatePath(paths.get(i).getDeparture(), paths.get(i + 1).getArrival());
+				ret = paths.get(i).getDeparture();
 				newPaths.add(path);
 				found = true;
 				++i;
@@ -132,6 +134,7 @@ public class DeliveryRound {
 			System.out.print(paths.get(i).getDeparture().getAddress() + " ");
 		}
 		System.out.println(paths.get(paths.size() - 1).getArrival().getAddress());
+		return ret;
 	}
 
 	/**

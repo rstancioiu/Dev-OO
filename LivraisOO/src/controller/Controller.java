@@ -86,19 +86,19 @@ public class Controller {
 	}
 
 	public void confirmAdd(Delivery delivery, Node node) {
-		currentState.confirmAdd(deliveryRound, delivery, node, typicalDay, graph);
+		currentState.confirmAdd(deliveryRound, delivery, node, typicalDay, graph, cmdList);
 		window.drawDeliveryRound(deliveryRound,typicalDay);
 	}
 	
 	public void confirmDelete(Delivery delivery){
-		currentState.confirmDelete(deliveryRound, delivery , typicalDay, graph);
+		currentState.confirmDelete(deliveryRound, delivery , typicalDay, graph, cmdList);
 		window.drawDeliveryRound(deliveryRound, typicalDay);
 		window.drawDeliveries(typicalDay);
 	}
 	
 	public void confirmSwap(Delivery start, Delivery end){
 		System.out.println("Swap started");
-		currentState.confirmSwap(deliveryRound, start, end, graph);
+		currentState.confirmSwap(deliveryRound, start, end, graph, cmdList);
 		window.drawDeliveryRound(deliveryRound,typicalDay);
 	}
 
@@ -118,4 +118,11 @@ public class Controller {
 		currentState.clickSwapButton();
 	}
 	
+	public void undo(){
+		cmdList.undo();
+	}
+	
+	public void redo(){
+		cmdList.redo();
+	}
 }
