@@ -72,6 +72,9 @@ public class DeliveryState extends DefaultState {
 	
 	public void updateVue(Window window){
 		window.hideButtons();
+		window.enableAddButton(true);
+		window.enableDeleteButton(true);
+		window.enableSwapButton(true);
 	}
 
 }

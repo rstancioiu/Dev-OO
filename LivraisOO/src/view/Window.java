@@ -194,12 +194,27 @@ public class Window extends JFrame {
 	public void enableGenerateRoadmap(boolean state) {
 		generateRoadmap.setEnabled(state);
 	}
+	
+	public void enableAddButton(boolean state) {
+		addButton.setEnabled(state);
+	}
+	
+	public void enableDeleteButton(boolean state) {
+		deleteButton.setEnabled(state);
+	}
+	
+	public void enableSwapButton(boolean state) {
+		swapButton.setEnabled(state);
+	}
 
 	public void disableAll() {
 		enableLoadMap(false);
 		enableLoadDeliveries(false);
 		enableCompute(false);
 		enableGenerateRoadmap(false);
+		enableAddButton(false);
+		enableDeleteButton(false);
+		enableSwapButton(false);
 	}
 	
 	public void showButtons() {
