@@ -6,6 +6,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import model.CityMap;
 import model.TypicalDay;
 import view.Window;
 import xml.XMLDeserializer;
@@ -15,6 +16,7 @@ public class CityMapState extends DefaultState {
 
 	@Override
 	public void loadDeliveries(TypicalDay typicalDay, Window window) {
+		typicalDay.clear();
 		try {
 			XMLDeserializer.loadDeliveries(typicalDay);
 			Controller.setCurrentState(Controller.requestState);
@@ -27,10 +29,29 @@ public class CityMapState extends DefaultState {
 		} catch (XMLException e) {
 			e.printStackTrace();
 		}
+		window.clearDeliveries();
 		window.drawDeliveries(typicalDay);
-		System.out.println("Current state : requestState");
+	}
+	
+	@Override
+	public void loadMap(CityMap map, Window window) {
+		map.clear();
+		try {
+			XMLDeserializer.loadMap(map);
+			Controller.setCurrentState(Controller.cityMapState);
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (XMLException e) {
+			e.printStackTrace();
+		}
+		window.drawMap(map);
 	}
 
+	@Override
 	public void updateVue(Window window) {
 		window.disableAll();
 		window.enableLoadMap(true);

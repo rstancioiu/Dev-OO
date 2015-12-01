@@ -1,27 +1,29 @@
 package controller;
 
 import view.Window;
+import xml.XMLDeserializer;
+import xml.XMLException;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
+import javax.xml.parsers.ParserConfigurationException;
 
+import org.xml.sax.SAXException;
+
+import model.CityMap;
 import model.DeliveryRound;
 import model.Path;
 import model.Section;
+import model.TypicalDay;
 
 public class DeliveryState extends DefaultState {
 
-	private String formatHour(int seconds) {
-		DecimalFormat formatter = new DecimalFormat("00");
-		String result = formatter.format(seconds / 3600) + ":" + formatter.format(seconds % 3600 / 60) + ":"
-				+ formatter.format(seconds % 60);
-		return result;
-	}
-
+	@Override
 	public void generateRoadmap(DeliveryRound deliveryRound) {
 
 		JFileChooser fileChooser = new JFileChooser();
@@ -84,6 +86,43 @@ public class DeliveryState extends DefaultState {
 		Controller.setCurrentState(Controller.swapState);
 	}
 
+	public void loadMap(CityMap map, Window window) {
+		map.clear();
+		try {
+			XMLDeserializer.loadMap(map);
+			Controller.setCurrentState(Controller.cityMapState);
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (XMLException e) {
+			e.printStackTrace();
+		}
+		window.drawMap(map);
+	}
+
+	@Override
+	public void loadDeliveries(TypicalDay typicalDay, Window window) {
+		typicalDay.clear();
+		try {
+			XMLDeserializer.loadDeliveries(typicalDay);
+			Controller.setCurrentState(Controller.requestState);
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (XMLException e) {
+			e.printStackTrace();
+		}
+		window.clearDeliveries();
+		window.drawDeliveries(typicalDay);
+	}
+
+	@Override
 	public void updateVue(Window window) {
 		window.hideButtons();
 		window.enableAddButton(true);
@@ -92,6 +131,13 @@ public class DeliveryState extends DefaultState {
 		window.enableGenerateRoadmap(true);
 		window.enableUndoButton(true);
 		window.enableRedoButton(true);
+	}
+
+	private String formatHour(int seconds) {
+		DecimalFormat formatter = new DecimalFormat("00");
+		String result = formatter.format(seconds / 3600) + ":" + formatter.format(seconds % 3600 / 60) + ":"
+				+ formatter.format(seconds % 60);
+		return result;
 	}
 
 }

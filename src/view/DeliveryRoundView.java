@@ -103,5 +103,12 @@ public class DeliveryRoundView extends JList {
 			model.addElement(line);
 		}
 	}
+	
+	/**
+	 * Clear the model of delivery round view
+	 */
+	public void clear(){
+		model.clear();
+	}
 
 }

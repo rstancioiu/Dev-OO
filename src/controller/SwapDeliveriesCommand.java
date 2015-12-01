@@ -71,8 +71,8 @@ public class SwapDeliveriesCommand extends AbstractCommand {
 			int pos2 = timeWindow2.getDeliveryPos(end);
 			timeWindow1.getDeliveries().remove(pos1);
 			timeWindow2.getDeliveries().remove(pos2);
-			timeWindow1.insertAt(end, pos1);
-			timeWindow2.insertAt(start, pos2);
+			timeWindow1.addDelivery(end);
+			timeWindow2.addDelivery(start);
 
 			end.setTimeWindow(timeWindow1);
 			System.out.println("Delivery " + end.getAddress() + " has now start " + timeWindow1.getStart());

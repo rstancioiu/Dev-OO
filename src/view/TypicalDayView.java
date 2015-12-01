@@ -65,5 +65,12 @@ public class TypicalDayView extends JList {
 			}
 		}
 	}
+	
+	/**
+	 * Clear the model of a typical day view
+	 */
+	public void clear(){
+		model.clear();
+	}
 
 }

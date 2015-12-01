@@ -426,4 +426,13 @@ public class GraphicView extends JPanel {
 	public ArrayList<Node> getSelectedNodes() {
 		return selectedNodes;
 	}
+	
+	/**
+	 * Clear the model of graphic view
+	 */
+	public void clear(){
+		clearNodes();
+		deliveryRound = new DeliveryRound();
+		typicalDay = new TypicalDay();
+	}
 }

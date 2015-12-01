@@ -7,6 +7,7 @@ import model.TypicalDay;
 import view.Window;
 
 public class DeleteState extends DefaultState {
+
 	@Override
 	public void confirmDelete(DeliveryRound deliveryRound, Delivery delivery, TypicalDay typicalDay, Graph graph,
 			CommandsList cmdList) {
@@ -16,10 +17,12 @@ public class DeleteState extends DefaultState {
 		Controller.setCurrentState(Controller.deliveryState);
 	}
 
+	@Override
 	public void cancel() {
 		Controller.setCurrentState(Controller.deliveryState);
 	}
 
+	@Override
 	public void updateVue(Window window) {
 		window.showButtons();
 		window.setMessage("Please select a delivery node to remove");

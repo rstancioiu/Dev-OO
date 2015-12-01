@@ -200,6 +200,9 @@ public class Window extends JFrame {
 	 * @param map
 	 */
 	public void drawMap(CityMap map) {
+		deliveryRoundView.clear();
+		typicalDayView.clear();
+		graphicView.clear();
 		graphicView.paintMap(map);
 		graphicView.update();
 	}
@@ -313,8 +316,6 @@ public class Window extends JFrame {
 	 * disable all buttons
 	 */
 	public void disableAll() {
-		enableLoadMap(false);
-		enableLoadDeliveries(false);
 		enableCompute(false);
 		enableGenerateRoadmap(false);
 		enableAddButton(false);
@@ -352,5 +353,13 @@ public class Window extends JFrame {
 		confirmButton.setEnabled(false);
 		cancelButton.setVisible(false);
 		cancelButton.setEnabled(false);
+	}
+	
+	/**
+	 * Clear deliveries
+	 */
+	public void clearDeliveries(){
+		deliveryRoundView.clear();
+		graphicView.clear();
 	}
 }

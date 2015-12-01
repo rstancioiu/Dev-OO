@@ -67,5 +67,14 @@ public class CityMap {
 	public ArrayList<Node> getNodes() {
 		return arrayNodes;
 	}
+	
+	/**
+	 * Clear the map
+	 */
+	public void clear(){
+		arrayNodes.clear();
+		nodes.clear();
+		sections.clear();
+	}
 
 }

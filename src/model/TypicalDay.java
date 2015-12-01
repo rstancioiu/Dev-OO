@@ -60,4 +60,11 @@ public class TypicalDay {
 	public void setWareHouse(int wareHouse) {
 		this.wareHouse = wareHouse;
 	}
+	
+	/**
+	 * Clear the typicalDay
+	 */
+	public void clear(){
+		timeWindows.clear();
+	}
 }

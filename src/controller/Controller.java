@@ -19,14 +19,13 @@ public class Controller {
 
 	// Instances associated to each possible state of a controller
 	protected static final InitState initState = new InitState();
-	protected static final CityMapState mapState = new CityMapState();
+	protected static final CityMapState cityMapState = new CityMapState();
 	protected static final RequestState requestState = new RequestState();
 	protected static final DeliveryState deliveryState = new DeliveryState();
 	protected static final AdditionState additionState = new AdditionState();
 	protected static final DeleteState deleteState = new DeleteState();
 	protected static final SwapState swapState = new SwapState();
-	protected static final GenerationState generationState = new GenerationState();
-
+	
 	/**
 	 * Constructor of the controller
 	 * 

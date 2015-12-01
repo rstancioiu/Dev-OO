@@ -4,7 +4,6 @@ import graph.Graph;
 import model.Delivery;
 import model.DeliveryRound;
 import model.TimeWindow;
-import model.TypicalDay;
 import view.Window;
 
 public class SwapState extends DefaultState {
@@ -39,10 +38,12 @@ public class SwapState extends DefaultState {
 		Controller.setCurrentState(Controller.deliveryState);
 	}
 
+	@Override
 	public void cancel() {
 		Controller.setCurrentState(Controller.deliveryState);
 	}
 
+	@Override
 	public void updateVue(Window window) {
 		window.showButtons();
 		window.setMessage("Please select two delivery nodes to be swapped");

@@ -16,9 +16,10 @@ public class InitState extends DefaultState {
 
 	@Override
 	public void loadMap(CityMap map, Window window) {
+		map.clear();
 		try {
 			XMLDeserializer.loadMap(map);
-			Controller.setCurrentState(Controller.mapState);
+			Controller.setCurrentState(Controller.cityMapState);
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (SAXException e) {
@@ -31,6 +32,7 @@ public class InitState extends DefaultState {
 		window.drawMap(map);
 	}
 
+	@Override
 	public void updateVue(Window window) {
 		window.disableAll();
 		window.enableLoadMap(true);
