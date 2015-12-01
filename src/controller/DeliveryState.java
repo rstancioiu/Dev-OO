@@ -36,7 +36,6 @@ public class DeliveryState extends DefaultState {
 
 			try {
 				int count = 1;
-				double duration = 0;
 				FileWriter roadmap = new FileWriter(fileChooser.getSelectedFile());
 				roadmap.write("ROADMAP \n START: " + formatHour(deliveryRound.getStart())
 						+ " \n END: " + formatHour(deliveryRound.getEnd()) + "\n DURATION: "
