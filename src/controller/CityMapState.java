@@ -14,7 +14,7 @@ import xml.XMLException;
 public class CityMapState extends DefaultState {
 
 	@Override
-	public void loadDeliveries(TypicalDay typicalDay, Window window){
+	public void loadDeliveries(TypicalDay typicalDay, Window window) {
 		try {
 			XMLDeserializer.loadDeliveries(typicalDay);
 			Controller.setCurrentState(Controller.requestState);
@@ -31,7 +31,7 @@ public class CityMapState extends DefaultState {
 		System.out.println("Current state : requestState");
 	}
 
-	public void updateVue(Window window){
+	public void updateVue(Window window) {
 		window.disableAll();
 		window.enableLoadMap(true);
 		window.enableLoadDeliveries(true);

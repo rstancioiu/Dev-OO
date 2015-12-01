@@ -25,11 +25,16 @@ public class DeliveryRound {
 		duration = 0;
 	}
 
+	/**
+	 * Generate a formated hour from a number of seconds
+	 * 
+	 * @param seconds
+	 * @return formated string
+	 */
 	private String formatHour(int seconds) {
 		DecimalFormat formatter = new DecimalFormat("00");
-		String result = formatter.format(seconds/3600) + ":"
-				+ formatter.format(seconds%3600/60) + ":"
-				+ formatter.format(seconds%60);
+		String result = formatter.format(seconds / 3600) + ":" + formatter.format(seconds % 3600 / 60) + ":"
+				+ formatter.format(seconds % 60);
 		return result;
 	}
 
@@ -52,14 +57,14 @@ public class DeliveryRound {
 			arrival.setTime(departure);
 			System.out.println("Found time for node " + arrival.getAddress() + " : " + formatHour(departure));
 			TimeWindow currentWindow = arrival.getTimeWindow();
-			//Wait until the window starts
-			if(departure<currentWindow.getStart()) {
+			// Wait until the window starts
+			if (departure < currentWindow.getStart()) {
 				int delta = currentWindow.getStart() - departure;
 				departure += delta;
 			}
 		}
 		end = departure;
-		duration = end-start;
+		duration = end - start;
 	}
 
 	/**
@@ -78,16 +83,16 @@ public class DeliveryRound {
 			if (paths.get(i).getDeparture().equals(previous)) {
 				Path path1 = graph.generatePath(paths.get(i).getDeparture(), newDelivery);
 
-				if(tm.getStart()>0 && i==0) {
-					//newDelivery.setTimeWindow(tm);
+				if (tm.getStart() > 0 && i == 0) {
+					// newDelivery.setTimeWindow(tm);
 				} else {
 					newDelivery.setTimeWindow(paths.get(i).getDeparture().getTimeWindow());
 				}
 
-				if(i == 0) {
+				if (i == 0) {
 					newDelivery.setTime(newDelivery.getTimeWindow().getStart());
 				} else {
-					newDelivery.setTime((int)(path1.getDeparture().getTime() + path1.getDuration()));
+					newDelivery.setTime((int) (path1.getDeparture().getTime() + path1.getDuration()));
 				}
 				Path path2 = graph.generatePath(newDelivery, paths.get(i).getArrival());
 				newPaths.add(path1);
@@ -112,7 +117,7 @@ public class DeliveryRound {
 	 */
 	public Delivery deleteDelivery(Delivery delivery, Graph graph) {
 		ArrayList<Path> newPaths = new ArrayList<Path>();
-		Delivery ret= null;
+		Delivery ret = null;
 		System.out.println("Delete results : ");
 		for (int i = 0; i < paths.size(); ++i) {
 			System.out.print(paths.get(i).getDeparture().getAddress() + " ");
@@ -187,13 +192,15 @@ public class DeliveryRound {
 	}
 
 	/**
-	 * Paths getter
+	 * @return an array list of paths
 	 */
 	public ArrayList<Path> getPaths() {
 		return paths;
 	}
 
 	/**
+	 * Replaces the start of a delivery round
+	 * 
 	 * @param start
 	 */
 	public void setStart(int s) {
@@ -201,6 +208,8 @@ public class DeliveryRound {
 	}
 
 	/**
+	 * Replaces the end of a delivery round
+	 * 
 	 * @param end
 	 */
 	public void setEnd(int end) {
@@ -208,6 +217,8 @@ public class DeliveryRound {
 	}
 
 	/**
+	 * Replaces the duration of a delivery round
+	 * 
 	 * @param duration
 	 */
 	public void setDuration(double duration) {
@@ -253,6 +264,5 @@ public class DeliveryRound {
 	public double getDuration() {
 		return this.duration;
 	}
-
 
 }

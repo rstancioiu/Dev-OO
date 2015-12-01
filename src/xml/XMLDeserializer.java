@@ -75,8 +75,8 @@ public class XMLDeserializer {
 	 */
 	private static Node createNode(Element elt, CityMap map) throws XMLException {
 		int id = Integer.parseInt(elt.getAttribute("id"));
-		int x = (int) (Integer.parseInt(elt.getAttribute("x"))*1.2);
-		int y = (int) (Integer.parseInt(elt.getAttribute("y"))*1.2);
+		int x = (int) (Integer.parseInt(elt.getAttribute("x")) * 1.2);
+		int y = (int) (Integer.parseInt(elt.getAttribute("y")) * 1.2);
 		Node n = new Node(id, x, y);
 		NodeList sectionList = elt.getElementsByTagName("LeTronconSortant");
 		for (int i = 0; i < sectionList.getLength(); i++) {
@@ -182,7 +182,7 @@ public class XMLDeserializer {
 		int ret = 0;
 		int multiply = 1;
 		int decimals = 1;
-		for (int i = time.length()-1; i >= 0; --i) {
+		for (int i = time.length() - 1; i >= 0; --i) {
 			if (time.charAt(i) == ':') {
 				multiply *= 60;
 				decimals = 1;

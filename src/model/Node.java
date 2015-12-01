@@ -82,5 +82,4 @@ public class Node {
 		return incoming;
 	}
 
-
 }

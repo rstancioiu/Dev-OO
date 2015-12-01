@@ -22,13 +22,13 @@ public abstract class AbstractCommand implements Command {
 	}
 
 	/**
-	 * Do the command
+	 * Do a command
 	 */
 	@Override
 	public abstract void doCmd();
 
 	/**
-	 * Undo the command
+	 * Undo a command
 	 */
 	@Override
 	public abstract void undoCmd();

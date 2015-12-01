@@ -17,16 +17,15 @@ public class DeliveryState extends DefaultState {
 
 	private String formatHour(int seconds) {
 		DecimalFormat formatter = new DecimalFormat("00");
-		String result = formatter.format(seconds/3600) + ":"
-				+ formatter.format(seconds%3600/60) + ":"
-				+ formatter.format(seconds%60);
+		String result = formatter.format(seconds / 3600) + ":" + formatter.format(seconds % 3600 / 60) + ":"
+				+ formatter.format(seconds % 60);
 		return result;
 	}
 
 	public void generateRoadmap(DeliveryRound deliveryRound) {
 
 		JFileChooser fileChooser = new JFileChooser();
-		fileChooser.setDialogTitle("Specify a file to save");   
+		fileChooser.setDialogTitle("Specify a file to save");
 
 		int userSelection = fileChooser.showSaveDialog(null);
 
@@ -37,18 +36,18 @@ public class DeliveryState extends DefaultState {
 			try {
 				int count = 1;
 				FileWriter roadmap = new FileWriter(fileChooser.getSelectedFile());
-				roadmap.write("ROADMAP \n START: " + formatHour(deliveryRound.getStart())
-						+ " \n END: " + formatHour(deliveryRound.getEnd()) + "\n DURATION: "
-						+ formatHour((int)deliveryRound.getDuration()) + "\n\n");
+				roadmap.write("ROADMAP \n START: " + formatHour(deliveryRound.getStart()) + " \n END: "
+						+ formatHour(deliveryRound.getEnd()) + "\n DURATION: "
+						+ formatHour((int) deliveryRound.getDuration()) + "\n\n");
 				ArrayList<Path> paths = deliveryRound.getPaths();
-				for (Path p : paths){
-					if(p == paths.get(paths.size()-1)) {
+				for (Path p : paths) {
+					if (p == paths.get(paths.size() - 1)) {
 						roadmap.write("Homecoming: ");
 						count++;
 						roadmap.write(" \n Adress: " + Integer.toString(p.getArrival().getAddress()));
-						roadmap.write("\n Arrival Time: " + formatHour((int)p.getArrival().getTime()));
+						roadmap.write("\n Arrival Time: " + formatHour((int) p.getArrival().getTime()));
 						roadmap.write("\n Itinerary :");
-						for (Section s: p.getSections())
+						for (Section s : p.getSections())
 							roadmap.write(Integer.toString(s.getDeparture()) + " - ");
 						roadmap.write(Integer.toString(p.getArrival().getAddress()));
 						break;
@@ -57,11 +56,11 @@ public class DeliveryState extends DefaultState {
 					count++;
 					roadmap.write(" \n Adress: " + Integer.toString(p.getArrival().getAddress()));
 					roadmap.write("\n Client: " + Integer.toString(p.getDeparture().getClient()));
-					roadmap.write("\n Arrival Time: " + formatHour((int)p.getArrival().getTime()));
-					int doorTime = Math.max(p.getArrival().getTime(),p.getArrival().getTimeWindow().getStart());
-					roadmap.write("\n Departure Time " + formatHour((int)(doorTime)+600));
+					roadmap.write("\n Arrival Time: " + formatHour((int) p.getArrival().getTime()));
+					int doorTime = Math.max(p.getArrival().getTime(), p.getArrival().getTimeWindow().getStart());
+					roadmap.write("\n Departure Time " + formatHour((int) (doorTime) + 600));
 					roadmap.write("\n Itinerary :");
-					for (Section s: p.getSections())
+					for (Section s : p.getSections())
 						roadmap.write(Integer.toString(s.getDeparture()) + " - ");
 					roadmap.write(Integer.toString(p.getArrival().getAddress()));
 					roadmap.write("\n\n");
@@ -73,19 +72,19 @@ public class DeliveryState extends DefaultState {
 		}
 	}
 
-	public void clickAddButton(){
+	public void clickAddButton() {
 		Controller.setCurrentState(Controller.additionState);
 	}
 
-	public void clickDeleteButton(){
+	public void clickDeleteButton() {
 		Controller.setCurrentState(Controller.deleteState);
 	}
 
-	public void clickSwapButton(){
+	public void clickSwapButton() {
 		Controller.setCurrentState(Controller.swapState);
 	}
 
-	public void updateVue(Window window){
+	public void updateVue(Window window) {
 		window.hideButtons();
 		window.enableAddButton(true);
 		window.enableDeleteButton(true);

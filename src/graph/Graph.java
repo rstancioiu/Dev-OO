@@ -306,8 +306,12 @@ public class Graph {
 		path = reversePath(path);
 		return new Path(start, end, path, dist[end.getAddress()]);
 	}
-	
-	public Delivery getDelivery(int i){
+
+	/**
+	 * @param i
+	 * @return the delivery with the id i
+	 */
+	public Delivery getDelivery(int i) {
 		return nodes.get(i);
 	}
 }

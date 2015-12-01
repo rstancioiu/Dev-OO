@@ -2,7 +2,6 @@ package controller;
 
 /**
  * Interface implemented by abstract class AbstractCommand
- * @author Heptaswagnome
  *
  */
 public interface Command {

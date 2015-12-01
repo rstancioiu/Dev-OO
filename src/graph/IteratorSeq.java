@@ -8,12 +8,20 @@ public class IteratorSeq implements Iterator<Integer> {
 	private Integer[] candidats;
 	private int nbCandidats;
 
-	public IteratorSeq(Collection<Integer> notSeen, int sommetCrt, Graph g){
+	/**
+	 * Constructor of the Iterator which is used to browse threw an integer
+	 * collection
+	 * 
+	 * @param notSeen
+	 * @param currentNode
+	 * @param g
+	 */
+	public IteratorSeq(Collection<Integer> notSeen, int currentNode, Graph g) {
 		this.candidats = new Integer[notSeen.size()];
 		Iterator<Integer> it = notSeen.iterator();
-		while (it.hasNext()){
+		while (it.hasNext()) {
 			Integer s = it.next();
-			if (g.isEdge(sommetCrt, s))
+			if (g.isEdge(currentNode, s))
 				candidats[nbCandidats++] = s;
 		}
 	}
@@ -30,5 +38,6 @@ public class IteratorSeq implements Iterator<Integer> {
 	}
 
 	@Override
-	public void remove() {}
+	public void remove() {
+	}
 }

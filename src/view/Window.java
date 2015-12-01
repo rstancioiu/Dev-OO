@@ -31,9 +31,13 @@ public class Window extends JFrame {
 	private Controller controller;
 	private JButton loadMap, loadDeliveries, compute, generateRoadmap;
 	private JButton addButton, deleteButton, swapButton, confirmButton, cancelButton, undoButton, redoButton;
-	private DeliveryRound deliveryRound;
 	private JLabel messageBox;
 
+	/**
+	 * Constructor of the window
+	 * 
+	 * @param controller
+	 */
 	public Window(Controller controller) {
 		this.controller = controller;
 		createAndShowGui();
@@ -83,14 +87,15 @@ public class Window extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				ArrayList<Node> nodes = graphicView.getSelectedNodes();
 				ArrayList<Delivery> deliveries = graphicView.getSelectedDeliveries();
-				if(nodes.size()>=1 && deliveries.size()>=1){
-					controller.confirmAdd(deliveries.get(deliveries.size()-1), nodes.get(nodes.size()-1));
+				if (nodes.size() >= 1 && deliveries.size() >= 1) {
+					controller.confirmAdd(deliveries.get(deliveries.size() - 1), nodes.get(nodes.size() - 1));
 				}
-				if(deliveries.size()>=1){
-					controller.confirmDelete(deliveries.get(deliveries.size()-1));
+				if (deliveries.size() >= 1) {
+					controller.confirmDelete(deliveries.get(deliveries.size() - 1));
 				}
-				if(deliveries.size()>=2){
-					controller.confirmSwap(deliveries.get(deliveries.size()-2), deliveries.get(deliveries.size()-1));
+				if (deliveries.size() >= 2) {
+					controller.confirmSwap(deliveries.get(deliveries.size() - 2),
+							deliveries.get(deliveries.size() - 1));
 				}
 				graphicView.clearNodes();
 			}
@@ -105,7 +110,7 @@ public class Window extends JFrame {
 				graphicView.clearNodes();
 			}
 		});
-		
+
 		undoButton = new JButton("Undo");
 		undoButton.addActionListener(new ActionListener() {
 
@@ -114,7 +119,7 @@ public class Window extends JFrame {
 				controller.undo();
 			}
 		});
-		
+
 		redoButton = new JButton("Redo");
 		redoButton.addActionListener(new ActionListener() {
 
@@ -123,9 +128,10 @@ public class Window extends JFrame {
 				controller.redo();
 			}
 		});
-		
+
 		hideButtons();
-		graphicView = new GraphicView(messageBox, addButton, deleteButton, swapButton, confirmButton, cancelButton, undoButton, redoButton);
+		graphicView = new GraphicView(messageBox, addButton, deleteButton, swapButton, confirmButton, cancelButton,
+				undoButton, redoButton);
 		typicalDayView = new TypicalDayView();
 		deliveryRoundView = new DeliveryRoundView();
 		loadMap = new JButton("Load Map");
@@ -156,12 +162,12 @@ public class Window extends JFrame {
 				controller.generateRoadmap();
 			}
 		});
-		
+
 		JScrollPane typicalDayScroll = new JScrollPane(typicalDayView);
 		JScrollPane deliveryRoundScroll = new JScrollPane(deliveryRoundView);
 		deliveryRoundScroll.setBorder(BorderFactory.createTitledBorder("Round"));
 		typicalDayScroll.setBorder(BorderFactory.createTitledBorder("Deliveries"));
-		
+
 		layout.setHorizontalGroup(layout.createSequentialGroup().addComponent(graphicView)
 				.addGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER).addComponent(typicalDayScroll)
 						.addComponent(deliveryRoundScroll).addComponent(compute).addComponent(generateRoadmap)
@@ -188,17 +194,33 @@ public class Window extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * Draw a plan
+	 * 
+	 * @param map
+	 */
 	public void drawMap(CityMap map) {
 		graphicView.paintMap(map);
 		graphicView.update();
 	}
 
+	/**
+	 * Draw the list of deliveries
+	 * 
+	 * @param typicalDay
+	 */
 	public void drawDeliveries(TypicalDay typicalDay) {
 		graphicView.paintDeliveries(typicalDay);
 		typicalDayView.listDeliveries(typicalDay);
 		graphicView.update();
 	}
 
+	/**
+	 * Draw the delivery round
+	 * 
+	 * @param deliveryRound
+	 * @param typicalDay
+	 */
 	public void drawDeliveryRound(DeliveryRound deliveryRound, TypicalDay typicalDay) {
 		graphicView.paintDeliveryRound(deliveryRound);
 		typicalDayView.listDeliveries(typicalDay);
@@ -206,42 +228,90 @@ public class Window extends JFrame {
 		graphicView.update();
 	}
 
+	/**
+	 * enable/disable the loading of a map
+	 * 
+	 * @param state
+	 */
 	public void enableLoadMap(boolean state) {
 		loadMap.setEnabled(state);
 	}
 
+	/**
+	 * enable/disable the loading of deliveries
+	 * 
+	 * @param state
+	 */
 	public void enableLoadDeliveries(boolean state) {
 		loadDeliveries.setEnabled(state);
 	}
 
+	/**
+	 * enable/disable the computing of a delivery round
+	 * 
+	 * @param state
+	 */
 	public void enableCompute(boolean state) {
 		compute.setEnabled(state);
 	}
 
+	/**
+	 * enable/disable the generation of a road map
+	 * 
+	 * @param state
+	 */
 	public void enableGenerateRoadmap(boolean state) {
 		generateRoadmap.setEnabled(state);
 	}
 
+	/**
+	 * enable/disable the addition of a new delivery
+	 * 
+	 * @param state
+	 */
 	public void enableAddButton(boolean state) {
 		addButton.setEnabled(state);
 	}
 
+	/**
+	 * enable/disable the deletion of a delivery
+	 * 
+	 * @param state
+	 */
 	public void enableDeleteButton(boolean state) {
 		deleteButton.setEnabled(state);
 	}
 
+	/**
+	 * enable/disable the swapping of two deliveries
+	 * 
+	 * @param state
+	 */
 	public void enableSwapButton(boolean state) {
 		swapButton.setEnabled(state);
 	}
-	
+
+	/**
+	 * enable/disable the undo of a command
+	 * 
+	 * @param state
+	 */
 	public void enableUndoButton(boolean state) {
 		undoButton.setEnabled(state);
 	}
-	
+
+	/**
+	 * enable/disable the redo of a command
+	 * 
+	 * @param state
+	 */
 	public void enableRedoButton(boolean state) {
 		redoButton.setEnabled(state);
 	}
 
+	/**
+	 * disable all buttons
+	 */
 	public void disableAll() {
 		enableLoadMap(false);
 		enableLoadDeliveries(false);
@@ -254,10 +324,18 @@ public class Window extends JFrame {
 		redoButton.setEnabled(false);
 	}
 
+	/**
+	 * Set a message in the message box
+	 * 
+	 * @param message
+	 */
 	public void setMessage(String message) {
 		messageBox.setText(message);
 	}
 
+	/**
+	 * Show confirm/cancel buttons
+	 */
 	public void showButtons() {
 		confirmButton.setVisible(true);
 		confirmButton.setEnabled(true);
@@ -266,7 +344,10 @@ public class Window extends JFrame {
 		graphicView.clearNodes();
 	}
 
-	public void hideButtons(){
+	/**
+	 * Hide confirm/cancel buttons
+	 */
+	public void hideButtons() {
 		confirmButton.setVisible(false);
 		confirmButton.setEnabled(false);
 		cancelButton.setVisible(false);

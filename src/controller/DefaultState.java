@@ -14,25 +14,17 @@ public abstract class DefaultState implements State {
 
 	private Window window;
 
-	public void loadMap(CityMap map,Window window) {
+	public void loadMap(CityMap map, Window window) {
 	}
 
 	public void loadDeliveries(TypicalDay typicalDay, Window window) {
 	}
 
-	public void computeDeliveries(CityMap map, TypicalDay typicalDay, DeliveryRound deliveryRound, Window window, Graph graph) {
+	public void computeDeliveries(CityMap map, TypicalDay typicalDay, DeliveryRound deliveryRound, Window window,
+			Graph graph) {
 	}
 
 	public void generateRoadmap(DeliveryRound deliveryRound) {
-	}
-
-	public void rightClick(Window window, CommandsList cmdList) {
-	}
-
-	public void save(CityMap map, Window window) {
-	};
-
-	public void open(CityMap map, CommandsList cmdList, Window window) {
 	}
 
 	public void confirm(DeliveryRound deliveryRound, Window window) {
@@ -41,22 +33,25 @@ public abstract class DefaultState implements State {
 	public void cancel() {
 	}
 
-	public void clickAddButton(){
+	public void clickAddButton() {
 	}
 
-	public void clickDeleteButton(){
+	public void clickDeleteButton() {
 	}
 
-	public void clickSwapButton(){
+	public void clickSwapButton() {
 	}
 
-	public void confirmAdd(DeliveryRound deliveryRound, Delivery delivery,Node node, TypicalDay typicalDay, Graph graph,CommandsList cmdList){	
+	public void confirmAdd(DeliveryRound deliveryRound, Delivery delivery, Node node, TypicalDay typicalDay,
+			Graph graph, CommandsList cmdList) {
 	}
-	
-	public void confirmDelete(DeliveryRound deliveryRound, Delivery delivery, TypicalDay typicalDay, Graph graph, CommandsList cmdList){
+
+	public void confirmDelete(DeliveryRound deliveryRound, Delivery delivery, TypicalDay typicalDay, Graph graph,
+			CommandsList cmdList) {
 	}
-	
-	public void confirmSwap(DeliveryRound deliveryRound, Delivery start, Delivery end, Graph graph, CommandsList cmdList){
+
+	public void confirmSwap(DeliveryRound deliveryRound, Delivery start, Delivery end, Graph graph,
+			CommandsList cmdList) {
 	}
 
 }

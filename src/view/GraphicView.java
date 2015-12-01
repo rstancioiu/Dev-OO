@@ -49,32 +49,45 @@ public class GraphicView extends JPanel {
 	private CityMap map = new CityMap();
 	private TypicalDay typicalDay = new TypicalDay();
 	private DeliveryRound deliveryRound = new DeliveryRound();
-	private AffineTransform at;   // the current pan and zoom transform
+	private AffineTransform at; // the current pan and zoom transform
 	private Point2D XFormedPoint; // storage for a transformed mouse point
-	private double translateX, translateY, scale; //already applied
+	private double translateX, translateY, scale; // already applied
 	private double wheelCounter;
 	private JPanel bottomButtons = new JPanel();
 	private ArrayList<Delivery> selectedDeliveries = new ArrayList<Delivery>();
 	private ArrayList<Node> selectedNodes = new ArrayList<Node>();
 
-	public GraphicView(JLabel messageBox, JButton addButton, JButton deleteButton, JButton swapButton, JButton confirmButton, JButton cancelButton, JButton undoButton, JButton redoButton) {
+	/**
+	 * Constructor of the graph panel
+	 * 
+	 * @param messageBox
+	 * @param addButton
+	 * @param deleteButton
+	 * @param swapButton
+	 * @param confirmButton
+	 * @param cancelButton
+	 * @param undoButton
+	 * @param redoButton
+	 */
+	public GraphicView(JLabel messageBox, JButton addButton, JButton deleteButton, JButton swapButton,
+			JButton confirmButton, JButton cancelButton, JButton undoButton, JButton redoButton) {
 		super();
 		this.setLayout(new BorderLayout());
 
 		bottomButtons.setOpaque(false);
 		bottomButtons.setLayout(new BoxLayout(bottomButtons, BoxLayout.X_AXIS));
 		bottomButtons.add(addButton);
-		bottomButtons.add(Box.createRigidArea(new Dimension(5,0)));
+		bottomButtons.add(Box.createRigidArea(new Dimension(5, 0)));
 		bottomButtons.add(deleteButton);
-		bottomButtons.add(Box.createRigidArea(new Dimension(5,0)));
+		bottomButtons.add(Box.createRigidArea(new Dimension(5, 0)));
 		bottomButtons.add(swapButton);
-		bottomButtons.add(Box.createRigidArea(new Dimension(20,0)));
+		bottomButtons.add(Box.createRigidArea(new Dimension(20, 0)));
 		bottomButtons.add(confirmButton);
-		bottomButtons.add(Box.createRigidArea(new Dimension(5,0)));
+		bottomButtons.add(Box.createRigidArea(new Dimension(5, 0)));
 		bottomButtons.add(cancelButton);
 		bottomButtons.add(Box.createHorizontalGlue());
 		bottomButtons.add(undoButton);
-		bottomButtons.add(Box.createRigidArea(new Dimension(5,0)));
+		bottomButtons.add(Box.createRigidArea(new Dimension(5, 0)));
 		bottomButtons.add(redoButton);
 		add(bottomButtons, BorderLayout.PAGE_END);
 
@@ -110,8 +123,7 @@ public class GraphicView extends JPanel {
 
 		public void mouseDragged(MouseEvent e) {
 			try {
-				XFormedPoint = initialTransform.inverseTransform(e.getPoint(),
-						null);
+				XFormedPoint = initialTransform.inverseTransform(e.getPoint(), null);
 			} catch (NoninvertibleTransformException te) {
 				System.out.println(te);
 			}
@@ -124,40 +136,38 @@ public class GraphicView extends JPanel {
 			repaint();
 		}
 
-		public void mouseWheelMoved(MouseWheelEvent e){
+		public void mouseWheelMoved(MouseWheelEvent e) {
 			int notches = e.getWheelRotation();
-			wheelCounter -= ((double)notches)/5;
-			wheelCounter = Math.max(-2,Math.min(wheelCounter, 2));
+			wheelCounter -= ((double) notches) / 5;
+			wheelCounter = Math.max(-2, Math.min(wheelCounter, 2));
 			scale = Math.exp(wheelCounter);
 			repaint();
 		}
 
 		public void mouseClicked(MouseEvent e) {
-			Node selectedNode= new Node(-1,-1,-1);
+			Node selectedNode = new Node(-1, -1, -1);
 			Point pointClicked = e.getPoint();
-			double px=(pointClicked.getX()-getWidth()/2 )/scale - translateX +getWidth()/2;
-			double py=(pointClicked.getY()-getHeight()/2)/scale  - translateY +getHeight()/2;
+			double px = (pointClicked.getX() - getWidth() / 2) / scale - translateX + getWidth() / 2;
+			double py = (pointClicked.getY() - getHeight() / 2) / scale - translateY + getHeight() / 2;
 			for (Node n : map.getNodes()) {
-				double x = n.getX()*getCoeff();
-				double y = n.getY()*getCoeff();
-				if(Math.sqrt((px-x)*(px-x)+(py-y)*(py-y))<20)
-				{
+				double x = n.getX() * getCoeff();
+				double y = n.getY() * getCoeff();
+				if (Math.sqrt((px - x) * (px - x) + (py - y) * (py - y)) < 20) {
 					selectedNode = n;
 				}
 			}
 			System.out.println(selectedNode.getId());
-			if(selectedNode.getId()!=-1)
-			{
-				boolean found=false;
+			if (selectedNode.getId() != -1) {
+				boolean found = false;
 				ArrayList<Path> paths = deliveryRound.getPaths();
-				for(int j=0;j<paths.size();++j){
-					if(selectedNode.getId()== paths.get(j).getDeparture().getAddress()){
+				for (int j = 0; j < paths.size(); ++j) {
+					if (selectedNode.getId() == paths.get(j).getDeparture().getAddress()) {
 						selectedDeliveries.add(paths.get(j).getDeparture());
-						found=true;
+						found = true;
 						System.out.println("Delivery Found");
 					}
 				}
-				if(!found){
+				if (!found) {
 					selectedNodes.add(selectedNode);
 				}
 			} else {
@@ -166,10 +176,17 @@ public class GraphicView extends JPanel {
 			update();
 		}
 
-		public void mouseEntered(MouseEvent e) {}
-		public void mouseExited(MouseEvent e) {}
-		public void mouseMoved(MouseEvent e) {}
-		public void mouseReleased(MouseEvent e) {}
+		public void mouseEntered(MouseEvent e) {
+		}
+
+		public void mouseExited(MouseEvent e) {
+		}
+
+		public void mouseMoved(MouseEvent e) {
+		}
+
+		public void mouseReleased(MouseEvent e) {
+		}
 	}
 
 	/**
@@ -183,20 +200,33 @@ public class GraphicView extends JPanel {
 		return 3;
 	}
 
+	/**
+	 * Draw a node
+	 * 
+	 * @param g
+	 * @param n
+	 * @param c
+	 */
 	private void drawNode(Graphics g, Node n, Color c) {
 		g.setColor(Color.BLACK);
-		g.fillOval((int) (n.getX() * getCoeff()-16), (int) (n.getY() * getCoeff()-16), 32, 32);
+		g.fillOval((int) (n.getX() * getCoeff() - 16), (int) (n.getY() * getCoeff() - 16), 32, 32);
 		g.setColor(c);
-		g.fillOval((int) (n.getX() * getCoeff()-15), (int) (n.getY() * getCoeff()-15), 30, 30);
+		g.fillOval((int) (n.getX() * getCoeff() - 15), (int) (n.getY() * getCoeff() - 15), 30, 30);
 		g.setColor(Color.BLACK);
 		String nodeId = Integer.toString(n.getId());
 		g.setFont(g.getFont().deriveFont(15F));
-		g.drawString(nodeId,(int) (n.getX() * getCoeff()-nodeId.length()*4),
-				(int) (n.getY() * getCoeff()+4));
+		g.drawString(nodeId, (int) (n.getX() * getCoeff() - nodeId.length() * 4), (int) (n.getY() * getCoeff() + 4));
 	}
 
-	private static Shape createArrowHead(Line2D line, double length, double width)
-	{
+	/**
+	 * Crate arrow head
+	 * 
+	 * @param line
+	 * @param length
+	 * @param width
+	 * @return
+	 */
+	private static Shape createArrowHead(Line2D line, double length, double width) {
 		Point2D p0 = line.getP1();
 		Point2D p1 = line.getP2();
 		double x0 = p0.getX();
@@ -205,7 +235,7 @@ public class GraphicView extends JPanel {
 		double y1 = p1.getY();
 		double dx = x1 - x0;
 		double dy = y1 - y0;
-		double invLength = 1.0 / Math.sqrt(dx*dx+dy*dy);
+		double invLength = 1.0 / Math.sqrt(dx * dx + dy * dy);
 		double dirX = dx * invLength;
 		double dirY = dy * invLength;
 		double ax = x1 - length * dirX;
@@ -224,52 +254,71 @@ public class GraphicView extends JPanel {
 		return arrowHead;
 	}
 
-	void drawArrow(Graphics g1, int x2, int y2, int x1, int y1, boolean bold) {
+	/**
+	 * Draw an arrow
+	 * 
+	 * @param g1
+	 * @param x2
+	 * @param y2
+	 * @param x1
+	 * @param y1
+	 * @param bold
+	 */
+	private void drawArrow(Graphics g1, int x2, int y2, int x1, int y1, boolean bold) {
 		Graphics2D g = (Graphics2D) g1.create();
 		QuadCurve2D q = new QuadCurve2D.Float();
 		double dx = x2 - x1;
 		double dy = y2 - y1;
 		double angle = Math.atan2(dy, dx);
-		x2 = (int) (x1 + dx - 16*Math.cos(angle));
-		y2 = (int) (y1 + dy - 16*Math.sin(angle));
+		x2 = (int) (x1 + dx - 16 * Math.cos(angle));
+		y2 = (int) (y1 + dy - 16 * Math.sin(angle));
 		double COEF = 20;
 		Point2D vec = new Point2D.Double(dy, -dx);
-		double norme = Math.sqrt(vec.getX()*vec.getX() + vec.getY()*vec.getY());
-		vec.setLocation(vec.getX()/norme, vec.getY()/norme);
-		Point2D middlePoint = new Point2D.Double(x1 + dx/2, y1 + dy/2);
-		q.setCurve(x1, y1, middlePoint.getX()+vec.getX()*COEF, middlePoint.getY()+vec.getY()*COEF, x2, y2);
+		double norme = Math.sqrt(vec.getX() * vec.getX() + vec.getY() * vec.getY());
+		vec.setLocation(vec.getX() / norme, vec.getY() / norme);
+		Point2D middlePoint = new Point2D.Double(x1 + dx / 2, y1 + dy / 2);
+		q.setCurve(x1, y1, middlePoint.getX() + vec.getX() * COEF, middlePoint.getY() + vec.getY() * COEF, x2, y2);
 		g.draw(q);
 		Point2D recul = q.getP2();
 		Line2D l = new Line2D.Double(q.getCtrlPt(), recul);
 		g.fill(createArrowHead(l, 30, 20));
 	}
 
+	/**
+	 * Draw an edge between two nodes/points
+	 * 
+	 * @param g
+	 * @param n1
+	 * @param n2
+	 * @param c
+	 * @param bold
+	 */
 	private void drawLine(Graphics g, Node n1, Node n2, Color c, boolean bold) {
 		Graphics2D graphics2D = (Graphics2D) g;
 		g.setColor(c);
 		graphics2D.setStroke(new BasicStroke(bold ? 4 : 1));
-		drawArrow(g, (int) (n1.getX() * getCoeff()), (int) (n1.getY() * getCoeff()), (int) (n2.getX() * getCoeff()), (int) (n2.getY() * getCoeff()), bold);
+		drawArrow(g, (int) (n1.getX() * getCoeff()), (int) (n1.getY() * getCoeff()), (int) (n2.getX() * getCoeff()),
+				(int) (n2.getY() * getCoeff()), bold);
 		graphics2D.setStroke(new BasicStroke(1));
 	}
 
 	/**
 	 * Paint the component
 	 */
-	 public void paintComponent(Graphics g) {
+	public void paintComponent(Graphics g) {
 		Graphics2D graphics2D = (Graphics2D) g;
-		graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
+		graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		super.paintComponent(g);
 
 		AffineTransform saveTransform = graphics2D.getTransform();
 		at = new AffineTransform(saveTransform);
-		at.translate(getWidth()/2, getHeight()/2);
+		at.translate(getWidth() / 2, getHeight() / 2);
 		at.scale(scale, scale);
-		at.translate(-getWidth()/2, -getHeight()/2);
+		at.translate(-getWidth() / 2, -getHeight() / 2);
 		at.translate(translateX, translateY);
 		graphics2D.setTransform(at);
 
-		//--- Draw map ---
+		// --- Draw map ---
 		for (Section s : map.getSections()) {
 			Node n1 = map.getNodeById(s.getArrival());
 			Node n2 = map.getNodeById(s.getDeparture());
@@ -281,14 +330,13 @@ public class GraphicView extends JPanel {
 			for (Section s : p.getSections()) {
 				Node n1 = map.getNodeById(s.getArrival());
 				Node n2 = map.getNodeById(s.getDeparture());
-				drawLine(g, n1, n2, new Color(40,110,130), true);
+				drawLine(g, n1, n2, new Color(40, 110, 130), true);
 			}
 		}
 
-
-		//Draw late problems
+		// Draw late problems
 		for (Path p : paths) {
-			if(p.isLate() && p != paths.get(paths.size()-1)) {
+			if (p.isLate() && p != paths.get(paths.size() - 1)) {
 				for (Section s : p.getSections()) {
 					Node n1 = map.getNodeById(s.getArrival());
 					Node n2 = map.getNodeById(s.getDeparture());
@@ -301,21 +349,21 @@ public class GraphicView extends JPanel {
 			drawNode(g, n, Color.WHITE);
 		}
 
-		//--- Draw deliveries ---
+		// --- Draw deliveries ---
 		for (TimeWindow t : typicalDay.getTimeWindows()) {
 			for (Delivery d : t.getDeliveries()) {
 				Node n = map.getNodeById(d.getAddress());
-				drawNode(g, n, new Color(140,210,230));
+				drawNode(g, n, new Color(140, 210, 230));
 			}
 		}
 
 		for (Path p : paths) {
-			if(p.isLate() && p != paths.get(paths.size()-1)) {
+			if (p.isLate() && p != paths.get(paths.size() - 1)) {
 				drawNode(g, map.getNodeById(p.getArrival().getAddress()), Color.RED);
 			}
 		}
 
-		if(typicalDay.getWareHouse() != -1) {
+		if (typicalDay.getWareHouse() != -1) {
 			drawNode(g, map.getNodeById(typicalDay.getWareHouse()), Color.GREEN);
 		}
 
@@ -327,46 +375,55 @@ public class GraphicView extends JPanel {
 		}
 
 		graphics2D.setTransform(saveTransform);
-	 }
+	}
 
-	 /**
-	  * Change the map
-	  * 
-	  * @param map
-	  */
-	 public void paintMap(CityMap map) {
-		 this.map = map;
-	 }
+	/**
+	 * Change the map
+	 * 
+	 * @param map
+	 */
+	public void paintMap(CityMap map) {
+		this.map = map;
+	}
 
-	 /**
-	  * Change the typical day
-	  * 
-	  * @param typicalDay
-	  */
-	 public void paintDeliveries(TypicalDay typicalDay) {
-		 this.typicalDay = typicalDay;
-		 update();
-	 }
+	/**
+	 * Change the typical day
+	 * 
+	 * @param typicalDay
+	 */
+	public void paintDeliveries(TypicalDay typicalDay) {
+		this.typicalDay = typicalDay;
+		update();
+	}
 
-	 /**
-	  * Change the delivery round
-	  * 
-	  * @param deliveryRound
-	  */
-	 public void paintDeliveryRound(DeliveryRound deliveryRound) {
-		 this.deliveryRound = deliveryRound;
-	 }
+	/**
+	 * Change the delivery round
+	 * 
+	 * @param deliveryRound
+	 */
+	public void paintDeliveryRound(DeliveryRound deliveryRound) {
+		this.deliveryRound = deliveryRound;
+	}
 
-	 public void clearNodes(){
-		 selectedNodes.clear();
-		 selectedDeliveries.clear();
-	 }
+	/**
+	 * Clear the view
+	 */
+	public void clearNodes() {
+		selectedNodes.clear();
+		selectedDeliveries.clear();
+	}
 
-	 public ArrayList<Delivery> getSelectedDeliveries() {
-		 return selectedDeliveries;
-	 }
+	/**
+	 * @return the selected deliveries
+	 */
+	public ArrayList<Delivery> getSelectedDeliveries() {
+		return selectedDeliveries;
+	}
 
-	 public ArrayList<Node> getSelectedNodes() {
-		 return selectedNodes;
-	 }
+	/**
+	 * @return the selected nodes
+	 */
+	public ArrayList<Node> getSelectedNodes() {
+		return selectedNodes;
+	}
 }

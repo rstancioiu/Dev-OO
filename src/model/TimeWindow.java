@@ -28,12 +28,17 @@ public class TimeWindow {
 		deliveries.add(d);
 	}
 
-	public void insertDelivery(Delivery before, Delivery d){
+	/**
+	 * Insert a new delivery after another delivery
+	 * 
+	 * @param before
+	 * @param d
+	 */
+	public void insertDelivery(Delivery before, Delivery d) {
 		ArrayList<Delivery> newDeliveries = new ArrayList<Delivery>();
-		for(int i=0;i<deliveries.size();++i)
-		{
+		for (int i = 0; i < deliveries.size(); ++i) {
 			newDeliveries.add(deliveries.get(i));
-			if(deliveries.get(i).getAddress() == before.getAddress()){
+			if (deliveries.get(i).getAddress() == before.getAddress()) {
 				newDeliveries.add(d);
 			}
 		}
@@ -75,23 +80,33 @@ public class TimeWindow {
 		}
 	}
 
-	public int getDeliveryPos(Delivery d){
-		for(int i=0;i<deliveries.size();++i){
-			if(d.equals(deliveries.get(i)))
+	/**
+	 * @param d
+	 * @return return the position of the delivery in the time window
+	 */
+	public int getDeliveryPos(Delivery d) {
+		for (int i = 0; i < deliveries.size(); ++i) {
+			if (d.equals(deliveries.get(i)))
 				return i;
 		}
 		return deliveries.size();
 	}
 
-	public void insertAt(Delivery d, int pos){
+	/**
+	 * Insert a delivery d at a given position pos
+	 * 
+	 * @param d
+	 * @param pos
+	 */
+	public void insertAt(Delivery d, int pos) {
 		ArrayList<Delivery> newDeliveries = new ArrayList<Delivery>();
-		for(int i=0;i<deliveries.size();++i){
-			if(pos==i){
+		for (int i = 0; i < deliveries.size(); ++i) {
+			if (pos == i) {
 				newDeliveries.add(d);
 			}
 			newDeliveries.add(deliveries.get(i));
 		}
-		if(pos==deliveries.size()){
+		if (pos == deliveries.size()) {
 			newDeliveries.add(d);
 		}
 		deliveries = newDeliveries;
@@ -123,5 +138,4 @@ public class TimeWindow {
 	public ArrayList<Delivery> getDeliveries() {
 		return deliveries;
 	}
-
 }

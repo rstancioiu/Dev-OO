@@ -10,11 +10,11 @@ import junit.framework.TestCase;
 import model.Delivery;
 import model.TimeWindow;
 
-public class DeliveryTest extends TestCase  {
+public class DeliveryTest extends TestCase {
 
 	private Delivery delivery;
 
-	public DeliveryTest (String name){
+	public DeliveryTest(String name) {
 		super(name);
 	}
 
@@ -49,7 +49,5 @@ public class DeliveryTest extends TestCase  {
 	public void testGetAddress() {
 		assertEquals("Is that address correct", 3, delivery.getAddress());
 	}
-
-
 
 }

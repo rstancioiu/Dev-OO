@@ -8,7 +8,7 @@ public class CityMap {
 
 	// List of nodes
 	private ArrayList<Node> arrayNodes = new ArrayList<Node>();
-	private HashMap<Integer,Node> nodes = new HashMap<Integer,Node>();
+	private HashMap<Integer, Node> nodes = new HashMap<Integer, Node>();
 
 	// List of time windows
 	private ArrayList<Section> sections = new ArrayList<Section>();
@@ -26,7 +26,7 @@ public class CityMap {
 	 * @param n
 	 */
 	public void addNode(Node n) {
-		nodes.put(n.getId(),n);
+		nodes.put(n.getId(), n);
 		arrayNodes.add(n);
 	}
 

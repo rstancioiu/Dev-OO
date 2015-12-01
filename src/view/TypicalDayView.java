@@ -17,6 +17,9 @@ public class TypicalDayView extends JList {
 
 	private DefaultListModel model;
 
+	/**
+	 * Constructor for the list of deliveries of a typical day
+	 */
 	public TypicalDayView() {
 		super();
 		setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
@@ -26,18 +29,33 @@ public class TypicalDayView extends JList {
 		this.setModel(model);
 	}
 
+	/**
+	 * Add an element to the list of deliveries
+	 * 
+	 * @param label
+	 */
 	private void addElement(String label) {
 		model.addElement(label);
 	}
 
+	/**
+	 * Generate a formated hour from a number of seconds
+	 * 
+	 * @param seconds
+	 * @return a formated hour string
+	 */
 	private String formatHour(int seconds) {
 		DecimalFormat formatter = new DecimalFormat("00");
-		String result = formatter.format(seconds/3600) + ":"
-				+ formatter.format(seconds%3600/60) + ":"
-				+ formatter.format(seconds%60);
+		String result = formatter.format(seconds / 3600) + ":" + formatter.format(seconds % 3600 / 60) + ":"
+				+ formatter.format(seconds % 60);
 		return result;
 	}
 
+	/**
+	 * Update the list of deliveries
+	 * 
+	 * @param typicalDay
+	 */
 	public void listDeliveries(TypicalDay typicalDay) {
 		model.clear();
 		model.addElement("Warehouse : " + typicalDay.getWareHouse());

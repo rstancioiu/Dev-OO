@@ -11,6 +11,6 @@ public class Launcher {
 		CityMap map = new CityMap();
 		TypicalDay typicalDay = new TypicalDay();
 		DeliveryRound deliveryRound = new DeliveryRound();
-		new Controller(map,typicalDay, deliveryRound);
+		new Controller(map, typicalDay, deliveryRound);
 	}
 }

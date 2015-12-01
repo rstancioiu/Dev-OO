@@ -6,6 +6,9 @@ public class CommandsList {
 	private LinkedList<Command> liste;
 	private int indexCrt;
 
+	/**
+	 * Constructor of the list of commands
+	 */
 	public CommandsList() {
 		indexCrt = -1;
 		liste = new LinkedList<Command>();
@@ -68,5 +71,4 @@ public class CommandsList {
 			indexCrt--;
 		}
 	}
-
 }

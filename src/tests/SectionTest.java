@@ -1,4 +1,5 @@
 package tests;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,13 +10,14 @@ import model.Section;
 public class SectionTest extends TestCase {
 	private Section section;
 
-	public SectionTest(String name){
+	public SectionTest(String name) {
 		super(name);
 	}
 
-	public Section getSection(){
+	public Section getSection() {
 		return section;
 	}
+
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
@@ -32,22 +34,27 @@ public class SectionTest extends TestCase {
 	public void testSection() {
 		assertNotNull("Instance is created", section);
 	}
+
 	@Test
 	public void testGetStreet() {
-		assertEquals("Is that street correct","street", section.getStreet());
+		assertEquals("Is that street correct", "street", section.getStreet());
 	}
+
 	@Test
 	public void testGetDeparture() {
 		assertEquals("Is that departure correct", 1, section.getDeparture());
 	}
+
 	@Test
 	public void testGetArrival() {
 		assertEquals("Is that arrival correct", 2, section.getArrival());
 	}
+
 	@Test
 	public void testGetSpeed() {
 		assertEquals("Is that speed correct", 3.0, section.getSpeed());
 	}
+
 	@Test
 	public void testGetLength() {
 		assertEquals("Is that length correct", 4.0, section.getLength());

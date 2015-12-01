@@ -20,7 +20,7 @@ public class TypicalDay {
 	 */
 	public void addTimeWindow(TimeWindow tm) {
 		timeWindows.add(tm);
-		nbDeliveries+=tm.getDeliveries().size();
+		nbDeliveries += tm.getDeliveries().size();
 	}
 
 	/**
@@ -32,7 +32,7 @@ public class TypicalDay {
 	}
 
 	/**
-	 * @return  the list of time windows
+	 * @return the list of time windows
 	 */
 	public ArrayList<TimeWindow> getTimeWindows() {
 		return timeWindows;
@@ -54,6 +54,7 @@ public class TypicalDay {
 
 	/**
 	 * Change wareHouse
+	 * 
 	 * @param wareHouse
 	 */
 	public void setWareHouse(int wareHouse) {

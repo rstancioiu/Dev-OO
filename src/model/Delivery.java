@@ -50,18 +50,34 @@ public class Delivery {
 		return address;
 	}
 
+	/**
+	 * @return time window of the delivery
+	 */
 	public TimeWindow getTimeWindow() {
 		return timeWindow;
 	}
 
+	/**
+	 * Replaces the time window to a new one
+	 * 
+	 * @param timeWindow
+	 */
 	public void setTimeWindow(TimeWindow timeWindow) {
 		this.timeWindow = timeWindow;
 	}
 
+	/**
+	 * @return time
+	 */
 	public int getTime() {
 		return time;
 	}
 
+	/**
+	 * Replaces the time of the delivery
+	 * 
+	 * @param time
+	 */
 	public void setTime(int time) {
 		this.time = time;
 	}

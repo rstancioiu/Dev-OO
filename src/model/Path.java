@@ -28,6 +28,9 @@ public class Path {
 		this.duration = duration;
 	}
 
+	/**
+	 * @return if a path is late
+	 */
 	public boolean isLate() {
 		int time = getArrival().getTime();
 		return (time > getArrival().getTimeWindow().getEnd());

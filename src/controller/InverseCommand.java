@@ -1,6 +1,6 @@
 package controller;
 
-public class InverseCmd implements Command {
+public class InverseCommand implements Command {
 
 	private Command cmd;
 
@@ -10,7 +10,7 @@ public class InverseCmd implements Command {
 	 * 
 	 * @param cmd
 	 */
-	public InverseCmd(Command cmd) {
+	public InverseCommand(Command cmd) {
 		this.cmd = cmd;
 	}
 

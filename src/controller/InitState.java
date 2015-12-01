@@ -12,7 +12,7 @@ import xml.XMLDeserializer;
 import xml.XMLException;
 
 public class InitState extends DefaultState {
-	//Initial State
+	// Initial State
 
 	@Override
 	public void loadMap(CityMap map, Window window) {
@@ -29,10 +29,9 @@ public class InitState extends DefaultState {
 			e.printStackTrace();
 		}
 		window.drawMap(map);
-		System.out.println("Current state: cityMapState");
-	}	
+	}
 
-	public void updateVue(Window window){
+	public void updateVue(Window window) {
 		window.disableAll();
 		window.enableLoadMap(true);
 	}

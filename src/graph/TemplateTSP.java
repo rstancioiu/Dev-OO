@@ -7,58 +7,71 @@ import java.util.Iterator;
 
 public abstract class TemplateTSP implements TSP {
 
-	private Integer[] meilleureSolution;
+	private Integer[] bestSolution;
 	protected Graph g;
-	private double coutMeilleureSolution;
+	private double costBestSolution;
 
 	public void chercheSolution(Graph g) {
 		this.g = g;
-		meilleureSolution = new Integer[g.getNbNodesDelivery()];
+		bestSolution = new Integer[g.getNbNodesDelivery()];
 		Collection<Integer> nonVus = new ArrayList<Integer>(g.getNbNodesDelivery() - 1);
 		for (int i = 1; i < g.getNbNodesDelivery(); i++)
 			nonVus.add(i);
 		Collection<Integer> vus = new ArrayList<Integer>(g.getNbNodesDelivery());
 		vus.add(0);
-		coutMeilleureSolution = 1e12;
-		branchAndBound(0, nonVus, vus, 0);	
+		costBestSolution = 1e12;
+		branchAndBound(0, nonVus, vus, 0);
 	}
 
 	public Integer getSolution(int i) {
 		if (g != null && i >= 0 && i < g.getNbNodesDelivery())
-			return meilleureSolution[i];
+			return bestSolution[i];
 		return -1;
 	}
 
-	public double getCoutSolution() {
+	public double getCostSolution() {
 		if (g != null)
-			return coutMeilleureSolution;
+			return costBestSolution;
 		return -1;
 	}
 
-	protected abstract double bound(Integer sommetCourant, Collection<Integer> nonVus);
+	/**
+	 * Bound methode
+	 * 
+	 * @param currentNode
+	 * @param notSeen
+	 * @return
+	 */
+	protected abstract double bound(Integer currentNode, Collection<Integer> notSeen);
 
-	protected abstract Iterator<Integer> iterator(Integer sommetCrt, Collection<Integer> nonVus, Graph g);
+	protected abstract Iterator<Integer> iterator(Integer currentNode, Collection<Integer> notSeen, Graph g);
 
-	private void branchAndBound(int sommetCrt, Collection<Integer> nonVus, Collection<Integer> vus, double coutVus) {
-		if (nonVus.size() == 0) {
-			if (g.isEdge(sommetCrt, 0)) {
-				if (coutVus + g.getCost(sommetCrt, 0) < coutMeilleureSolution) {
-					vus.toArray(meilleureSolution);
-					for(Integer i : vus)
-						System.out.print(i+" ");
-					System.out.println();
-					coutMeilleureSolution = coutVus + g.getCost(sommetCrt, 0);
+	/**
+	 * Branch and bound method
+	 * 
+	 * @param currentNode
+	 * @param notSeen
+	 * @param seen
+	 * @param costSeen
+	 */
+	private void branchAndBound(int currentNode, Collection<Integer> notSeen, Collection<Integer> seen,
+			double costSeen) {
+		if (notSeen.size() == 0) {
+			if (g.isEdge(currentNode, 0)) {
+				if (costSeen + g.getCost(currentNode, 0) < costBestSolution) {
+					seen.toArray(bestSolution);
+					costBestSolution = costSeen + g.getCost(currentNode, 0);
 				}
 			}
-		} else if (coutVus + bound(sommetCrt, nonVus) < coutMeilleureSolution) {
-			Iterator<Integer> it = iterator(sommetCrt, nonVus, g);
+		} else if (costSeen + bound(currentNode, notSeen) < costBestSolution) {
+			Iterator<Integer> it = iterator(currentNode, notSeen, g);
 			while (it.hasNext()) {
-				Integer prochainSommet = it.next();
-				vus.add(prochainSommet);
-				nonVus.remove(prochainSommet);
-				branchAndBound(prochainSommet, nonVus, vus, coutVus + g.getCost(sommetCrt, prochainSommet));
-				vus.remove(prochainSommet);
-				nonVus.add(prochainSommet);
+				Integer nextNode = it.next();
+				seen.add(nextNode);
+				notSeen.remove(nextNode);
+				branchAndBound(nextNode, notSeen, seen, costSeen + g.getCost(currentNode, nextNode));
+				seen.remove(nextNode);
+				notSeen.add(nextNode);
 			}
 		}
 	}

@@ -27,6 +27,13 @@ public class Controller {
 	protected static final SwapState swapState = new SwapState();
 	protected static final GenerationState generationState = new GenerationState();
 
+	/**
+	 * Constructor of the controller
+	 * 
+	 * @param map
+	 * @param typicalDay
+	 * @param deliveryRound
+	 */
 	public Controller(CityMap map, TypicalDay typicalDay, DeliveryRound deliveryRound) {
 		this.map = map;
 		this.typicalDay = typicalDay;
@@ -57,74 +64,110 @@ public class Controller {
 		return currentState;
 	}
 
-	public void computeDeliveries(){
-		graph = new Graph(map,typicalDay);
+	/**
+	 * Generate the delivery round
+	 */
+	public void computeDeliveries() {
+		graph = new Graph(map, typicalDay);
 		currentState.computeDeliveries(this.map, this.typicalDay, this.deliveryRound, this.window, this.graph);
 	}
 
+	/**
+	 * Load a plan
+	 */
 	public void loadMap() {
 		currentState.loadMap(this.map, this.window);
 	}
 
+	/**
+	 * Load a list of deliveries
+	 */
 	public void loadDeliveries() {
 		currentState.loadDeliveries(this.typicalDay, this.window);
 	}
 
-
+	/**
+	 * Generate the RoadMap file from delivery round
+	 */
 	public void generateRoadmap() {
-		currentState.generateRoadmap(deliveryRound);
+		currentState.generateRoadmap(this.deliveryRound);
 	}
 
-	public void rightClick(Window window, CommandsList cmdList) {
-		currentState.rightClick(window, cmdList);
-	}
-
-	public void save(CityMap map, Window window) {
-	}
-
-	public void open(CityMap map, CommandsList cmdList, Window window) {
-	}
-
+	/**
+	 * Confirm the addition of a node to the delivery round
+	 * 
+	 * @param delivery
+	 * @param node
+	 */
 	public void confirmAdd(Delivery delivery, Node node) {
 		currentState.confirmAdd(deliveryRound, delivery, node, typicalDay, graph, cmdList);
-		window.drawDeliveryRound(deliveryRound,typicalDay);
+		window.drawDeliveryRound(deliveryRound, typicalDay);
 	}
 
-	public void confirmDelete(Delivery delivery){
-		currentState.confirmDelete(deliveryRound, delivery , typicalDay, graph, cmdList);
+	/**
+	 * Confirm the delete a delivery from the delivery round
+	 * 
+	 * @param delivery
+	 */
+	public void confirmDelete(Delivery delivery) {
+		currentState.confirmDelete(deliveryRound, delivery, typicalDay, graph, cmdList);
 		window.drawDeliveryRound(deliveryRound, typicalDay);
 		window.drawDeliveries(typicalDay);
 	}
 
-	public void confirmSwap(Delivery start, Delivery end){
+	/**
+	 * Confirm the swap of two deliveries from the delivery round
+	 * 
+	 * @param start
+	 * @param end
+	 */
+	public void confirmSwap(Delivery start, Delivery end) {
 		System.out.println("Swap started");
 		currentState.confirmSwap(deliveryRound, start, end, graph, cmdList);
-		window.drawDeliveryRound(deliveryRound,typicalDay);
+		window.drawDeliveryRound(deliveryRound, typicalDay);
 	}
 
+	/**
+	 * Cancel a add/delete/swap command
+	 */
 	public void cancel() {
 		currentState.cancel();
 	}
 
-	public void clickAddButton(){
+	/**
+	 * Click on the add button
+	 */
+	public void clickAddButton() {
 		currentState.clickAddButton();
 	}
 
-	public void clickDeleteButton(){
-		currentState.clickDeleteButton();	
+	/**
+	 * Click on the delete button
+	 */
+	public void clickDeleteButton() {
+		currentState.clickDeleteButton();
 	}
 
-	public void clickSwapButton(){
+	/**
+	 * Click on the swap button
+	 */
+	public void clickSwapButton() {
 		currentState.clickSwapButton();
 	}
-	
-	public void undo(){
+
+	/**
+	 * Undo a command
+	 */
+	public void undo() {
 		cmdList.undo();
 		window.drawDeliveryRound(deliveryRound, typicalDay);
 		window.drawDeliveries(typicalDay);
 	}
-	
-	public void redo(){
+
+	/**
+	 * Redo a command
+	 */
+	public void redo() {
 		cmdList.redo();
 		window.drawDeliveryRound(deliveryRound, typicalDay);
 		window.drawDeliveries(typicalDay);
