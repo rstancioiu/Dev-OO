@@ -15,8 +15,8 @@ public class SwapDeliveriesCommand extends AbstractCommand {
 	private Delivery end;
 
 	/**
+	 * Constructor of swap deliveries command
 	 * 
-	 * @param tw
 	 * @param start
 	 * @param end
 	 * @param dr
