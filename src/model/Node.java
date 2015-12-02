@@ -42,27 +42,21 @@ public class Node {
 	}
 
 	/**
-	 * Return id of the node
-	 * 
-	 * @return
+	 * @return id of the node
 	 */
 	public int getId() {
 		return id;
 	}
 
 	/**
-	 * Return x-coordinate of the node
-	 * 
-	 * @return
+	 * @return x-coordinate of the node
 	 */
 	public int getX() {
 		return x;
 	}
 
 	/**
-	 * Return y-coordinate of the node
-	 * 
-	 * @return
+	 * @return y-coordinate of the node
 	 */
 	public int getY() {
 		return y;

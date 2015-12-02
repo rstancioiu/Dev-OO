@@ -16,7 +16,8 @@ public interface State {
 	 * Method called by controller when the button 'Load Map' is clicked. It
 	 * loads a map from a .XML file
 	 * 
-	 * @param mapFile
+	 * @param map
+	 * @param window
 	 */
 	public void loadMap(CityMap map, Window window);
 
@@ -24,7 +25,8 @@ public interface State {
 	 * Method called by controller when the button 'Load Request' is cliked. It
 	 * loads the deliveries request from a .XML file
 	 * 
-	 * @param requestFile
+	 * @param typicalDay
+	 * @param window
 	 */
 	public void loadDeliveries(TypicalDay typicalDay, Window window);
 

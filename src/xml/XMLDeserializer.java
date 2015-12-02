@@ -70,7 +70,7 @@ public class XMLDeserializer {
 	 * 
 	 * @param elt
 	 * @param map
-	 * @return
+	 * @return the created node
 	 * @throws XMLException
 	 */
 	private static Node createNode(Element elt, CityMap map) throws XMLException {
@@ -91,7 +91,7 @@ public class XMLDeserializer {
 	 * 
 	 * @param elt
 	 * @param departure
-	 * @return
+	 * @return the created section
 	 * @throws XMLException
 	 */
 	private static Section createSection(Element elt, int departure) throws XMLException {
@@ -160,7 +160,7 @@ public class XMLDeserializer {
 	 * Creates a delivery that will be added to the a time window
 	 * 
 	 * @param elt
-	 * @return
+	 * @return the created delivery
 	 * @throws XMLException
 	 * @throws NumberFormatException
 	 */
@@ -176,7 +176,7 @@ public class XMLDeserializer {
 	 * number of seconds
 	 * 
 	 * @param time
-	 * @return
+	 * @return the computed time
 	 */
 	private static int computeTime(String time) {
 		int ret = 0;

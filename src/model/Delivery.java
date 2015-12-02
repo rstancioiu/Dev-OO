@@ -24,27 +24,22 @@ public class Delivery {
 	}
 
 	/**
-	 * Return id of the delivery
-	 * 
-	 * @return
+	 * @return id of the delivery
 	 */
 	public int getId() {
 		return id;
 	}
 
 	/**
-	 * Return the client of the delivery
-	 * 
-	 * @return
+	 * @return the client of the delivery
 	 */
 	public int getClient() {
 		return client;
 	}
 
 	/**
-	 * Return the address of the delivery that corresponds to the id of the node
-	 * 
-	 * @return
+	 * @return the address of the delivery that corresponds to the id of the
+	 *         node
 	 */
 	public int getAddress() {
 		return address;
@@ -58,7 +53,7 @@ public class Delivery {
 	}
 
 	/**
-	 * Replaces the time window to a new one
+	 * Replace the timeWindow
 	 * 
 	 * @param timeWindow
 	 */

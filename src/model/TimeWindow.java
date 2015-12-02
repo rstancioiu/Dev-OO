@@ -113,27 +113,21 @@ public class TimeWindow {
 	}
 
 	/**
-	 * Return the starting time of the time window
-	 * 
-	 * @return
+	 * @return the starting time of the time window
 	 */
 	public int getStart() {
 		return start;
 	}
 
 	/**
-	 * Return the ending time of the time window
-	 * 
-	 * @return
+	 * @return the ending time of the time window
 	 */
 	public int getEnd() {
 		return end;
 	}
 
 	/**
-	 * Return the list of deliveries
-	 * 
-	 * @return
+	 * @return the list of deliveries
 	 */
 	public ArrayList<Delivery> getDeliveries() {
 		return deliveries;

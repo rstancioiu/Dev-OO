@@ -181,7 +181,9 @@ public class DeliveryRound {
 	}
 
 	/**
-	 * @param path
+	 * Replace the list of paths
+	 * 
+	 * @param paths
 	 */
 	public void setPaths(ArrayList<Path> paths) {
 		duration = 0;
@@ -203,8 +205,8 @@ public class DeliveryRound {
 	 * 
 	 * @param start
 	 */
-	public void setStart(int s) {
-		this.start = s;
+	public void setStart(int start) {
+		this.start = start;
 	}
 
 	/**
@@ -226,9 +228,7 @@ public class DeliveryRound {
 	}
 
 	/**
-	 * Returns the first unused ID for a delivery
-	 * 
-	 * @return
+	 * @return the first unused ID for a delivery
 	 */
 	public int getNewID() {
 

@@ -8,6 +8,9 @@ public class TypicalDay {
 	private int nbDeliveries;
 	private int wareHouse;
 
+	/**
+	 * Constructor of a typical day
+	 */
 	public TypicalDay() {
 		nbDeliveries = 0;
 		wareHouse = -1;
@@ -60,11 +63,11 @@ public class TypicalDay {
 	public void setWareHouse(int wareHouse) {
 		this.wareHouse = wareHouse;
 	}
-	
+
 	/**
 	 * Clear the typicalDay
 	 */
-	public void clear(){
+	public void clear() {
 		timeWindows.clear();
 	}
 }

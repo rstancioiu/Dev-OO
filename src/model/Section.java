@@ -26,45 +26,35 @@ public class Section {
 	}
 
 	/**
-	 * Returns the id of the arrival node.
-	 * 
-	 * @return
+	 * @return the id of the arrival node.
 	 */
 	public int getArrival() {
 		return arrival;
 	}
 
 	/**
-	 * Returns the street name.
-	 * 
-	 * @return
+	 * @return the street name.
 	 */
 	public String getStreet() {
 		return street;
 	}
 
 	/**
-	 * Returns the id of the departure node.
-	 * 
-	 * @return
+	 * @return the id of the departure node.
 	 */
 	public int getDeparture() {
 		return departure;
 	}
 
 	/**
-	 * Returns the driving speed.
-	 * 
-	 * @return
+	 * @return the driving speed.
 	 */
 	public double getSpeed() {
 		return speed;
 	}
 
 	/**
-	 * Returns the length of the street.
-	 * 
-	 * @return
+	 * @return the length of the street.
 	 */
 	public double getLength() {
 		return length;

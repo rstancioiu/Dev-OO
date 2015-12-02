@@ -34,7 +34,7 @@ public class Graph {
 	/**
 	 * Graph depends on a city map and on a typicalDay
 	 * 
-	 * @param map
+	 * @param cityMap
 	 * @param typicalDay
 	 */
 	public Graph(CityMap cityMap, TypicalDay typicalDay) {
@@ -224,10 +224,8 @@ public class Graph {
 	}
 
 	/**
-	 * Reverses an array of sections, used to compute the reverse path
-	 * 
 	 * @param path
-	 * @return
+	 * @return the reversed array of sections
 	 */
 	private ArrayList<Section> reversePath(ArrayList<Section> path) {
 		ArrayList<Section> ret = new ArrayList<Section>();

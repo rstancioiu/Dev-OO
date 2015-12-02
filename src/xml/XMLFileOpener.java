@@ -28,7 +28,7 @@ public class XMLFileOpener extends FileFilter {
 	 * Opens a file
 	 * 
 	 * @param read
-	 * @return
+	 * @return a file
 	 * @throws XMLException
 	 */
 	public File open(boolean read) throws XMLException {

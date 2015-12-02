@@ -36,11 +36,9 @@ public abstract class TemplateTSP implements TSP {
 	}
 
 	/**
-	 * Bound methode
-	 * 
 	 * @param currentNode
 	 * @param notSeen
-	 * @return
+	 * @return bound
 	 */
 	protected abstract double bound(Integer currentNode, Collection<Integer> notSeen);
 

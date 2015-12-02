@@ -40,19 +40,15 @@ public class CityMap {
 	}
 
 	/**
-	 * Return the list of sections
-	 * 
-	 * @return
+	 * @return list of sections
 	 */
 	public ArrayList<Section> getSections() {
 		return sections;
 	}
 
 	/**
-	 * Return node by id
-	 * 
 	 * @param id
-	 * @return
+	 * @return node by id
 	 */
 	public Node getNodeById(int id) {
 		Node node = nodes.get(id);
@@ -60,18 +56,16 @@ public class CityMap {
 	}
 
 	/**
-	 * Return the list of nodes
-	 * 
-	 * @return
+	 * @return the list of nodes
 	 */
 	public ArrayList<Node> getNodes() {
 		return arrayNodes;
 	}
-	
+
 	/**
 	 * Clear the map
 	 */
-	public void clear(){
+	public void clear() {
 		arrayNodes.clear();
 		nodes.clear();
 		sections.clear();

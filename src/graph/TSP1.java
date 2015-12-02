@@ -20,11 +20,9 @@ public class TSP1 extends TemplateTSP {
 	}
 
 	/**
-	 * Get minimal cost for the next edge used to compute the bound
-	 * 
 	 * @param currentNode
 	 * @param notSeen
-	 * @return
+	 * @return minimal cost for the next edge used to compute the bound
 	 */
 	private double getMinCost(int currentNode, Collection<Integer> notSeen) {
 		double minimum = 1e12;
