@@ -1,6 +1,11 @@
 package tests;
 
+import static org.junit.Assert.*;
+
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,17 +14,14 @@ import graph.Graph;
 import junit.framework.TestCase;
 import model.CityMap;
 import model.Delivery;
-import model.DeliveryRound;
 import model.Node;
 import model.Path;
 import model.Section;
 import model.TimeWindow;
 import model.TypicalDay;
 
-public class DeliveryRoundTest extends TestCase {
-
-	private DeliveryRound deliveryRound;
-	private Path path;
+public class GraphTest extends TestCase{
+	private Graph graph;
 	private Delivery d1;
 	private Delivery d2;
 	private Delivery d3;
@@ -32,17 +34,12 @@ public class DeliveryRoundTest extends TestCase {
 	private TimeWindow tm;
 	private CityMap cm;
 	private TypicalDay td;
-	private Graph g;
-
-	public DeliveryRoundTest(String name) {
+	public GraphTest(String name){
 		super(name);
 	}
-
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		deliveryRound = new DeliveryRound();
-		
 		tm = new TimeWindow(0, 24);
 		Node n0 = new Node (0,0,0);
 		Node n1 = new Node(1,1,1);
@@ -85,72 +82,42 @@ public class DeliveryRoundTest extends TestCase {
 		td = new TypicalDay();
 		td.setWareHouse(0);
 		td.addTimeWindow(tm);
-		
-		g = new Graph(cm,td);
-		
+		graph = new Graph(cm,td);
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		super.tearDown();
-		deliveryRound = null;
+		graph = null;
 	}
 
 	@Test
-	public void testDeliveryRound() {
-		assertNotNull("Instance is created", deliveryRound);
+	public void testGraph() {
+		assertNotNull("Instance is created",graph);
 	}
-
-	@Test
-	public void testGetSetPaths() {
-		ArrayList<Section> sections = new ArrayList<Section>();
-		path = new Path(d1, d2, sections, 0);
-		
-		ArrayList<Path> paths = new ArrayList<Path>();
-		
-		paths.add(path);
-		
-		deliveryRound.setPaths(paths);
-		assertEquals("Is that length correct", 1, deliveryRound.getPaths().size());
-		assertEquals("Is that path correct", path, deliveryRound.getPaths().get(0));
-	}
-
-	public void testGetSetStart() {
-		deliveryRound.setStart(3 * 3600);
-		assertEquals("Is that start hour correct", 3 * 3600, deliveryRound.getStart());
-	}
-
-	public void testGetSetEnd() {
-		deliveryRound.setEnd(20 * 3600);
-		assertEquals("Is that end hour correct", 20 * 3600, deliveryRound.getEnd());
-	}
-
-	public void testGetSetDuration() {
-		deliveryRound.setDuration(5.0);
-		assertEquals("Is that duration correct", 5.0, deliveryRound.getDuration());
-	}
-
-	public void testDeleteDelivery() {
+	public void testComputeShortestPaths() {
 		fail("Not yet implemented");
 	}
-
-	public void testSwapDelivery() {
+	public void testGetPath() {
 		fail("Not yet implemented");
 	}
-
-	public void testGetNewId() {
-		assertEquals("Is this the first unused id",1,deliveryRound.getNewID());
+	public void testGetNbNodesDelivery() {
+		fail("Not yet implemented");
 	}
-	public void testAddDelivery(){ 
-		deliveryRound.setPaths(paths1);
-		//deliveryRound.addDelivery(d1,d3,g,tm);
-		Path path = deliveryRound.getPaths().get(0);
-		Delivery d = path.getDeparture();
-		assertEquals("Is this the added delivery",d1,d);
-		fail("IdK");
+	public void testGetCost() {
+		fail("Not yet implemented");
 	}
-	
-	// public void deleteDelivery(Delivery d, Graph graph)
-	// public void swapDeliveries(Delivery first, Delivery second, Graph graph)
+	public void testGetRank() {
+		fail("Not yet implemented");
+	}
+	public void testIsEdge() {
+		fail("Not yet implemented");
+	}
+	public void testGeneratePath() {
+		fail("Not yet implemented");
+	}
+	public void testGetDelivery() {
+		fail("Not yet implemented");
+	}
 
 }

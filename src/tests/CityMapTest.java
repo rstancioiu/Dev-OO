@@ -14,6 +14,7 @@ import model.Node;
 import model.Section;
 
 public class CityMapTest extends TestCase{
+	
 	private CityMap cityMap;
 	
 	public CityMapTest(String name) {
