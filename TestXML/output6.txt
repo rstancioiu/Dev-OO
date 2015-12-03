@@ -1,5 +1,0 @@
---->TestPlan6
---->TestLivraison6
-OrdreLivraison = [3,7,6];
-OrdreIntersectionTotal = [0,4,3,4,5,7,5,6,9,0]
-TempsTourneeSeconde = 2661.258488192 //861.258488192 + 1800
