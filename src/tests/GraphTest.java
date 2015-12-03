@@ -1,10 +1,6 @@
 package tests;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.PriorityQueue;
 
 import org.junit.After;
 import org.junit.Before;
@@ -99,25 +95,33 @@ public class GraphTest extends TestCase{
 		fail("Not yet implemented");
 	}
 	public void testGetPath() {
-		fail("Not yet implemented");
+		Path path = graph.getPath(1,2);
+		assertEquals("The path is right",path1,path);
 	}
 	public void testGetNbNodesDelivery() {
-		fail("Not yet implemented");
+		int nbNodesDelivery = graph.getNbNodesDelivery();
+		assertEquals("The number of nodes is ok",3,nbNodesDelivery);
 	}
 	public void testGetCost() {
-		fail("Not yet implemented");
+		double d = graph.getCost(1, 2);
+		assertEquals("The cost is ok",1.0,d);
 	}
 	public void testGetRank() {
-		fail("Not yet implemented");
+		int i = graph.getRank(1);
+		assertEquals("The rank of the first delivery is ok",0,i);
 	}
 	public void testIsEdge() {
-		fail("Not yet implemented");
+		boolean e = graph.isEdge(1,2);
+		assertTrue("There is an edge",e);
 	}
 	public void testGeneratePath() {
-		fail("Not yet implemented");
+		//Path path = graph.generatePath(d1, d2);
+		//assertEquals("The path leads from A to B",paths1,path);
+		fail("idK");
 	}
 	public void testGetDelivery() {
-		fail("Not yet implemented");
+		Delivery d = graph.getDelivery(2);
+		assertEquals("The delivery is found",d2,d);
 	}
 
 }

@@ -33,6 +33,7 @@ public class DeliveryRoundTest extends TestCase {
 	private CityMap cm;
 	private TypicalDay td;
 	private Graph g;
+	private Section ss1;
 
 	public DeliveryRoundTest(String name) {
 		super(name);
@@ -48,10 +49,15 @@ public class DeliveryRoundTest extends TestCase {
 		Node n1 = new Node(1,1,1);
 		Node n2 = new Node(2,2,2);
 		Node n3 = new Node(3,3,3);
-		
+
+		Section s0 = new Section("r3",0,1,3.0,3.0);
+		Section ss0 = new Section("rr1",1,0,3.0,3.0);
 		Section s1 = new Section("r1",1,2,3.0,3.0);
 		Section s2 = new Section("r2",1,3,3.0,3.0);
 		Section s3 = new Section("r3",2,3,3.0,3.0);
+		ss1 = new Section("rr1",2,1,3.0,3.0);
+		Section ss2 = new Section("rr2",3,1,3.0,3.0);
+		Section ss3 = new Section("rr3",3,2,3.0,3.0);
 		
 		sections1= new ArrayList<Section>();
 		sections1.add(s1);
@@ -66,7 +72,7 @@ public class DeliveryRoundTest extends TestCase {
 		tm.addDelivery(d2);
 		
 		d3 = new Delivery(3, 3, 3, tm);
-		 
+		
 		path1 = new Path(d1,d2,sections1,3600); 
 		path2 = new Path(d2,d3,sections2,3600);
 		paths1 = new ArrayList<Path>();
@@ -78,9 +84,14 @@ public class DeliveryRoundTest extends TestCase {
 		cm.addNode(n2);
 		cm.addNode(n3);
 		cm.addNode(n0);
+		cm.addSection(s0);
 		cm.addSection(s1);
 		cm.addSection(s2);
 		cm.addSection(s3);
+		cm.addSection(ss0);
+		cm.addSection(ss1);
+		cm.addSection(ss2);
+		cm.addSection(ss3);
 
 		td = new TypicalDay();
 		td.setWareHouse(0);
@@ -131,26 +142,37 @@ public class DeliveryRoundTest extends TestCase {
 	}
 
 	public void testDeleteDelivery() {
-		fail("Not yet implemented");
+		deliveryRound.setPaths(paths1);
+		Delivery d0 = deliveryRound.getPaths().get(0).getArrival();
+		assertEquals("Is the delivery deleted",d1,d0);
+		deliveryRound.deleteDelivery(d1, g);
+		Delivery d00 = deliveryRound.getPaths().get(0).getArrival();
+		assertNotSame("Is the delivery deleted",d1,d00);
+		fail("IdK");
 	}
 
 	public void testSwapDelivery() {
-		fail("Not yet implemented");
+		deliveryRound.setPaths(paths1);
+		deliveryRound.swapDeliveries(d2,d1,g);
+		Path path = deliveryRound.getPaths().get(0);
+		Delivery dd1 = path.getDeparture();
+		Delivery dd2 = path.getArrival();
+		assertEquals("Is the first delivery ok",d2,dd1);
+		assertEquals("Is the second delivery ok",d1,dd2);
+		fail("IdK");
 	}
 
 	public void testGetNewId() {
-		assertEquals("Is this the first unused id",1,deliveryRound.getNewID());
+		assertEquals("Is this the first unused id",2,deliveryRound.getNewID());
 	}
 	public void testAddDelivery(){ 
 		deliveryRound.setPaths(paths1);
 		//deliveryRound.addDelivery(d1,d3,g,tm);
 		Path path = deliveryRound.getPaths().get(0);
 		Delivery d = path.getDeparture();
-		assertEquals("Is this the added delivery",d1,d);
+		assertEquals("Is this the added delivery",d3,d);
 		fail("IdK");
 	}
-	
-	// public void deleteDelivery(Delivery d, Graph graph)
 	// public void swapDeliveries(Delivery first, Delivery second, Graph graph)
 
 }
