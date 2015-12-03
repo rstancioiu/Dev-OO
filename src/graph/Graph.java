@@ -4,11 +4,7 @@ import model.TypicalDay;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.PriorityQueue;
-import java.util.Set;
 
 import model.Delivery;
 import model.CityMap;
@@ -17,6 +13,9 @@ import model.Path;
 import model.Section;
 import model.TimeWindow;
 
+/**
+ * Graph class, mostly contains and manages data about paths, deliveries and nodes
+ */
 public class Graph {
 	private static final double INF = 1e12;
 	private CityMap cityMap;
@@ -32,10 +31,9 @@ public class Graph {
 	private int[] rank;
 
 	/**
-	 * Graph depends on a city map and on a typicalDay
-	 * 
-	 * @param cityMap
-	 * @param typicalDay
+	 * Constructor of graph
+	 * @param cityMap the graph depends of a map
+	 * @param typicalDay the graph depends of a typical day
 	 */
 	public Graph(CityMap cityMap, TypicalDay typicalDay) {
 		this.cityMap = cityMap;
@@ -76,8 +74,7 @@ public class Graph {
 	/**
 	 * Generate ranks for each node used in the partial graph - the ranks are
 	 * used in computing TSP faster
-	 * 
-	 * @param timeWindows
+	 * @param timeWindows list of time windows containing deliveries
 	 */
 	private void generateRanks(ArrayList<TimeWindow> timeWindows) {
 		int prev = 0;
@@ -94,9 +91,8 @@ public class Graph {
 	 * Generate the partial graph that is going to be used to compute the TSP
 	 * solution. The existence of edges between the nodes are stored in the
 	 * matrix edges[][]
-	 * 
-	 * @param length
-	 * @param timeWindows
+	 * @param length number of nodes
+	 * @param timeWindows list of time windows containing deliveries
 	 */
 	private void initPartialGraph(int length, ArrayList<TimeWindow> timeWindows) {
 		for (int i = 0; i < length; ++i) {
@@ -154,8 +150,7 @@ public class Graph {
 	/**
 	 * Implementation of Dijkstra algorithm used to compute the shortest paths
 	 * from a source node to every other node of the graph
-	 * 
-	 * @param source
+	 * @param source id of source node
 	 */
 	private void dijkstra(int source) {
 		for (int i = 0; i < nbNodes; ++i) {
@@ -183,7 +178,7 @@ public class Graph {
 	}
 
 	/**
-	 * Comparator class used in the priority queue of dijkstra
+	 * Comparator class used in the priority queue of Dijkstra
 	 */
 	private class NodesComparator implements Comparator<Integer> {
 
@@ -200,8 +195,7 @@ public class Graph {
 	/**
 	 * Computes all the matrix of paths from a source node to the delivery
 	 * points
-	 * 
-	 * @param source
+	 * @param source id of source node
 	 */
 	private void computePaths(int source) {
 		int pos = hashArray[source];
@@ -224,7 +218,8 @@ public class Graph {
 	}
 
 	/**
-	 * @param path
+	 * Return the reversed path
+	 * @param path path which will be reversed
 	 * @return the reversed array of sections
 	 */
 	private ArrayList<Section> reversePath(ArrayList<Section> path) {
@@ -237,8 +232,9 @@ public class Graph {
 	}
 
 	/**
-	 * @param in
-	 * @param out
+	 * Return a path between two deliveries
+	 * @param in index of first delivery
+	 * @param out index of second delivery
 	 * @return the shortest path from the delivery in to delivery out
 	 */
 	public Path getPath(int in, int out) {
@@ -246,6 +242,7 @@ public class Graph {
 	}
 
 	/**
+	 * Return the number of delivery points
 	 * @return the number of delivery points
 	 */
 	public int getNbNodesDelivery() {
@@ -253,8 +250,9 @@ public class Graph {
 	}
 
 	/**
-	 * @param i
-	 * @param j
+	 * Return the cost of the path between two deliveries
+	 * @param i index of first delivery
+	 * @param j index of second delivery
 	 * @return the cost from the delivery i to the delivery j;
 	 */
 	public double getCost(int i, int j) {
@@ -262,7 +260,8 @@ public class Graph {
 	}
 
 	/**
-	 * @param i
+	 * Return the rank of a delivery
+	 * @param i index of the delivery
 	 * @return the rank for the ith delivery
 	 */
 	public int getRank(int i) {
@@ -271,13 +270,11 @@ public class Graph {
 
 	/**
 	 * Checks if there is an edge between the delivery i and the delivery j;
-	 * 
-	 * @param i
-	 * @param j
+	 * @param i index of first delivery
+	 * @param j index of the second delivery
 	 * @return true if it is the case
 	 */
 	public boolean isEdge(int i, int j) {
-		int s = hashArray[i];
 		if (i < 0 || i >= nbNodesDelivery || j < 0 || j >= nbNodesDelivery)
 			return false;
 		return ((edges[i][j] == 1) ? true : false);
@@ -286,10 +283,9 @@ public class Graph {
 	/**
 	 * Computes the path between a starting delivery point and an ending
 	 * delivery point
-	 * 
-	 * @param start
-	 * @param end
-	 * @return path
+	 * @param start starting delivery
+	 * @param end ending delivery
+	 * @return path path between the two deliveries
 	 */
 	public Path generatePath(Delivery start, Delivery end) {
 		int in = start.getAddress();
@@ -306,7 +302,8 @@ public class Graph {
 	}
 
 	/**
-	 * @param i
+	 * Return a delivery from an id
+	 * @param i id of delivery
 	 * @return the delivery with the id i
 	 */
 	public Delivery getDelivery(int i) {

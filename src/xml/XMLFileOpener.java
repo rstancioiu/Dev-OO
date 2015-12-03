@@ -4,6 +4,11 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.*;
 
+/**
+ * XMLFileOpener class, imported from PlaCo
+ * Uses to open a XML file
+ * Extends FileFilter, follow the Singleton pattern
+ */
 public class XMLFileOpener extends FileFilter {
 
 	private static XMLFileOpener instance = null;
@@ -16,6 +21,8 @@ public class XMLFileOpener extends FileFilter {
 	}
 
 	/**
+	 * Get the current instance of XMLFileOpener if it exists, create one otherwise
+	 * 
 	 * @return the XMLFileOpener instance
 	 */
 	protected static XMLFileOpener getInstance() {
@@ -27,7 +34,7 @@ public class XMLFileOpener extends FileFilter {
 	/**
 	 * Opens a file
 	 * 
-	 * @param read
+	 * @param read boolean indicating if the file has to be read
 	 * @return a file
 	 * @throws XMLException
 	 */
@@ -63,7 +70,9 @@ public class XMLFileOpener extends FileFilter {
 	}
 
 	/**
-	 * @param f
+	 * Get extension of the file
+	 * 
+	 * @param f filename
 	 * @return a string representing the extension of the file
 	 */
 	private String getExtension(File f) {

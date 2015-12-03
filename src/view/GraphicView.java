@@ -20,7 +20,6 @@ import javax.swing.JLabel;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -33,17 +32,17 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.FlatteningPathIterator;
 import java.awt.geom.Line2D;
 import java.awt.geom.NoninvertibleTransformException;
 import java.awt.geom.Path2D;
-import java.awt.geom.PathIterator;
 import java.awt.geom.Point2D;
 import java.awt.geom.QuadCurve2D;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Vector;
 
+/**
+ * GraphicView class, manages the left panel of the application, which includes the map, the graph, the message box...
+ * Extends JPanel
+ */
 public class GraphicView extends JPanel {
 
 	private CityMap map = new CityMap();
@@ -60,14 +59,14 @@ public class GraphicView extends JPanel {
 	/**
 	 * Constructor of the graph panel
 	 * 
-	 * @param messageBox
-	 * @param addButton
-	 * @param deleteButton
-	 * @param swapButton
-	 * @param confirmButton
-	 * @param cancelButton
-	 * @param undoButton
-	 * @param redoButton
+	 * @param messageBox box used to send messages to the user
+	 * @param addButton button to add a delivery
+	 * @param deleteButton button to remove a delivery
+	 * @param swapButton button to swap two deliveries
+	 * @param confirmButton button to confirm a command
+	 * @param cancelButton button to cancel a command
+	 * @param undoButton button to undo a command
+	 * @param redoButton button to redo a command
 	 */
 	public GraphicView(JLabel messageBox, JButton addButton, JButton deleteButton, JButton swapButton,
 			JButton confirmButton, JButton cancelButton, JButton undoButton, JButton redoButton) {
@@ -105,11 +104,18 @@ public class GraphicView extends JPanel {
 		this.addMouseWheelListener(handler);
 	}
 
+	/**
+	 * MovingHandler class, manages the map's movement and zoom, and the clicks on nodes
+	 * Implements several MouseListeners
+	 */
 	class MovingHandler implements MouseListener, MouseMotionListener, MouseWheelListener {
 		double refX;
 		double refY;
 		AffineTransform initialTransform;
 
+		/**
+		 * Event sent when user presses a mouse button
+		 */
 		public void mousePressed(MouseEvent e) {
 			try {
 				XFormedPoint = at.inverseTransform(e.getPoint(), null);
@@ -121,6 +127,9 @@ public class GraphicView extends JPanel {
 			initialTransform = at;
 		}
 
+		/**
+		 * Event sent when the user drags the mouse
+		 */
 		public void mouseDragged(MouseEvent e) {
 			try {
 				XFormedPoint = initialTransform.inverseTransform(e.getPoint(), null);
@@ -136,6 +145,9 @@ public class GraphicView extends JPanel {
 			repaint();
 		}
 
+		/**
+		 * Event sent when the user moves the mouse's wheel
+		 */
 		public void mouseWheelMoved(MouseWheelEvent e) {
 			int notches = e.getWheelRotation();
 			wheelCounter -= ((double) notches) / 5;
@@ -144,6 +156,9 @@ public class GraphicView extends JPanel {
 			repaint();
 		}
 
+		/**
+		 * Event sent when the user clicks a mouse button
+		 */
 		public void mouseClicked(MouseEvent e) {
 			Node selectedNode = new Node(-1, -1, -1);
 			Point pointClicked = e.getPoint();
@@ -176,15 +191,27 @@ public class GraphicView extends JPanel {
 			update();
 		}
 
+		/**
+		 * Unused event
+		 */
 		public void mouseEntered(MouseEvent e) {
 		}
 
+		/**
+		 * Unused event
+		 */
 		public void mouseExited(MouseEvent e) {
 		}
-
+		
+		/**
+		 * Unused event
+		 */
 		public void mouseMoved(MouseEvent e) {
 		}
 
+		/**
+		 * Unused event
+		 */
 		public void mouseReleased(MouseEvent e) {
 		}
 	}
@@ -196,6 +223,10 @@ public class GraphicView extends JPanel {
 		repaint();
 	}
 
+	/**
+	 * Get the size coefficient of the map
+	 * @return the size coefficient of the map
+	 */
 	public double getCoeff() {
 		return 3;
 	}
@@ -203,9 +234,9 @@ public class GraphicView extends JPanel {
 	/**
 	 * Draw a node
 	 * 
-	 * @param g
-	 * @param n
-	 * @param c
+	 * @param g the graphics object used to draw
+	 * @param n the drawn node
+	 * @param c color of the drawn node
 	 */
 	private void drawNode(Graphics g, Node n, Color c) {
 		g.setColor(Color.BLACK);
@@ -221,7 +252,7 @@ public class GraphicView extends JPanel {
 	/**
 	 * Crate arrow head
 	 * 
-	 * @param line
+	 * @param line 
 	 * @param length
 	 * @param width
 	 * @return a shape
@@ -380,7 +411,7 @@ public class GraphicView extends JPanel {
 	/**
 	 * Change the map
 	 * 
-	 * @param map
+	 * @param map map to set
 	 */
 	public void paintMap(CityMap map) {
 		this.map = map;
@@ -389,7 +420,7 @@ public class GraphicView extends JPanel {
 	/**
 	 * Change the typical day
 	 * 
-	 * @param typicalDay
+	 * @param typicalDay typical day to set
 	 */
 	public void paintDeliveries(TypicalDay typicalDay) {
 		this.typicalDay = typicalDay;
@@ -399,7 +430,7 @@ public class GraphicView extends JPanel {
 	/**
 	 * Change the delivery round
 	 * 
-	 * @param deliveryRound
+	 * @param deliveryRound delivery round to set
 	 */
 	public void paintDeliveryRound(DeliveryRound deliveryRound) {
 		this.deliveryRound = deliveryRound;
@@ -414,6 +445,8 @@ public class GraphicView extends JPanel {
 	}
 
 	/**
+	 * Get the selected deliveries
+	 * 
 	 * @return the selected deliveries
 	 */
 	public ArrayList<Delivery> getSelectedDeliveries() {
@@ -421,6 +454,8 @@ public class GraphicView extends JPanel {
 	}
 
 	/**
+	 * Get the selected nodes
+	 * 
 	 * @return the selected nodes
 	 */
 	public ArrayList<Node> getSelectedNodes() {

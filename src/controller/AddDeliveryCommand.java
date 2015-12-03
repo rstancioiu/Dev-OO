@@ -5,25 +5,23 @@ import model.Delivery;
 import model.TimeWindow;
 import model.TypicalDay;
 import model.DeliveryRound;
-import model.Node;
 
 /**
- * Command to add a delivery in a time window and a delivery round extending
- * AbstractCommand abstract class
- *
+ * Command that adds a delivery to a delivery round
+ * Extends AbstractCommand abstract class 
+ * Contains a typical day and a second delivery
  */
 public class AddDeliveryCommand extends AbstractCommand {
 	private TypicalDay typicalDay;
 	private Delivery newDelivery;
 
 	/**
-	 * Constructor of an addition command
-	 * 
-	 * @param delivery
-	 * @param deliveryRound
-	 * @param graph
-	 * @param newDelivery
-	 * @param typicalDay
+	 * Constructor of an addDeliveryCommand
+	 * @param delivery delivery followed by the new delivery
+	 * @param deliveryRound the delivery will be added to this delivery round
+	 * @param graph the delivery will be added to this graph
+	 * @param newDelivery the new delivery
+	 * @param typicalDay the delivery will be added to this typical day
 	 */
 	public AddDeliveryCommand(Delivery delivery, DeliveryRound deliveryRound, Graph graph, Delivery newDelivery,
 			TypicalDay typicalDay) {
@@ -50,8 +48,7 @@ public class AddDeliveryCommand extends AbstractCommand {
 	}
 
 	/**
-	 * Reversed command, remove the delivery from the time window and delivery
-	 * round
+	 * Reversed command, remove the delivery from the time window and delivery round
 	 */
 	@Override
 	public void undoCmd() {

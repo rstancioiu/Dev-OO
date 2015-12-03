@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import graph.Graph;
 
 /**
+ * DeliveryRound class
  * Represents a delivery round, with a list of paths, a start hour, an end hour
  * and a duration
- *
  */
 public class DeliveryRound {
 
@@ -112,8 +112,8 @@ public class DeliveryRound {
 	/**
 	 * Deletes a delivery
 	 * 
-	 * @param delivery
-	 * @param graph
+	 * @param delivery this delivery will be removed
+	 * @param graph the delivery will also be removed from this graph
 	 */
 	public Delivery deleteDelivery(Delivery delivery, Graph graph) {
 		ArrayList<Path> newPaths = new ArrayList<Path>();
@@ -146,8 +146,8 @@ public class DeliveryRound {
 	/**
 	 * Swaps two deliveries
 	 * 
-	 * @param first
-	 * @param second
+	 * @param first delivery to swap
+	 * @param second delivery to swap
 	 */
 	public void swapDeliveries(Delivery first, Delivery second, Graph graph) {
 		int i = 0, j = 0;
@@ -183,7 +183,7 @@ public class DeliveryRound {
 	/**
 	 * Replace the list of paths
 	 * 
-	 * @param paths
+	 * @param paths new list of paths
 	 */
 	public void setPaths(ArrayList<Path> paths) {
 		duration = 0;
@@ -194,7 +194,9 @@ public class DeliveryRound {
 	}
 
 	/**
-	 * @return an array list of paths
+	 * Return the paths
+	 * 
+	 * @return the list of paths
 	 */
 	public ArrayList<Path> getPaths() {
 		return paths;
@@ -203,7 +205,7 @@ public class DeliveryRound {
 	/**
 	 * Replaces the start of a delivery round
 	 * 
-	 * @param start
+	 * @param start new start hour
 	 */
 	public void setStart(int start) {
 		this.start = start;
@@ -212,7 +214,7 @@ public class DeliveryRound {
 	/**
 	 * Replaces the end of a delivery round
 	 * 
-	 * @param end
+	 * @param end new end hour
 	 */
 	public void setEnd(int end) {
 		this.end = end;
@@ -221,13 +223,15 @@ public class DeliveryRound {
 	/**
 	 * Replaces the duration of a delivery round
 	 * 
-	 * @param duration
+	 * @param duration new duration
 	 */
 	public void setDuration(double duration) {
 		this.duration = duration;
 	}
 
 	/**
+	 * Get the first unused ID of delivery
+	 * 
 	 * @return the first unused ID for a delivery
 	 */
 	public int getNewID() {
@@ -245,21 +249,27 @@ public class DeliveryRound {
 	}
 
 	/**
-	 * @return start
+	 * Return start hour
+	 * 
+	 * @return start hour
 	 */
 	public int getStart() {
 		return this.start;
 	}
 
 	/**
-	 * @return end
+	 * Return end hour
+	 * 
+	 * @return end hour
 	 */
 	public int getEnd() {
 		return this.end;
 	}
 
 	/**
-	 * @return duration
+	 * Return duration of the delivery round
+	 * 
+	 * @return duration of the delivery round
 	 */
 	public double getDuration() {
 		return this.duration;

@@ -6,6 +6,10 @@ import model.DeliveryRound;
 import model.TimeWindow;
 import view.Window;
 
+/**
+ * State set when the user clicks on the SwapButton
+ * Extends DefaultState abstract class
+ */
 public class SwapState extends DefaultState {
 
 	// State reached when the user clicks the swap button

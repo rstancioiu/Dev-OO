@@ -11,6 +11,10 @@ import view.Window;
 import xml.XMLDeserializer;
 import xml.XMLException;
 
+/**
+ * Initial state of the controller, basically set when the application is launched
+ * Extends DefaultState abstract class
+ */
 public class InitState extends DefaultState {
 	// Initial State
 

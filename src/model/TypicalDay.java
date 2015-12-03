@@ -2,6 +2,11 @@ package model;
 
 import java.util.ArrayList;
 
+/**
+ * TypicalDay class
+ * A typical day is basically a working day, it contains several time window launched from a warehouse
+ * It also contains the list of planned deliveries
+ */
 public class TypicalDay {
 
 	private ArrayList<TimeWindow> timeWindows = new ArrayList<TimeWindow>();
@@ -19,7 +24,7 @@ public class TypicalDay {
 	/**
 	 * Add a time window to the list of time windows
 	 * 
-	 * @param tm
+	 * @param tm new time window
 	 */
 	public void addTimeWindow(TimeWindow tm) {
 		timeWindows.add(tm);
@@ -27,14 +32,18 @@ public class TypicalDay {
 	}
 
 	/**
-	 * @param id
-	 * @return TimeWindow by id
+	 * Get a time window from an id
+	 * 
+	 * @param id wanted id
+	 * @return time window from an id
 	 */
 	public TimeWindow getById(int id) {
 		return timeWindows.get(id);
 	}
 
 	/**
+	 * Get every time windows
+	 * 
 	 * @return the list of time windows
 	 */
 	public ArrayList<TimeWindow> getTimeWindows() {
@@ -42,6 +51,8 @@ public class TypicalDay {
 	}
 
 	/**
+	 * Get number of deliveries
+	 * 
 	 * @return number of deliveries
 	 */
 	public int getNbDeliveries() {
@@ -49,6 +60,8 @@ public class TypicalDay {
 	}
 
 	/**
+	 * Get warehouse address
+	 * 
 	 * @return wareHouse
 	 */
 	public int getWareHouse() {
@@ -58,7 +71,7 @@ public class TypicalDay {
 	/**
 	 * Change wareHouse
 	 * 
-	 * @param wareHouse
+	 * @param wareHouse new warehouse
 	 */
 	public void setWareHouse(int wareHouse) {
 		this.wareHouse = wareHouse;

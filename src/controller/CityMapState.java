@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 
+
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
@@ -12,6 +13,10 @@ import view.Window;
 import xml.XMLDeserializer;
 import xml.XMLException;
 
+/**
+ * State set when the user has load the map and leaved when the user load the deliveries file
+ * Extends DefaultState abstract class
+ */
 public class CityMapState extends DefaultState {
 
 	@Override

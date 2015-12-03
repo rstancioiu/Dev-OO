@@ -2,9 +2,7 @@ package view;
 
 import java.text.DecimalFormat;
 
-import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
@@ -13,6 +11,10 @@ import model.Delivery;
 import model.TimeWindow;
 import model.TypicalDay;
 
+/**
+ * TypicalDayView class, viewer of a typical day. Manages the upper right bloc off the window
+ * Extends JList
+ */
 public class TypicalDayView extends JList {
 
 	private DefaultListModel model;
@@ -32,7 +34,7 @@ public class TypicalDayView extends JList {
 	/**
 	 * Add an element to the list of deliveries
 	 * 
-	 * @param label
+	 * @param label new element
 	 */
 	private void addElement(String label) {
 		model.addElement(label);
@@ -41,7 +43,7 @@ public class TypicalDayView extends JList {
 	/**
 	 * Generate a formated hour from a number of seconds
 	 * 
-	 * @param seconds
+	 * @param seconds number of seconds
 	 * @return a formated hour string
 	 */
 	private String formatHour(int seconds) {
@@ -54,7 +56,7 @@ public class TypicalDayView extends JList {
 	/**
 	 * Update the list of deliveries
 	 * 
-	 * @param typicalDay
+	 * @param typicalDay this typical day deliveries list will be updated
 	 */
 	public void listDeliveries(TypicalDay typicalDay) {
 		model.clear();

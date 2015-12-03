@@ -1,18 +1,17 @@
 package controller;
 
 /**
- * Interface implemented by abstract class AbstractCommand
- *
+ * Command interface. Defines a pattern followed by every command class
  */
 public interface Command {
 
 	/**
-	 * Execute the 'this' command
+	 * Execute the command
 	 */
 	public void doCmd();
 
 	/**
-	 * Execute the 'this' reverse command
+	 * Execute the reversed command
 	 */
 	public void undoCmd();
 }

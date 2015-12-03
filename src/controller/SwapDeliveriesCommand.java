@@ -6,9 +6,9 @@ import model.TimeWindow;
 import model.DeliveryRound;
 
 /**
- * Command to swap two deliveries in a time window and a delivery round
- * extending AstractCommand abstract class
- *
+ * Command that swaps two deliveries in a delivery round
+ * Extends AbstractCommand abstract class
+ * Contains two deliveries
  */
 public class SwapDeliveriesCommand extends AbstractCommand {
 	private Delivery start;
@@ -16,11 +16,10 @@ public class SwapDeliveriesCommand extends AbstractCommand {
 
 	/**
 	 * Constructor of swap deliveries command
-	 * 
-	 * @param start
-	 * @param end
-	 * @param dr
-	 * @param g
+	 * @param start first delivery to swap
+	 * @param end second delivery to swap
+	 * @param dr delivery round containing the deliveries
+	 * @param g graph containing the deliveries
 	 */
 	public SwapDeliveriesCommand(Delivery start, Delivery end, DeliveryRound dr, Graph g) {
 		super(start, dr, g);
@@ -29,7 +28,7 @@ public class SwapDeliveriesCommand extends AbstractCommand {
 	}
 
 	/**
-	 * Swap the deliveries in the time window and delivery round
+	 * Swap the deliveries in the delivery round
 	 */
 	@Override
 	public void doCmd() {
@@ -56,8 +55,7 @@ public class SwapDeliveriesCommand extends AbstractCommand {
 	}
 
 	/**
-	 * Reversed command, which swap the deliveries in the time window and
-	 * delivery round
+	 * Reversed command, which swaps the deliveries in delivery round
 	 */
 	@Override
 	public void undoCmd() {

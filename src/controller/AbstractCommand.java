@@ -1,13 +1,12 @@
 package controller;
 
 import graph.Graph;
-import model.TimeWindow;
 import model.Delivery;
 import model.DeliveryRound;
 
 /**
- * Abstract class Command, implementing ICommand interface, extended by commands
- *
+ * AbstractCommand abstract class, implementing ICommand interface, extended by commands
+ * Contains a delivery, a delivery round and a graph
  */
 public abstract class AbstractCommand implements Command {
 
@@ -15,21 +14,21 @@ public abstract class AbstractCommand implements Command {
 	protected DeliveryRound deliveryRound;
 	protected Graph graph;
 
+	/**
+	 * Constructor of command
+	 * @param d delivery attached to the command
+	 * @param dr delivery round attached to the command
+	 * @param g graph attached to the command
+	 */
 	public AbstractCommand(Delivery d, DeliveryRound dr, Graph g) {
 		this.delivery = d;
 		this.deliveryRound = dr;
 		this.graph = g;
 	}
 
-	/**
-	 * Do a command
-	 */
 	@Override
 	public abstract void doCmd();
 
-	/**
-	 * Undo a command
-	 */
 	@Override
 	public abstract void undoCmd();
 

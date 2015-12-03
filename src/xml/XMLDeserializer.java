@@ -22,6 +22,10 @@ import model.Section;
 import model.TypicalDay;
 import model.TimeWindow;
 
+/**
+ * XMLDeserializer class, imported from PlaCo
+ * Get every needed informations from XML file
+ */
 public class XMLDeserializer {
 
 	/**
@@ -66,7 +70,7 @@ public class XMLDeserializer {
 	}
 
 	/**
-	 * Creates a node and add the incomming/outgoing sections to the node
+	 * Creates a node and add the incoming/outgoing sections to the node
 	 * 
 	 * @param elt
 	 * @param map

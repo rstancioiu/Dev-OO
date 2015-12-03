@@ -2,6 +2,10 @@ package model;
 
 import java.util.ArrayList;
 
+/**
+ * TimeWindow class
+ * A time window  is determined by a starting hour, an ending hour, and a list of deliveries
+ */
 public class TimeWindow {
 
 	private int start;
@@ -9,10 +13,10 @@ public class TimeWindow {
 	private ArrayList<Delivery> deliveries = new ArrayList<Delivery>();
 
 	/**
-	 * TimeWindow is determined by a starting hour and an ending hour
+	 * Constructor of TimeWindow
 	 * 
-	 * @param start
-	 * @param end
+	 * @param start starting hour
+	 * @param end ending hour
 	 */
 	public TimeWindow(int start, int end) {
 		this.start = start;
@@ -22,7 +26,7 @@ public class TimeWindow {
 	/**
 	 * Add a delivery to the time window
 	 * 
-	 * @param d
+	 * @param d new delivery
 	 */
 	public void addDelivery(Delivery d) {
 		deliveries.add(d);
@@ -31,8 +35,8 @@ public class TimeWindow {
 	/**
 	 * Insert a new delivery after another delivery
 	 * 
-	 * @param before
-	 * @param d
+	 * @param before delivery followed by new delivery
+	 * @param d new delivery
 	 */
 	public void insertDelivery(Delivery before, Delivery d) {
 		ArrayList<Delivery> newDeliveries = new ArrayList<Delivery>();
@@ -48,7 +52,7 @@ public class TimeWindow {
 	/**
 	 * Delete a delivery from the list of deliveries
 	 * 
-	 * @param d
+	 * @param d delivery to delete
 	 */
 	public void deleteDelivery(Delivery d) {
 		for (int i = 0; i < deliveries.size(); ++i) {
@@ -62,8 +66,8 @@ public class TimeWindow {
 	/**
 	 * Swap two deliveries
 	 * 
-	 * @param d1
-	 * @param d2
+	 * @param d1 first delivery
+	 * @param d2 second delivery
 	 */
 	public void swapDeliveries(Delivery d1, Delivery d2) {
 		int i, j;
@@ -81,7 +85,9 @@ public class TimeWindow {
 	}
 
 	/**
-	 * @param d
+	 * Get the position of a delivery in the time window
+	 * 
+	 * @param d delivery
 	 * @return return the position of the delivery in the time window
 	 */
 	public int getDeliveryPos(Delivery d) {
@@ -93,10 +99,10 @@ public class TimeWindow {
 	}
 
 	/**
-	 * Insert a delivery d at a given position pos
+	 * Insert a delivery d at a given position
 	 * 
-	 * @param d
-	 * @param pos
+	 * @param d new delivery
+	 * @param pos id of the new delivery node
 	 */
 	public void insertAt(Delivery d, int pos) {
 		ArrayList<Delivery> newDeliveries = new ArrayList<Delivery>();
@@ -113,6 +119,8 @@ public class TimeWindow {
 	}
 
 	/**
+	 * Get the starting hour of the time window
+	 * 
 	 * @return the starting time of the time window
 	 */
 	public int getStart() {
@@ -120,6 +128,8 @@ public class TimeWindow {
 	}
 
 	/**
+	 * Get the ending hour of a time window
+	 * 
 	 * @return the ending time of the time window
 	 */
 	public int getEnd() {
@@ -127,6 +137,8 @@ public class TimeWindow {
 	}
 
 	/**
+	 * Get the deliveries list of the time window
+	 * 
 	 * @return the list of deliveries
 	 */
 	public ArrayList<Delivery> getDeliveries() {

@@ -8,6 +8,10 @@ import model.TimeWindow;
 import model.TypicalDay;
 import view.Window;
 
+/**
+ * State set when the user clicks on AddDeliveryButton
+ * Extends DefaultState abstract class
+ */
 public class AdditionState extends DefaultState {
 	// State reached when the user clicks the add button
 	// The user selects a node in the first list and a preceding delivery in the
@@ -31,10 +35,12 @@ public class AdditionState extends DefaultState {
 		Controller.setCurrentState(Controller.deliveryState);
 	}
 
+	@Override
 	public void cancel() {
 		Controller.setCurrentState(Controller.deliveryState);
 	}
 
+	@Override
 	public void updateVue(Window window) {
 		window.showButtons();
 		window.setMessage("Please select an empty node and a delivery node to insert after");

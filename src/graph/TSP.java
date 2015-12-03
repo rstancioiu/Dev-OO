@@ -1,11 +1,15 @@
 package graph;
 
+/**
+ * TSP interface. Defines a pattern followed by every TSP class
+ *
+ */
 public interface TSP {
 
 	/**
 	 * Search a solution in the given Graph
 	 * 
-	 * @param g
+	 * @param g given graph
 	 */
 	public void chercheSolution(Graph g);
 

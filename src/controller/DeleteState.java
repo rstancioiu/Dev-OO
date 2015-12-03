@@ -6,6 +6,10 @@ import model.DeliveryRound;
 import model.TypicalDay;
 import view.Window;
 
+/**
+ * State set when the user clicks on DeleteDeliveryButton
+ * Extends DefaultState abstract class
+ */
 public class DeleteState extends DefaultState {
 
 	@Override

@@ -2,6 +2,10 @@ package controller;
 
 import java.util.LinkedList;
 
+/**
+ * CommandList class, contains a list of executed commands
+ * Facilitates undo/redo implementation
+ */
 public class CommandsList {
 	private LinkedList<Command> liste;
 	private int indexCrt;
@@ -15,9 +19,8 @@ public class CommandsList {
 	}
 
 	/**
-	 * Add the command this to the list
-	 * 
-	 * @param c
+	 * Add a command to the list
+	 * @param c command to add
 	 */
 	public void add(Command c) {
 		for (int i = indexCrt + 1; i < liste.size(); i++)
@@ -27,8 +30,8 @@ public class CommandsList {
 	}
 
 	/**
-	 * Temporarily delete the last add command (this Command can return to the
-	 * list with the redo)
+	 * Temporarily delete the last added command
+	 * This command can return to the list
 	 */
 	public void undo() {
 		if (indexCrt >= 0) {
@@ -39,8 +42,8 @@ public class CommandsList {
 	}
 
 	/**
-	 * Permanently delete the last add command from the list(this Command can't
-	 * go back to the list with redo)
+	 * Permanently delete the last added command from the list
+	 * this command can't return to the list
 	 */
 	public void remove() {
 		if (indexCrt >= 0) {
@@ -52,7 +55,7 @@ public class CommandsList {
 	}
 
 	/**
-	 * Add back to the list the last delete command with undo
+	 * Add back to the list the last undone command
 	 */
 	public void redo() {
 		if (indexCrt < liste.size() - 1) {
@@ -63,7 +66,7 @@ public class CommandsList {
 	}
 
 	/**
-	 * Permanently delete all the commands from the list
+	 * Reset the list, remove every commands
 	 */
 	public void reset() {
 		while (indexCrt >= 0) {

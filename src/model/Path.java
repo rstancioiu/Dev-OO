@@ -3,8 +3,8 @@ package model;
 import java.util.ArrayList;
 
 /**
- * Represents a path between two deliveries points (departure & arrival) A path
- * is a list of sections
+ * Path class
+ * Represents a path between two deliveries points (departure & arrival). A path is a list of sections
  */
 public class Path {
 
@@ -16,10 +16,10 @@ public class Path {
 	/**
 	 * Path constructor
 	 * 
-	 * @param arrival
-	 * @param departure
-	 * @param sections
-	 * @param duration
+	 * @param arrival second delivery linked by the path
+	 * @param departure first delivery linked by the path
+	 * @param sections ordinated list of sections constituting the path
+	 * @param duration time between departure and arrival
 	 */
 	public Path(Delivery departure, Delivery arrival, ArrayList<Section> sections, double duration) {
 		this.sections = sections;
@@ -29,7 +29,9 @@ public class Path {
 	}
 
 	/**
-	 * @return if a path is late
+	 * Return a boolean indicating if the delivery will be delayed
+	 * 
+	 * @return boolean indicating if the delivery will be delayed
 	 */
 	public boolean isLate() {
 		int time = getArrival().getTime();
@@ -37,6 +39,8 @@ public class Path {
 	}
 
 	/**
+	 * Return the list of sections constituting the path
+	 * 
 	 * @return sections list
 	 */
 	public ArrayList<Section> getSections() {
@@ -44,6 +48,8 @@ public class Path {
 	}
 
 	/**
+	 * Return the departure of the path
+	 * 
 	 * @return departure
 	 */
 	public Delivery getDeparture() {
@@ -51,6 +57,8 @@ public class Path {
 	}
 
 	/**
+	 * Return arrival of the path
+	 * 
 	 * @return arrival
 	 */
 	public Delivery getArrival() {
@@ -60,7 +68,7 @@ public class Path {
 	/**
 	 * Change sections
 	 * 
-	 * @param sections
+	 * @param sections new list of sections
 	 */
 	public void SetSections(ArrayList<Section> sections) {
 		this.sections = sections;
@@ -69,7 +77,7 @@ public class Path {
 	/**
 	 * Change arrival
 	 * 
-	 * @param arrival
+	 * @param arrival arrival to set
 	 */
 	public void setArrival(Delivery arrival) {
 		this.arrival = arrival;
@@ -78,14 +86,16 @@ public class Path {
 	/**
 	 * Change departure
 	 * 
-	 * @param departure
+	 * @param departure departure to set
 	 */
 	public void setDeparture(Delivery departure) {
 		this.departure = departure;
 	}
 
 	/**
-	 * @return duration
+	 * Set a new duration
+	 * 
+	 * @return duration duration to set
 	 */
 	public double getDuration() {
 		return duration;

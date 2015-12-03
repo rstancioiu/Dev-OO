@@ -2,7 +2,6 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -19,6 +18,10 @@ import model.DeliveryRound;
 import model.Path;
 import model.TypicalDay;
 
+/**
+ * State set when the user loads a deliveries file, allow him to compute deliveries
+ * Extends DefaultState abstract class
+ */
 public class RequestState extends DefaultState {
 
 	@Override

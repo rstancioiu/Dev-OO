@@ -2,9 +2,12 @@ package graph;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
 
+/**
+ * TemplateTSP abstract class, implements the TSP interface
+ * Extended by TSP classes
+ */
 public abstract class TemplateTSP implements TSP {
 
 	private Integer[] bestSolution;

@@ -1,26 +1,23 @@
 package view;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 
-import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
 import model.Delivery;
 import model.DeliveryRound;
-import model.Node;
 import model.Path;
-import model.Section;
 import model.TimeWindow;
 import model.TypicalDay;
 
+/**
+ * DeliveryRoundView class, viewer of a delivery round. Manages the middle right bloc of the window
+ * Extends JList
+ */
 public class DeliveryRoundView extends JList {
 
 	private DefaultListModel model;
@@ -40,7 +37,7 @@ public class DeliveryRoundView extends JList {
 	/**
 	 * Add an element to the list of delivery round
 	 * 
-	 * @param label
+	 * @param label new element
 	 */
 	private void addElement(String label) {
 		model.addElement(label);
@@ -49,7 +46,7 @@ public class DeliveryRoundView extends JList {
 	/**
 	 * Generate a formated hour from a number of seconds
 	 * 
-	 * @param seconds
+	 * @param seconds a number of seconds
 	 * @return formated hour string
 	 */
 	private String formatHour(int seconds) {
@@ -60,9 +57,11 @@ public class DeliveryRoundView extends JList {
 	}
 
 	/**
-	 * @param d
-	 * @param typicalDay
-	 * @return a TimeWindow by a delivery d
+	 * Get a time window from a delivery
+	 * 
+	 * @param d delivery 
+	 * @param typicalDay typical day containing the delivery
+	 * @return time window containing the delivery
 	 */
 	public TimeWindow getWindowByDelivery(Delivery d, TypicalDay typicalDay) {
 		for (TimeWindow t : typicalDay.getTimeWindows()) {
@@ -78,8 +77,8 @@ public class DeliveryRoundView extends JList {
 	/**
 	 * Update the list of deliveries of a delivery round
 	 * 
-	 * @param deliveryRound
-	 * @param typicalDay
+	 * @param deliveryRound delivery round which will be updated
+	 * @param typicalDay typical day containing the delivery round
 	 */
 	public void listDeliveryRound(DeliveryRound deliveryRound, TypicalDay typicalDay) {
 		model.clear();

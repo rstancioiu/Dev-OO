@@ -1,5 +1,7 @@
 package tests;
 
+import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 
 import org.junit.After;
@@ -8,6 +10,7 @@ import org.junit.Test;
 
 import junit.framework.TestCase;
 import model.Delivery;
+import model.DeliveryRound;
 import model.TimeWindow;
 
 public class TimeWindowTest extends TestCase {

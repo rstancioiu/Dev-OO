@@ -8,6 +8,11 @@ import model.Delivery;
 import model.TypicalDay;
 import view.Window;
 
+/**
+ * Controller class, contains methods to manage data
+ * Contains a map of the city, a typical day, a graph, a command list, the current state, the window
+ * And an instance of each possible state
+ */
 public class Controller {
 	private CityMap map;
 	private TypicalDay typicalDay;
@@ -28,10 +33,9 @@ public class Controller {
 	
 	/**
 	 * Constructor of the controller
-	 * 
-	 * @param map
-	 * @param typicalDay
-	 * @param deliveryRound
+	 * @param map map of the city
+	 * @param typicalDay set of delivery rounds
+	 * @param deliveryRound delivery round
 	 */
 	public Controller(CityMap map, TypicalDay typicalDay, DeliveryRound deliveryRound) {
 		this.map = map;
@@ -43,10 +47,8 @@ public class Controller {
 	}
 
 	/**
-	 * Change the controller current state, by receiving the new state as
-	 * parameter
-	 *
-	 * @param state
+	 * Change the controller current state
+	 * @param state next state to set
 	 */
 	protected static void setCurrentState(State state) {
 		currentState = state;
@@ -56,8 +58,7 @@ public class Controller {
 
 	/**
 	 * Returns the controller's current state
-	 * 
-	 * @return current state
+	 * @return currentState current state
 	 */
 	public State getCurrentState() {
 		return currentState;
@@ -94,9 +95,8 @@ public class Controller {
 
 	/**
 	 * Confirm the addition of a node to the delivery round
-	 * 
-	 * @param delivery
-	 * @param node
+	 * @param delivery delivery to add
+	 * @param node node where to add the delivery
 	 */
 	public void confirmAdd(Delivery delivery, Node node) {
 		currentState.confirmAdd(deliveryRound, delivery, node, typicalDay, graph, cmdList);
@@ -104,9 +104,8 @@ public class Controller {
 	}
 
 	/**
-	 * Confirm the delete a delivery from the delivery round
-	 * 
-	 * @param delivery
+	 * Confirm the removal of a delivery from the delivery round
+	 * @param delivery delivery to remove
 	 */
 	public void confirmDelete(Delivery delivery) {
 		currentState.confirmDelete(deliveryRound, delivery, typicalDay, graph, cmdList);
@@ -116,9 +115,8 @@ public class Controller {
 
 	/**
 	 * Confirm the swap of two deliveries from the delivery round
-	 * 
-	 * @param start
-	 * @param end
+	 * @param start first delivery to swap
+	 * @param end second delivery to swap
 	 */
 	public void confirmSwap(Delivery start, Delivery end) {
 		System.out.println("Swap started");

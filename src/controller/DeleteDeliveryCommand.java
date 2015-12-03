@@ -5,24 +5,23 @@ import model.TimeWindow;
 import model.TypicalDay;
 import model.Delivery;
 import model.DeliveryRound;
-import model.Node;
 
 /**
- * Deletes a delivery from a time window and a delivery round
+ * Command that deletes a delivery from a delivery round
+ * Extends AbstractCommand abstract class
+ * Contains a typical day and a second delivery
  */
 public class DeleteDeliveryCommand extends AbstractCommand {
 	private TypicalDay typicalDay;
 	private Delivery deliveryPrev;
-	private Node node;
 
 	/**
-	 * Constructor of a delete command
-	 * 
-	 * @param d
-	 * @param dr
-	 * @param g
-	 * @param typicalDay
-	 * @param deliveryPrev
+	 * Constructor of a DeleteDeliveryCommand
+	 * @param d delivery to delete
+	 * @param dr the delivery will be removed from this delivery round
+	 * @param g the delivery will be removed from this graph
+	 * @param typicalDay the delivery will be removed from this typical day
+	 * @param deliveryPrev the delivery to delete follows this delivery
 	 */
 	public DeleteDeliveryCommand(Delivery d, DeliveryRound dr, Graph g, TypicalDay typicalDay, Delivery deliveryPrev) {
 		super(d, dr, g);
@@ -31,17 +30,16 @@ public class DeleteDeliveryCommand extends AbstractCommand {
 	}
 
 	/**
-	 * Remove the delivery from the time window and delivery round
+	 * Remove the delivery from the delivery round
 	 */
 	@Override
 	public void doCmd() {
-		node = new Node(delivery.getAddress(), 0, 0);
 		delivery.getTimeWindow().deleteDelivery(delivery);
 		deliveryPrev = deliveryRound.deleteDelivery(delivery, graph);
 	}
 
 	/**
-	 * Reversed command, add the delivery to the time window and delivery round
+	 * Reversed command, add the delivery to the delivery round
 	 */
 	@Override
 	public void undoCmd() {

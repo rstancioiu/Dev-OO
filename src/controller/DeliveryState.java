@@ -21,6 +21,10 @@ import model.Path;
 import model.Section;
 import model.TypicalDay;
 
+/**
+ * Main state of the controller, basically set after executing or canceling a command
+ * Extends DefaultState abstract class
+ */
 public class DeliveryState extends DefaultState {
 
 	@Override
@@ -74,18 +78,30 @@ public class DeliveryState extends DefaultState {
 		}
 	}
 
+	/**
+	 * Set the controller state to AdditionState after a click on AddButton
+	 */
 	public void clickAddButton() {
 		Controller.setCurrentState(Controller.additionState);
 	}
 
+	/**
+	 * Set controller state to DeleteState after a click on DeleteButton
+	 */
 	public void clickDeleteButton() {
 		Controller.setCurrentState(Controller.deleteState);
 	}
 
+	/**
+	 * Set controller state to SwapState after a click on SwapButton
+	 */
 	public void clickSwapButton() {
 		Controller.setCurrentState(Controller.swapState);
 	}
 
+	/**
+	 * Set controller state to CityMapState after a click on LoadMapButton
+	 */
 	public void loadMap(CityMap map, Window window) {
 		map.clear();
 		try {
@@ -133,6 +149,11 @@ public class DeliveryState extends DefaultState {
 		window.enableRedoButton(true);
 	}
 
+	/**
+	 * Format a number of seconds into a representation hh:mm:ss
+	 * @param seconds number of seconds
+	 * @return formatted string
+	 */
 	private String formatHour(int seconds) {
 		DecimalFormat formatter = new DecimalFormat("00");
 		String result = formatter.format(seconds / 3600) + ":" + formatter.format(seconds % 3600 / 60) + ":"

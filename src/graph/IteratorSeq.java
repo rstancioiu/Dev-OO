@@ -3,15 +3,18 @@ package graph;
 import java.util.Collection;
 import java.util.Iterator;
 
+/**
+ * IteratorSeq class, used to browse threw an integer collection
+ * Contains an array of integer and its length as an integer
+ * Implements Iterator<Integer>
+ */
 public class IteratorSeq implements Iterator<Integer> {
 
 	private Integer[] candidats;
 	private int nbCandidats;
 
 	/**
-	 * Constructor of the Iterator which is used to browse threw an integer
-	 * collection
-	 * 
+	 * Constructor of the class
 	 * @param notSeen
 	 * @param currentNode
 	 * @param g

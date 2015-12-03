@@ -18,11 +18,15 @@ import model.CityMap;
 import model.Delivery;
 import model.DeliveryRound;
 import model.Node;
-import model.TimeWindow;
 import model.TypicalDay;
 
 import controller.Controller;
 
+/**
+ * Window class, directly manages the main window and its lower right bloc.
+ * Includes a DeliveryRoundView, a GraphicView and a TypicalDayView
+ * Extends JFrame
+ */
 public class Window extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private GraphicView graphicView;
@@ -36,13 +40,16 @@ public class Window extends JFrame {
 	/**
 	 * Constructor of the window
 	 * 
-	 * @param controller
+	 * @param controller application's controller
 	 */
 	public Window(Controller controller) {
 		this.controller = controller;
 		createAndShowGui();
 	}
 
+	/**
+	 * Create and show the GUI
+	 */
 	private void createAndShowGui() {
 		setSize(1000, 600);
 		setMinimumSize(new Dimension(900, 500));
@@ -197,7 +204,7 @@ public class Window extends JFrame {
 	/**
 	 * Draw a plan
 	 * 
-	 * @param map
+	 * @param map map of the city
 	 */
 	public void drawMap(CityMap map) {
 		deliveryRoundView.clear();
@@ -210,7 +217,7 @@ public class Window extends JFrame {
 	/**
 	 * Draw the list of deliveries
 	 * 
-	 * @param typicalDay
+	 * @param typicalDay typical day containing the list of deliveries
 	 */
 	public void drawDeliveries(TypicalDay typicalDay) {
 		graphicView.paintDeliveries(typicalDay);
@@ -221,8 +228,8 @@ public class Window extends JFrame {
 	/**
 	 * Draw the delivery round
 	 * 
-	 * @param deliveryRound
-	 * @param typicalDay
+	 * @param deliveryRound drawn delivery round
+	 * @param typicalDay typical day containing the delivery round
 	 */
 	public void drawDeliveryRound(DeliveryRound deliveryRound, TypicalDay typicalDay) {
 		graphicView.paintDeliveryRound(deliveryRound);
@@ -232,88 +239,88 @@ public class Window extends JFrame {
 	}
 
 	/**
-	 * enable/disable the loading of a map
+	 * Enable/disable the loading of a map
 	 * 
-	 * @param state
+	 * @param state set this state to the LoadMap button
 	 */
 	public void enableLoadMap(boolean state) {
 		loadMap.setEnabled(state);
 	}
 
 	/**
-	 * enable/disable the loading of deliveries
+	 * Enable/disable the loading of deliveries
 	 * 
-	 * @param state
+	 * @param state set this state to the LoadDeliveries button
 	 */
 	public void enableLoadDeliveries(boolean state) {
 		loadDeliveries.setEnabled(state);
 	}
 
 	/**
-	 * enable/disable the computing of a delivery round
+	 * Enable/disable the computing of a delivery round
 	 * 
-	 * @param state
+	 * @param state set this state to the Compute button
 	 */
 	public void enableCompute(boolean state) {
 		compute.setEnabled(state);
 	}
 
 	/**
-	 * enable/disable the generation of a road map
+	 * Enable/disable the generation of a road map
 	 * 
-	 * @param state
+	 * @param state set this state to the GenerateRoadMap button
 	 */
 	public void enableGenerateRoadmap(boolean state) {
 		generateRoadmap.setEnabled(state);
 	}
 
 	/**
-	 * enable/disable the addition of a new delivery
+	 * Enable/disable the addition of a new delivery
 	 * 
-	 * @param state
+	 * @param state set this state to the AddButton button
 	 */
 	public void enableAddButton(boolean state) {
 		addButton.setEnabled(state);
 	}
 
 	/**
-	 * enable/disable the deletion of a delivery
+	 * Enable/disable the deletion of a delivery
 	 * 
-	 * @param state
+	 * @param state set this state to the DeleteButton button
 	 */
 	public void enableDeleteButton(boolean state) {
 		deleteButton.setEnabled(state);
 	}
 
 	/**
-	 * enable/disable the swapping of two deliveries
+	 * Enable/disable the swapping of two deliveries
 	 * 
-	 * @param state
+	 * @param state set this state to the SwapButton button
 	 */
 	public void enableSwapButton(boolean state) {
 		swapButton.setEnabled(state);
 	}
 
 	/**
-	 * enable/disable the undo of a command
+	 * Enable/disable the undo of a command
 	 * 
-	 * @param state
+	 * @param state set this state to the UndoButton button
 	 */
 	public void enableUndoButton(boolean state) {
 		undoButton.setEnabled(state);
 	}
 
 	/**
-	 * enable/disable the redo of a command
+	 * Enable/disable the redo of a command
 	 * 
-	 * @param state
+	 * @param state set this state to the RedoButton button
 	 */
 	public void enableRedoButton(boolean state) {
 		redoButton.setEnabled(state);
 	}
 
 	/**
-	 * disable all buttons
+	 * Disable all buttons
 	 */
 	public void disableAll() {
 		enableCompute(false);
@@ -328,7 +335,7 @@ public class Window extends JFrame {
 	/**
 	 * Set a message in the message box
 	 * 
-	 * @param message
+	 * @param message set this message to the message box
 	 */
 	public void setMessage(String message) {
 		messageBox.setText(message);

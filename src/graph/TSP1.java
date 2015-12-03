@@ -3,6 +3,10 @@ package graph;
 import java.util.Collection;
 import java.util.Iterator;
 
+/**
+ * TSP1 class
+ * Extends TemplateSP abstract class
+ */
 public class TSP1 extends TemplateTSP {
 
 	@Override

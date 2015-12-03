@@ -1,7 +1,5 @@
 package controller;
 
-import java.io.File;
-
 import graph.Graph;
 import model.CityMap;
 import model.Delivery;
@@ -10,9 +8,10 @@ import model.Node;
 import model.TypicalDay;
 import view.Window;
 
+/**
+ * DefaultState abstract class, implementing State interface, extended by states
+ */
 public abstract class DefaultState implements State {
-
-	private Window window;
 
 	@Override
 	public void loadMap(CityMap map, Window window) {

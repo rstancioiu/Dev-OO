@@ -1,5 +1,9 @@
 package model;
 
+/**
+ * Delivery class, a delivery is represented by an id, a client, the address of a node.
+ * It's included in a time window and has a delivery hour (time)
+ */
 public class Delivery {
 
 	private int id;
@@ -9,11 +13,11 @@ public class Delivery {
 	private int time;
 
 	/**
-	 * A delivery is contained in a TimeWindow
+	 * Constructor of delivery
 	 * 
-	 * @param id
-	 * @param client
-	 * @param address
+	 * @param id id of delivery
+	 * @param client client waiting for delivery
+	 * @param address node where the client waits
 	 */
 	public Delivery(int id, int client, int address, TimeWindow timeWindow) {
 		this.id = id;
@@ -24,6 +28,8 @@ public class Delivery {
 	}
 
 	/**
+	 * Return the id of a delivery
+	 * 
 	 * @return id of the delivery
 	 */
 	public int getId() {
@@ -31,6 +37,8 @@ public class Delivery {
 	}
 
 	/**
+	 * Return the client of a delivery
+	 * 
 	 * @return the client of the delivery
 	 */
 	public int getClient() {
@@ -38,14 +46,17 @@ public class Delivery {
 	}
 
 	/**
-	 * @return the address of the delivery that corresponds to the id of the
-	 *         node
+	 * Return the address of a delivery
+	 * 
+	 * @return the address, which is the id of a node
 	 */
 	public int getAddress() {
 		return address;
 	}
 
 	/**
+	 * Return the time window containing the delivery
+	 * 
 	 * @return time window of the delivery
 	 */
 	public TimeWindow getTimeWindow() {
@@ -55,13 +66,15 @@ public class Delivery {
 	/**
 	 * Replace the timeWindow
 	 * 
-	 * @param timeWindow
+	 * @param timeWindow new time window
 	 */
 	public void setTimeWindow(TimeWindow timeWindow) {
 		this.timeWindow = timeWindow;
 	}
 
 	/**
+	 * Return the delivery hour
+	 * 
 	 * @return time
 	 */
 	public int getTime() {
@@ -69,9 +82,9 @@ public class Delivery {
 	}
 
 	/**
-	 * Replaces the time of the delivery
+	 * Replace the delivery hour
 	 * 
-	 * @param time
+	 * @param time new hour of the delivery
 	 */
 	public void setTime(int time) {
 		this.time = time;
