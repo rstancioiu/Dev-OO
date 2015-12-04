@@ -1,4 +1,4 @@
-# Application Dev-OO
+# Application Dev-OO  
 
 This repository contains an application inspired from a real project, made by Grand Lyon between 2012 and 2015, which aims to optimise the public transport.   
 Given two xmls files corresponding to the plan of the city and the deliveries that have to be made, the application computes the shortest path that the delivery person has to do in order to complete all his tasks.   
@@ -9,5 +9,9 @@ For more details regarding the application or would you wish to provide us with 
  > - hugo.sipahi@hotmail.fr   
  > - mb_vaz@hotmail.com   
  > - stancioiu.razvan@gmail.com  
+   
+# Screenshot of the application   
+  
+![Alt text](/../<screenshots>/screenshot/screenshot.jpg?raw=true)
 
 
