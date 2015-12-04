@@ -23,8 +23,8 @@ import model.TypicalDay;
 import model.TimeWindow;
 
 /**
- * XMLDeserializer class, imported from PlaCo
- * Get every needed informations from XML file
+ * XMLDeserializer class, imported from PlaCo Get every needed informations from
+ * XML file
  */
 public class XMLDeserializer {
 
@@ -39,14 +39,18 @@ public class XMLDeserializer {
 	 */
 	public static void loadMap(CityMap map)
 			throws ParserConfigurationException, SAXException, IOException, XMLException {
+		CityMap previous = map;
 		File xml = XMLFileOpener.getInstance().open(true);
 		DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		Document document = docBuilder.parse(xml);
 		Element root = document.getDocumentElement();
 		if (root.getNodeName().equals("Reseau")) {
+			map.clear();
 			buildMapFromDOMXML(root, map);
-		} else
+		} else {
+			map = previous;
 			throw new XMLException("Document non conforme");
+		}
 	}
 
 	/**
@@ -124,14 +128,18 @@ public class XMLDeserializer {
 	 */
 	public static void loadDeliveries(TypicalDay typicalDay)
 			throws ParserConfigurationException, SAXException, IOException, XMLException {
+		TypicalDay previous = typicalDay;
 		File xml = XMLFileOpener.getInstance().open(true);
 		DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		Document document = docBuilder.parse(xml);
 		Element root = document.getDocumentElement();
 		if (root.getNodeName().equals("JourneeType")) {
+			typicalDay.clear();
 			buildDeliveriesFromDOMXML(root, typicalDay);
-		} else
+		} else {
+			typicalDay = previous;
 			throw new XMLException("Document non conforme");
+		}
 	}
 
 	/**

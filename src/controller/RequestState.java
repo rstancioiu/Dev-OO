@@ -19,8 +19,8 @@ import model.Path;
 import model.TypicalDay;
 
 /**
- * State set when the user loads a deliveries file, allow him to compute deliveries
- * Extends DefaultState abstract class
+ * State set when the user loads a deliveries file, allow him to compute
+ * deliveries Extends DefaultState abstract class
  */
 public class RequestState extends DefaultState {
 
@@ -42,10 +42,10 @@ public class RequestState extends DefaultState {
 
 	@Override
 	public void loadMap(CityMap map, Window window) {
-		map.clear();
 		try {
 			XMLDeserializer.loadMap(map);
 			Controller.setCurrentState(Controller.cityMapState);
+			window.drawMap(map);
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (SAXException e) {
@@ -55,15 +55,15 @@ public class RequestState extends DefaultState {
 		} catch (XMLException e) {
 			e.printStackTrace();
 		}
-		window.drawMap(map);
 	}
 
 	@Override
 	public void loadDeliveries(TypicalDay typicalDay, Window window) {
-		typicalDay.clear();
 		try {
 			XMLDeserializer.loadDeliveries(typicalDay);
 			Controller.setCurrentState(Controller.requestState);
+			window.clearDeliveries();
+			window.drawDeliveries(typicalDay);
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (SAXException e) {
@@ -73,8 +73,6 @@ public class RequestState extends DefaultState {
 		} catch (XMLException e) {
 			e.printStackTrace();
 		}
-		window.clearDeliveries();
-		window.drawDeliveries(typicalDay);
 	}
 
 	@Override

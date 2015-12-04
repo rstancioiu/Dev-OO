@@ -230,25 +230,6 @@ public class DeliveryRound {
 	}
 
 	/**
-	 * Get the first unused ID of delivery
-	 * 
-	 * @return the first unused ID for a delivery
-	 */
-	public int getNewID() {
-
-		ArrayList<Integer> IDs = new ArrayList<Integer>();
-		for (Path p : paths) {
-			IDs.add(p.getArrival().getId());
-		}
-
-		int ID = 1;
-		while (IDs.indexOf(ID) != -1)
-			ID++;
-
-		return ID;
-	}
-
-	/**
 	 * Return start hour
 	 * 
 	 * @return start hour

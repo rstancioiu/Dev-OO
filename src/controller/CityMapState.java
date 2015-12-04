@@ -2,7 +2,6 @@ package controller;
 
 import java.io.IOException;
 
-
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
@@ -14,17 +13,18 @@ import xml.XMLDeserializer;
 import xml.XMLException;
 
 /**
- * State set when the user has load the map and leaved when the user load the deliveries file
- * Extends DefaultState abstract class
+ * State set when the user has load the map and leaved when the user load the
+ * deliveries file Extends DefaultState abstract class
  */
 public class CityMapState extends DefaultState {
 
 	@Override
 	public void loadDeliveries(TypicalDay typicalDay, Window window) {
-		typicalDay.clear();
 		try {
 			XMLDeserializer.loadDeliveries(typicalDay);
 			Controller.setCurrentState(Controller.requestState);
+			window.clearDeliveries();
+			window.drawDeliveries(typicalDay);
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (SAXException e) {
@@ -34,16 +34,14 @@ public class CityMapState extends DefaultState {
 		} catch (XMLException e) {
 			e.printStackTrace();
 		}
-		window.clearDeliveries();
-		window.drawDeliveries(typicalDay);
 	}
-	
+
 	@Override
 	public void loadMap(CityMap map, Window window) {
-		map.clear();
 		try {
 			XMLDeserializer.loadMap(map);
 			Controller.setCurrentState(Controller.cityMapState);
+			window.drawMap(map);
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (SAXException e) {
@@ -53,7 +51,6 @@ public class CityMapState extends DefaultState {
 		} catch (XMLException e) {
 			e.printStackTrace();
 		}
-		window.drawMap(map);
 	}
 
 	@Override

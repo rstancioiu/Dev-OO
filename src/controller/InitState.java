@@ -12,18 +12,18 @@ import xml.XMLDeserializer;
 import xml.XMLException;
 
 /**
- * Initial state of the controller, basically set when the application is launched
- * Extends DefaultState abstract class
+ * Initial state of the controller, basically set when the application is
+ * launched Extends DefaultState abstract class
  */
 public class InitState extends DefaultState {
 	// Initial State
 
 	@Override
 	public void loadMap(CityMap map, Window window) {
-		map.clear();
 		try {
 			XMLDeserializer.loadMap(map);
 			Controller.setCurrentState(Controller.cityMapState);
+			window.drawMap(map);
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (SAXException e) {
@@ -33,7 +33,6 @@ public class InitState extends DefaultState {
 		} catch (XMLException e) {
 			e.printStackTrace();
 		}
-		window.drawMap(map);
 	}
 
 	@Override

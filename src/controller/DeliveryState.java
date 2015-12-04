@@ -22,8 +22,8 @@ import model.Section;
 import model.TypicalDay;
 
 /**
- * Main state of the controller, basically set after executing or canceling a command
- * Extends DefaultState abstract class
+ * Main state of the controller, basically set after executing or canceling a
+ * command Extends DefaultState abstract class
  */
 public class DeliveryState extends DefaultState {
 
@@ -103,10 +103,10 @@ public class DeliveryState extends DefaultState {
 	 * Set controller state to CityMapState after a click on LoadMapButton
 	 */
 	public void loadMap(CityMap map, Window window) {
-		map.clear();
 		try {
 			XMLDeserializer.loadMap(map);
 			Controller.setCurrentState(Controller.cityMapState);
+			window.drawMap(map);
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (SAXException e) {
@@ -116,15 +116,15 @@ public class DeliveryState extends DefaultState {
 		} catch (XMLException e) {
 			e.printStackTrace();
 		}
-		window.drawMap(map);
 	}
 
 	@Override
 	public void loadDeliveries(TypicalDay typicalDay, Window window) {
-		typicalDay.clear();
 		try {
 			XMLDeserializer.loadDeliveries(typicalDay);
 			Controller.setCurrentState(Controller.requestState);
+			window.clearDeliveries();
+			window.drawDeliveries(typicalDay);
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (SAXException e) {
@@ -134,8 +134,6 @@ public class DeliveryState extends DefaultState {
 		} catch (XMLException e) {
 			e.printStackTrace();
 		}
-		window.clearDeliveries();
-		window.drawDeliveries(typicalDay);
 	}
 
 	@Override
@@ -151,7 +149,9 @@ public class DeliveryState extends DefaultState {
 
 	/**
 	 * Format a number of seconds into a representation hh:mm:ss
-	 * @param seconds number of seconds
+	 * 
+	 * @param seconds
+	 *            number of seconds
 	 * @return formatted string
 	 */
 	private String formatHour(int seconds) {
