@@ -10,8 +10,7 @@ For more details regarding the application or would you wish to provide us with 
  > - mb_vaz@hotmail.com   
  > - stancioiu.razvan@gmail.com  
    
-# Screenshot of the application   
+# Screenshot  
   
-![Alt text](/../<screenshots>/screenshot/screenshot.jpg?raw=true)
-
+![Alt text](/../screenshots/screenshot/screenshot.jpg?raw=true)
 
