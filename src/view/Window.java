@@ -326,6 +326,7 @@ public class Window extends JFrame {
 		enableAddButton(false);
 		enableDeleteButton(false);
 		enableSwapButton(false);
+		enableLoadDeliveries(false);
 		undoButton.setEnabled(false);
 		redoButton.setEnabled(false);
 	}
