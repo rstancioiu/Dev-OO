@@ -2,9 +2,9 @@ package controller;
 
 import graph.Graph;
 import model.Delivery;
+import model.DeliveryRound;
 import model.TimeWindow;
 import model.TypicalDay;
-import model.DeliveryRound;
 
 /**
  * Command that adds a delivery to a delivery round

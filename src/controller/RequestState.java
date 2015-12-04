@@ -7,16 +7,16 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import view.Window;
-import xml.XMLDeserializer;
-import xml.XMLException;
 import graph.Graph;
-import graph.TSP1;
 import graph.TSP;
+import graph.TSP1;
 import model.CityMap;
 import model.DeliveryRound;
 import model.Path;
 import model.TypicalDay;
+import view.Window;
+import xml.XMLDeserializer;
+import xml.XMLException;
 
 /**
  * State set when the user loads a deliveries file, allow him to compute

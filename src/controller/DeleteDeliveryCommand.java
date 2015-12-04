@@ -1,10 +1,10 @@
 package controller;
 
 import graph.Graph;
-import model.TimeWindow;
-import model.TypicalDay;
 import model.Delivery;
 import model.DeliveryRound;
+import model.TimeWindow;
+import model.TypicalDay;
 
 /**
  * Command that deletes a delivery from a delivery round

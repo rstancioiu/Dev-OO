@@ -2,8 +2,8 @@ package controller;
 
 import graph.Graph;
 import model.Delivery;
-import model.TimeWindow;
 import model.DeliveryRound;
+import model.TimeWindow;
 
 /**
  * Command that swaps two deliveries in a delivery round

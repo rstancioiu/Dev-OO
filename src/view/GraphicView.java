@@ -1,27 +1,10 @@
 package view;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-
-import model.CityMap;
-import model.Delivery;
-import model.DeliveryRound;
-import model.Node;
-import model.Section;
-import model.TimeWindow;
-import model.Path;
-import model.TypicalDay;
-
-import javax.swing.JLabel;
-
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
@@ -38,6 +21,22 @@ import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.QuadCurve2D;
 import java.util.ArrayList;
+
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import model.CityMap;
+import model.Delivery;
+import model.DeliveryRound;
+import model.Node;
+import model.Path;
+import model.Section;
+import model.TimeWindow;
+import model.TypicalDay;
 
 /**
  * GraphicView class, manages the left panel of the application, which includes the map, the graph, the message box...

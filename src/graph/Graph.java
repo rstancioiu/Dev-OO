@@ -1,17 +1,16 @@
 package graph;
 
-import model.TypicalDay;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
-import model.Delivery;
 import model.CityMap;
+import model.Delivery;
 import model.Node;
 import model.Path;
 import model.Section;
 import model.TimeWindow;
+import model.TypicalDay;
 
 /**
  * Graph class, mostly contains and manages data about paths, deliveries and nodes

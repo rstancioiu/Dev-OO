@@ -1,9 +1,5 @@
 package controller;
 
-import view.Window;
-import xml.XMLDeserializer;
-import xml.XMLException;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,6 +16,9 @@ import model.DeliveryRound;
 import model.Path;
 import model.Section;
 import model.TypicalDay;
+import view.Window;
+import xml.XMLDeserializer;
+import xml.XMLException;
 
 /**
  * Main state of the controller, basically set after executing or canceling a

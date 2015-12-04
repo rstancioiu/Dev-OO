@@ -7,20 +7,18 @@ import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import javax.swing.JButton;
-
+import controller.Controller;
 import model.CityMap;
 import model.Delivery;
 import model.DeliveryRound;
 import model.Node;
 import model.TypicalDay;
-
-import controller.Controller;
 
 /**
  * Window class, directly manages the main window and its lower right bloc.
